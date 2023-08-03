@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+// import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
   history: createWebHistory(process.env.NODE_ENV === 'production' ? '/vue_3_side_project/' : '/'),
@@ -8,7 +8,8 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      // component: HomeView
+      component: () => import('../views/OverView.vue')
     },
     {
       path: '/about',
