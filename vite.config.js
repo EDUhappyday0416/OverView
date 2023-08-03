@@ -5,6 +5,13 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  build: {
+    outDir: './dist'
+  },
+  scripts: {
+    build: "vite build",
+    preview: "vite preview"
+  },
   plugins: [
     vue(),
   ],
@@ -12,5 +19,5 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
-  }
+  },
 })
