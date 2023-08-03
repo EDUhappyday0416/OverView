@@ -8,7 +8,7 @@ export default defineConfig({
   // base: process.env.NODE_ENV === 'production'
   // ? '/vue_3_side_project/'
   // : '/',
-  publicPath: '/vue_3_side_project/',
+  base: '/vue_3_side_project/',
   build: {
     outDir: './dist'
   },
