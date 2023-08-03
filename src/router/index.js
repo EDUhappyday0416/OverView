@@ -2,7 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
-  history: createWebHashHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(process.env.NODE_ENV === 'production' ? '/my-repo/' : '/'),
+  //history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
