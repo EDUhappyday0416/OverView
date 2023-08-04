@@ -3,11 +3,15 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 1,
             "patches": [
                 {
                     "date": 1691125393919,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1691126733355,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,10 +4,10 @@\n     <meta charset=\"UTF-8\">\r\n     <link rel=\"icon\" href=\"/vue3_project_0804/favicon.ico\">\r\n     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n     <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css\" />\r\n-    <title>Vite App</title>\r\n-    <script type=\"module\" crossorigin src=\"./vue3_project_0804/assets/index-466d859e.js\"></script>\r\n+    <title>Vite App aaaaa</title>\r\n+    <script type=\"module\" crossorigin src=\"/vue3_project_0804/assets/index-466d859e.js\"></script>\r\n     <link rel=\"stylesheet\" href=\"/vue3_project_0804/assets/index-3460bac0.css\">\r\n   </head>\r\n   <body>\r\n     <div id=\"app\"></div>\r\n"
                 }
             ],
             "date": 1691125393919,
