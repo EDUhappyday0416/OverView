@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/main.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1691127090873,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1691127090873,
+            "name": "Commit-0",
+            "content": "import './assets/main.css'\r\n\r\nimport { createApp } from 'vue'\r\nimport { createPinia } from 'pinia'\r\n/* import the fontawesome core */\r\nimport { library } from '@fortawesome/fontawesome-svg-core'\r\n\r\n/* import font awesome icon component */\r\nimport { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'\r\n\r\n/* import specific icons */\r\nimport { faUserSecret } from '@fortawesome/free-solid-svg-icons'\r\n\r\n/* add icons to the library */\r\nlibrary.add(faUserSecret)\r\n\r\nimport App from './App.vue'\r\nimport router from './router'\r\n\r\nconst app = createApp(App)\r\n\r\napp.component('font-awesome-icon', FontAwesomeIcon)\r\n\r\napp.use(createPinia())\r\napp.use(router)\r\n\r\napp.mount('#app')\r\n"
+        }
+    ]
+}
