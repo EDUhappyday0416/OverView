@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/components/MainHeader.vue",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1691131448057,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1691131448057,
+            "name": "Commit-0",
+            "content": "<script setup>\r\nimport { ref, defineProps, defineEmits, computed, shallowRef } from 'vue'\r\nimport Tickets from '../views/Tickets.vue'\r\nimport Past from './Past.vue'\r\nimport Waitlist from './Waitlist.vue'\r\nconst tabs = ref([\r\n  { title: 'Tickets', isActive: true, view: shallowRef(Tickets) },\r\n  { title: 'Past', isActive: false, view: shallowRef(Past) },\r\n  { title: 'Waitlist', isActive: false, view: shallowRef(Waitlist) }\r\n])\r\nconst props = defineProps({\r\n  activeTab: {\r\n    type: String,\r\n    default: 'Ticket'\r\n  }\r\n})\r\n\r\nconst emit = defineEmits(['fouce'])\r\nconst currentTabView = computed(() => {\r\n  return tabs.value.find((tab) => tab.isActive).view\r\n})\r\nconst setActiveTab = (stab) => {\r\n  tabs.value.forEach((tab) => {\r\n    tab.isActive = tab.title == stab.title\r\n  })\r\n}\r\n</script>\r\n<template>\r\n  <div class=\"header\">\r\n    <div\r\n      class=\"header__title\"\r\n      @click=\"setActiveTab(tab)\"\r\n      v-for=\"(tab, i) in tabs\"\r\n      :key=\"i\"\r\n      :class=\"{ active: tab.isActive }\"\r\n    >\r\n      {{ tab.title }}\r\n    </div>\r\n  </div>\r\n  <component :is=\"currentTabView\"> </component>\r\n</template>\r\n<style scoped lang=\"scss\">\r\n.header {\r\n  display: flex;\r\n  justify-content: space-between;\r\n  align-items: center;\r\n  text-align: center;\r\n  background-color: rgb(33 135 234);\r\n  height: 4vh;\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  z-index: 100;\r\n\r\n  &__title {\r\n    width: 200px;\r\n    color: white;\r\n  }\r\n}\r\n.active {\r\n  border-bottom: 4.3px solid white;\r\n}\r\n</style>\r\n"
+        }
+    ]
+}

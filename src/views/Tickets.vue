@@ -120,6 +120,7 @@ const data = ref([])
 <style scoped lang="scss">
 .tieket__bar {
   overflow: auto;
+  height: 100vh;
 }
 .tieket {
   max-width: 48rem;

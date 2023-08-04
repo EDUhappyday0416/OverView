@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/assets/main.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1691130467019,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1691130467019,
+            "name": "Commit-0",
+            "content": "@import './base.css';\r\n\r\n#app {\r\n  max-width: 1280px;\r\n  margin: 0 auto;\r\n  overflow: auto;\r\n  height: 100vh;\r\n  font-weight: normal;\r\n}\r\n\r\na,\r\n.green {\r\n  text-decoration: none;\r\n  color: hsla(160, 100%, 37%, 1);\r\n  transition: 0.4s;\r\n}\r\n\r\n@media (hover: hover) {\r\n  a:hover {\r\n    background-color: hsla(160, 100%, 37%, 0.2);\r\n  }\r\n}\r\n\r\n@media (min-width: 1024px) {\r\n  body {\r\n    display: flex;\r\n    place-items: center;\r\n  }\r\n\r\n  #app {\r\n    display: grid;\r\n    /* grid-template-columns: 1fr 1fr; */\r\n  }\r\n}\r\n"
+        }
+    ]
+}

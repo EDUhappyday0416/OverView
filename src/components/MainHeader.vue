@@ -47,6 +47,11 @@ const setActiveTab = (stab) => {
   text-align: center;
   background-color: rgb(33 135 234);
   height: 4vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
 
   &__title {
     width: 200px;
