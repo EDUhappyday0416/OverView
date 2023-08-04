@@ -21,7 +21,6 @@ const props = defineProps({
 .loading {
   position: absolute;
   height: 100vh;
-  /* bottom: 50%; */
   left: 0;
   right: 0;
   width: 100%;
@@ -65,4 +64,5 @@ const props = defineProps({
     }
   }
 }
+
 </style>

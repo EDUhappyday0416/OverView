@@ -6,6 +6,7 @@
   overflow: auto;
   height: 100vh;
   font-weight: normal;
+  display: grid;
 }
 
 a,
@@ -25,10 +26,5 @@ a,
   body {
     display: flex;
     place-items: center;
-  }
-
-  #app {
-    display: grid;
-    /* grid-template-columns: 1fr 1fr; */
   }
 }
