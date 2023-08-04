@@ -1,8 +1,8 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
-  history: createWebHistory(process.env.NODE_ENV === 'production' ? '/vue3_project_0804/' : '/'),
+  history: createWebHashHistory(),
   //history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
     {
@@ -26,7 +26,6 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/OverView.vue')
     },
-   
   ]
 })
 
