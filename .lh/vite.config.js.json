@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 9,
+            "activePatchIndex": 10,
             "patches": [
                 {
                     "date": 1691123552117,
@@ -44,6 +44,10 @@
                 {
                     "date": 1691126600243,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,30 +4,8 @@\n import vue from '@vitejs/plugin-vue'\r\n \r\n // https://vitejs.dev/config/\r\n export default defineConfig({\r\n-  base: process.env.NODE_ENV === 'production'\r\n-  ? '/vue3_project_0804/'\r\n-  : '/',\r\n-  build: {\r\n-    outDir: './dist'\r\n-  },\r\n-  plugins: [\r\n-    vue(),\r\n-  ],\r\n-  resolve: {\r\n-    alias: {\r\n-      '@': fileURLToPath(new URL('./src', import.meta.url))\r\n-    }\r\n-  },\r\n-})\r\n-import { fileURLToPath, URL } from 'node:url'\r\n-\r\n-import { defineConfig } from 'vite'\r\n-import vue from '@vitejs/plugin-vue'\r\n-\r\n-// https://vitejs.dev/config/\r\n-export default defineConfig({\r\n   base: '/vue3_project_0804/',\r\n   build: {\r\n     outDir: './dist'\r\n   },\r\n@@ -39,46 +17,4 @@\n       '@': fileURLToPath(new URL('./src', import.meta.url))\r\n     }\r\n   },\r\n })\r\n-import { fileURLToPath, URL } from 'node:url'\r\n-\r\n-import { defineConfig } from 'vite'\r\n-import vue from '@vitejs/plugin-vue'\r\n-\r\n-// https://vitejs.dev/config/\r\n-export default defineConfig({\r\n-  base: '/vue3_project_0804/',\r\n-  build: {\r\n-    outDir: './dist'\r\n-  },\r\n-  plugins: [\r\n-    vue(),\r\n-  ],\r\n-  resolve: {\r\n-    alias: {\r\n-      '@': fileURLToPath(new URL('./src', import.meta.url))\r\n-    }\r\n-  },\r\n-})\r\n-import { fileURLToPath, URL } from 'node:url'\r\n-\r\n-import { defineConfig } from 'vite'\r\n-import vue from '@vitejs/plugin-vue'\r\n-\r\n-// https://vitejs.dev/config/\r\n-export default defineConfig({\r\n-  base: process.env.NODE_ENV === 'production'\r\n-  ? '/vue3_project_0804/'\r\n-  : '/',\r\n-  build: {\r\n-    outDir: './dist'\r\n-  },\r\n-  plugins: [\r\n-    vue(),\r\n-  ],\r\n-  resolve: {\r\n-    alias: {\r\n-      '@': fileURLToPath(new URL('./src', import.meta.url))\r\n-    }\r\n-  },\r\n-})\r\n"
+                },
+                {
+                    "date": 1691129083100,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import vue from '@vitejs/plugin-vue'\r\n \r\n // https://vitejs.dev/config/\r\n export default defineConfig({\r\n-  base: '/vue3_project_0804/',\r\n+  base: './',\r\n   build: {\r\n     outDir: './dist'\r\n   },\r\n   plugins: [\r\n"
                 }
             ],
             "date": 1691123552117,
