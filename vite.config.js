@@ -5,7 +5,7 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/vue_3_side_project/',
+  base: '/vue3_project_0804/',
   build: {
     outDir: './dist'
   },
