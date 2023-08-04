@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/utils/sort.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1691133370999,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1691133370999,
+            "name": "Commit-0",
+            "content": "export const show_icon = (col,sortColumn) =>{\r\n    if (col.key !== sortColumn ) {      \r\n  \r\n       const el = event.target.closest('th')\r\n       el.classList.add('hovered')\r\n       \r\n       if (col.sortable) {       \r\n           col.sorted = 'desc'\r\n  \r\n    }\r\n     \r\n    }\r\n  \r\n  }\r\n  \r\n  export const hide_icon = (col,sortColumn) =>{\r\n   if (col.key !== sortColumn ){\r\n      const el = event.target.closest('th')\r\n      el.classList.remove('hovered')\r\n      if (col.sortable) {\r\n        col.sorted = null\r\n    }\r\n  \r\n   }\r\n  \r\n  \r\n    \r\n  }\r\n  \r\n  \r\n  export const sort_items = (col,rows) =>{ \r\n    if (col.sorted === 'asc') {\r\n        rows.sort((a,b) =>(a[col.key] < b[col.key])? 1:-1)\r\n        col.sorted = 'desc'\r\n     \r\n    }\r\n    else {\r\n      rows.sort((a,b) =>(a[col.key] > b[col.key])? 1:-1)\r\n      col.sorted = 'asc'\r\n  \r\n    }\r\n  \r\n  \r\n  }"
+        }
+    ]
+}

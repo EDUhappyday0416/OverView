@@ -18,7 +18,34 @@ import { RouterView } from 'vue-router'
   </header> -->
 
   <RouterView />
+
+  <!-- <DataTable :paginatedData="paginatedData" :columns="columns">
+    <template #action="props">
+      <button class="edit1" @click="showEditForm(props.index)" >
+        <img src="../assets/icons/ico_edit.png" />
+      </button>
+      <button class="delt1" @click="delAPI('header', props.index, item.equipment_type_id, '')">
+          <img src="../assets/icons/ico_delete.png" />
+      </button>
+      <button id="edit2" class="btn" @click="showLinkFrom(props.index)">
+          <img src="../assets/icons/ico_attach.png" />
+      </button>
+    </template>
+  </DataTable> -->
 </template>
+
+<script setup>
+// const columns = ref([
+//   { key: 'equipment_type', name: 'AIoT設備類型', colWidth: 'width: 100px;', class: 'text-cell', sortable: true, sorted: null , type: ''},
+//   { key: 'equipment_name', name: 'AIoT設備名稱', colWidth: 'width: 100px;', class: 'text-cell', sortable: true, sorted: null , type: ''},
+//   { key: 'emission_type', name: '排放型式', colWidth: 'width: 100px;', class: 'text-cell', sortable: true, sorted: null ,type: '' },
+//   { key: 'emission_source_type', name: '排放類型', colWidth: 'width: 100px;', class: 'text-cell', sortable: true, sorted: null, type: ''},
+//   { key: 'emission_source', name: '燃料別', colWidth: 'width: 100px;', class: 'text-cell', sortable: true, sorted: null, type: ''},
+//   { key: 'creation_date', name: '建立日期', colWidth: 'width: 100px;', class: 'text-cell', sortable: true, sorted: null , type: 'date'},
+//   { key: 'last_updated_date', name: '上次更新日期', colWidth: 'width: 100px;', class: 'text-cell', sortable: true, sorted: null , type: 'date'},
+//   { key: 'action', name: '動作', colWidth: 'width: 100px;', class: 'text-cell center-table-text', sortable: false, sorted: null , type: 'action'}
+// ]);
+</script>
 
 <style scoped>
 header {
