@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/api/loading/fullscreen-loading.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1691462388560,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1691462388560,
+            "name": "Commit-0",
+            "content": "const SUCCESS_RESPONSE_DATA = {\r\n    code: 0,\r\n    data: {},\r\n    message: \"抓取成功\"\r\n}\r\n\r\n/* 抓取成功 */\r\nexport function getSuccessApi () {\r\n    return new Promise((resolve) => {\r\n    setTimeout(() => {\r\n        resolve(SUCCESS_RESPONSE_DATA)\r\n    }, 1000)\r\n    })\r\n}\r\n\r\n/* 抓取失敗 */\r\nexport function getErrorApi() {\r\n    return new Promise((_resolve, reject) => {\r\n        setTimeout(() => {\r\n            reject(new Error(\"抓取失敗\"))\r\n        }, 1000)\r\n    })\r\n}\r\n"
+        }
+    ]
+}

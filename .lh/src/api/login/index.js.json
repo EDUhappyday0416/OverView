@@ -1,0 +1,90 @@
+{
+    "sourceFile": "src/api/login/index.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 18,
+            "patches": [
+                {
+                    "date": 1691464188079,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1691465022177,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,8 @@\n     err => {\r\n         return Promise.reject(err)\r\n     },\r\n )\r\n-// http response 拦截器\r\n axios.interceptors.response.use(\r\n     response => {\r\n         return response\r\n     },\r\n"
+                },
+                {
+                    "date": 1691465133481,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,41 @@\n+import axios from 'axios'\r\n+import store from '../../stores/login'\r\n+\r\n+\r\n+\r\n+axios.defaults.timeout = 5000\r\n+axios.defaults.baseURL = 'https://reqres.in/api/'\r\n+\r\n+\r\n+axios.interceptors.request.use(\r\n+    config => {\r\n+        if (store.state.token) {\r\n+            config.headers.Authorization = `token ${store.state.token}`\r\n+        }\r\n+        return config\r\n+    },\r\n+    err => {\r\n+        return Promise.reject(err)\r\n+    },\r\n+)\r\n+axios.interceptors.response.use(\r\n+    response => {\r\n+        return response\r\n+    },\r\n+    error => {\r\n+        if (error.response) {\r\n+        switch (error.response.status) {\r\n+            case 401:\r\n+            store.commit(types.LOGOUT)\r\n+            router.currentRoute.path !== 'login' &&\r\n+            router.replace({\r\n+                path: 'login',\r\n+                query: { redirect: router.currentRoute.path },\r\n+            })\r\n+        }\r\n+    }\r\n+        return Promise.reject(error.response.data)\r\n+    },\r\n+)\r\n+\r\n+export default axios\r\n"
+                },
+                {
+                    "date": 1691465314112,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import axios from 'axios'\r\n-import store from '../../stores/login'\r\n+import { usePlaneData } from '../../stores/login'\r\n \r\n+const store = usePlaneData()\r\n \r\n-\r\n axios.defaults.timeout = 5000\r\n axios.defaults.baseURL = 'https://reqres.in/api/'\r\n \r\n \r\n@@ -25,9 +25,9 @@\n     error => {\r\n         if (error.response) {\r\n         switch (error.response.status) {\r\n             case 401:\r\n-            store.commit(types.LOGOUT)\r\n+            store.commit(store.registerUser)\r\n             router.currentRoute.path !== 'login' &&\r\n             router.replace({\r\n                 path: 'login',\r\n                 query: { redirect: router.currentRoute.path },\r\n@@ -38,46 +38,4 @@\n     },\r\n )\r\n \r\n export default axios\r\n-import axios from 'axios'\r\n-import store from '../../stores/login'\r\n-\r\n-\r\n-\r\n-axios.defaults.timeout = 5000\r\n-axios.defaults.baseURL = 'https://reqres.in/api/'\r\n-\r\n-\r\n-axios.interceptors.request.use(\r\n-    config => {\r\n-        if (store.state.token) {\r\n-            config.headers.Authorization = `token ${store.state.token}`\r\n-        }\r\n-        return config\r\n-    },\r\n-    err => {\r\n-        return Promise.reject(err)\r\n-    },\r\n-)\r\n-axios.interceptors.response.use(\r\n-    response => {\r\n-        return response\r\n-    },\r\n-    error => {\r\n-        if (error.response) {\r\n-        switch (error.response.status) {\r\n-            case 401:\r\n-            store.commit(types.LOGOUT)\r\n-            router.currentRoute.path !== 'login' &&\r\n-            router.replace({\r\n-                path: 'login',\r\n-                query: { redirect: router.currentRoute.path },\r\n-            })\r\n-        }\r\n-    }\r\n-      // console.log(JSON.stringify(error));//console : Error: Request failed with status code 402\r\n-        return Promise.reject(error.response.data)\r\n-    },\r\n-)\r\n-\r\n-export default axios\r\n"
+                },
+                {
+                    "date": 1691466018741,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,9 @@\n axios.defaults.timeout = 5000\r\n axios.defaults.baseURL = 'https://reqres.in/api/'\r\n \r\n \r\n+\r\n axios.interceptors.request.use(\r\n     config => {\r\n         if (store.state.token) {\r\n             config.headers.Authorization = `token ${store.state.token}`\r\n"
+                },
+                {
+                    "date": 1691466467336,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import axios from 'axios'\r\n-import { usePlaneData } from '../../stores/login'\r\n+import usePlaneData from '../../stores/login'\r\n \r\n const store = usePlaneData()\r\n \r\n axios.defaults.timeout = 5000\r\n"
+                },
+                {
+                    "date": 1691466475630,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n import axios from 'axios'\r\n-import usePlaneData from '../../stores/login'\r\n+import { usePlaneData } from '../../stores/login'\r\n \r\n const store = usePlaneData()\r\n \r\n axios.defaults.timeout = 5000\r\n"
+                },
+                {
+                    "date": 1691467633435,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,42 +1,8 @@\n-import axios from 'axios'\r\n-import { usePlaneData } from '../../stores/login'\r\n+import { request } from \"../../utils/service\"\r\n \r\n-const store = usePlaneData()\r\n-\r\n-axios.defaults.timeout = 5000\r\n-axios.defaults.baseURL = 'https://reqres.in/api/'\r\n-\r\n-\r\n-\r\n-axios.interceptors.request.use(\r\n-    config => {\r\n-        if (store.state.token) {\r\n-            config.headers.Authorization = `token ${store.state.token}`\r\n-        }\r\n-        return config\r\n-    },\r\n-    err => {\r\n-        return Promise.reject(err)\r\n-    },\r\n-)\r\n-axios.interceptors.response.use(\r\n-    response => {\r\n-        return response\r\n-    },\r\n-    error => {\r\n-        if (error.response) {\r\n-        switch (error.response.status) {\r\n-            case 401:\r\n-            store.commit(store.registerUser)\r\n-            router.currentRoute.path !== 'login' &&\r\n-            router.replace({\r\n-                path: 'login',\r\n-                query: { redirect: router.currentRoute.path },\r\n-            })\r\n-        }\r\n-    }\r\n-        return Promise.reject(error.response.data)\r\n-    },\r\n-)\r\n-\r\n-export default axios\r\n+async function getUser() {\r\n+    return request({\r\n+        url: \"register\",\r\n+        method: \"post\"\r\n+    })\r\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1691467991220,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n import { request } from \"../../utils/service\"\r\n \r\n-async function getUser() {\r\n+async function loginApi(data) {\r\n     return request({\r\n         url: \"register\",\r\n-        method: \"post\"\r\n+        method: \"post\",\r\n+        data\r\n     })\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1691468018861,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,9 @@\n+import { request } from \"../../utils/service\"\r\n+\r\n+async function loginApi(data) {\r\n+    return request({\r\n+        url: \"register\",\r\n+        method: \"post\",\r\n+        data\r\n+    })\r\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1691468312989,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,18 +1,9 @@\n import { request } from \"../../utils/service\"\r\n \r\n-async function loginApi(data) {\r\n+export async function loginApi(data) {\r\n     return request({\r\n         url: \"register\",\r\n         method: \"post\",\r\n         data\r\n     })\r\n-}\n-import { request } from \"../../utils/service\"\r\n-\r\n-async function loginApi(data) {\r\n-    return request({\r\n-        url: \"register\",\r\n-        method: \"post\",\r\n-        data\r\n-    })\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1691468693160,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,9 @@\n+import { axios } from \"../../utils/service\"\r\n+\r\n+export async function loginApi(data) {\r\n+    return axios({\r\n+        url: \"register\",\r\n+        method: \"post\",\r\n+        data\r\n+    })\r\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1691469492660,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,4 @@\n-import { axios } from \"../../utils/service\"\r\n-\r\n-export async function loginApi(data) {\r\n-    return axios({\r\n-        url: \"register\",\r\n-        method: \"post\",\r\n-        data\r\n-    })\r\n-}\n import { request } from \"../../utils/service\"\r\n \r\n export async function loginApi(data) {\r\n     return request({\r\n"
+                },
+                {
+                    "date": 1691469519987,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,9 @@\n+import { request } from \"../../utils/service\"\r\n+\r\n+export async function loginApi(data) {\r\n+    return request({\r\n+        url: \"register\",\r\n+        method: \"post\",\r\n+        data\r\n+    })\r\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1691470731558,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,18 +1,10 @@\n import { request } from \"../../utils/service\"\r\n \r\n export async function loginApi(data) {\r\n+    console.log('66666666666666')\r\n     return request({\r\n         url: \"register\",\r\n         method: \"post\",\r\n         data\r\n     })\r\n-}\n-import { request } from \"../../utils/service\"\r\n-\r\n-export async function loginApi(data) {\r\n-    return request({\r\n-        url: \"register\",\r\n-        method: \"post\",\r\n-        data\r\n-    })\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1691473789604,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import { request } from \"../../utils/service\"\r\n \r\n-export async function loginApi(data) {\r\n+export async function register(data) {\r\n     console.log('66666666666666')\r\n     return request({\r\n         url: \"register\",\r\n         method: \"post\",\r\n"
+                },
+                {
+                    "date": 1691473816584,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,17 @@\n import { request } from \"../../utils/service\"\r\n \r\n export async function register(data) {\r\n-    console.log('66666666666666')\r\n     return request({\r\n         url: \"register\",\r\n         method: \"post\",\r\n         data\r\n     })\r\n+}\r\n+\r\n+export async function login(data) {\r\n+    return request({\r\n+        url: \"login\",\r\n+        method: \"post\",\r\n+        data\r\n+    })\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1691473948567,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,17 @@\n+import { request } from \"../../utils/service\"\r\n+\r\n+export async function register(data) {\r\n+    return request({\r\n+        url: \"register\",\r\n+        method: \"post\",\r\n+        data\r\n+    })\r\n+}\r\n+\r\n+export async function login(data) {\r\n+    return request({\r\n+        url: \"login\",\r\n+        method: \"post\",\r\n+        data\r\n+    })\r\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1691474013691,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,22 +13,5 @@\n         url: \"login\",\r\n         method: \"post\",\r\n         data\r\n     })\r\n-}\n-import { request } from \"../../utils/service\"\r\n-\r\n-export async function register(data) {\r\n-    return request({\r\n-        url: \"register\",\r\n-        method: \"post\",\r\n-        data\r\n-    })\r\n-}\r\n-\r\n-export async function login(data) {\r\n-    return request({\r\n-        url: \"login\",\r\n-        method: \"post\",\r\n-        data\r\n-    })\r\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1691464188079,
+            "name": "Commit-0",
+            "content": "import axios from 'axios'\r\nimport store from '../../stores/login'\r\n\r\n\r\n\r\naxios.defaults.timeout = 5000\r\naxios.defaults.baseURL = 'https://reqres.in/api/'\r\n\r\n\r\naxios.interceptors.request.use(\r\n    config => {\r\n        if (store.state.token) {\r\n            config.headers.Authorization = `token ${store.state.token}`\r\n        }\r\n        return config\r\n    },\r\n    err => {\r\n        return Promise.reject(err)\r\n    },\r\n)\r\n// http response 拦截器\r\naxios.interceptors.response.use(\r\n    response => {\r\n        return response\r\n    },\r\n    error => {\r\n        if (error.response) {\r\n        switch (error.response.status) {\r\n            case 401:\r\n            store.commit(types.LOGOUT)\r\n            router.currentRoute.path !== 'login' &&\r\n            router.replace({\r\n                path: 'login',\r\n                query: { redirect: router.currentRoute.path },\r\n            })\r\n        }\r\n    }\r\n      // console.log(JSON.stringify(error));//console : Error: Request failed with status code 402\r\n        return Promise.reject(error.response.data)\r\n    },\r\n)\r\n\r\nexport default axios\r\n"
+        }
+    ]
+}

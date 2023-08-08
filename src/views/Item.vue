@@ -1,5 +1,6 @@
 <template>
     <div>
+        <div @click="logout">登出</div>
         <div class="header">
             <div class="noActive" :class="{ 'active' : initTab == 'currect' }" @click="currentChange('currect')">currect</div>
             <div class="noActive" :class="{ 'active' : initTab == 'Past' }" @click="currentChange('Past')">Past</div>
@@ -28,7 +29,6 @@
         </div> 
     </div>
     <Loading :loading="hideLoading" />
-
 </template>
 
 
@@ -36,20 +36,26 @@
 import { ref , computed} from 'vue'
 import { useRouter, useRoute } from "vue-router";
 import { usePlaneData } from '../stores/counter'
+import { useLogin } from '../stores/login'
+
 import Loading from '../components/Loading.vue'
 
 const hideLoading = ref(false)
 const store = usePlaneData()
+const storeLogout = useLogin()
 console.log('store' , store.List)
 
 const router = useRouter();
-    const route = useRoute();
+const route = useRoute();
 
 const goPage = (i) => {
     router.push(`/DragDrop/${i}`);
     console.log(route.params);
 }
-
+const logout = () => {
+    storeLogout.removeToken()
+    router.push(`/`);
+}
 const showInfo = ref(null)
 const initTab = ref('currect');
 const currentChange = (type) => {

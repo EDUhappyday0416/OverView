@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/api/index.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1691467042546,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1691467042546,
+            "name": "Commit-0",
+            "content": "// import { request } from \"../utils/service\"\r\n\r\n\r\nexport function getLoginCodeApi() {\r\n    // return request<Login.LoginCodeResponseData>({\r\n    //     url: \"login/code\",\r\n    //     method: \"get\"\r\n    // })\r\n}"
+        }
+    ]
+}
