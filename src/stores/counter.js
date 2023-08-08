@@ -144,7 +144,27 @@ export const usePlaneData = defineStore("planeData", {
         "gateSeat": "C3/3C",
         "qrcode": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/QRcode_image.svg/1200px-QRcode_image.svg.png"
       },
-    ]
+    ],
+    List: [
+      {key: 1, type: "currect" , content: 'ticket 1', isActive: false , event: 'Event Name' , date: '25 June 01:20 pm' , totalSeats: '02' , Seats : 'B2,C2'},
+      {key: 1, type: "currect" , content: 'ticket 1', isActive: false , event: 'Event Name' , date: '25 June 01:20 pm' , totalSeats: '02' , Seats : 'B2,C2'},
+      {key: 1, type: "currect" , content: 'ticket 1', isActive: false , event: 'Event Name' , date: '25 June 01:20 pm' , totalSeats: '02' , Seats : 'B2,C2'},
+      {key: 1, type: "currect" , content: 'ticket 1', isActive: false , event: 'Event Name' , date: '25 June 01:20 pm' , totalSeats: '02' , Seats : 'B2,C2'},
+      {key: 1, type: "currect" , content: 'ticket 1', isActive: false , event: 'Event Name' , date: '25 June 01:20 pm' , totalSeats: '02' , Seats : 'B2,C2'},
+      {key: 1, type: "currect" , content: 'ticket 1', isActive: false , event: 'Event Name' , date: '25 June 01:20 pm' , totalSeats: '02' , Seats : 'B2,C2'},
+      {key: 1, type: "currect" , content: 'ticket 1', isActive: false , event: 'Event Name' , date: '25 June 01:20 pm' , totalSeats: '02' , Seats : 'B2,C2'},
+      {key: 1, type: "currect" , content: 'ticket 1', isActive: false , event: 'Event Name' , date: '25 June 01:20 pm' , totalSeats: '02' , Seats : 'B2,C2'},
+      {key: 1, type: "Waitlist" ,content: 'ticket 1', isActive: false , event: 'Event Name' , date: '25 June 01:20 pm' , totalSeats: '02' , Seats : 'B2,C2'},
+      {key: 1, type: "Past" ,content: 'ticket 1', isActive: false , event: 'Event Name' , date: '25 June 01:20 pm' , totalSeats: '02' , Seats : 'B2,C2'},
+      {key: 1, type: "Waitlist" ,content: 'ticket 1', isActive: false , event: 'Event Name' , date: '25 June 01:20 pm' , totalSeats: '02' , Seats : 'B2,C2'},
+      {key: 1, type: "Past" ,content: 'ticket 1', isActive: false , event: 'Event Name' , date: '25 June 01:20 pm' , totalSeats: '02' , Seats : 'B2,C2'},
+      {key: 1, type: "Waitlist" ,content: 'ticket 1', isActive: false , event: 'Event Name' , date: '25 June 01:20 pm' , totalSeats: '02' , Seats : 'B2,C2'},
+      {key: 1, type: "Past" ,content: 'ticket 1', isActive: false , event: 'Event Name' , date: '25 June 01:20 pm' , totalSeats: '02' , Seats : 'B2,C2'},
+      {key: 1, type: "Past" ,content: 'ticket 1', isActive: false , event: 'Event Name' , date: '25 June 01:20 pm' , totalSeats: '02' , Seats : 'B2,C2'},
+      {key: 1, type: "Past" ,content: 'ticket 1', isActive: false , event: 'Event Name' , date: '25 June 01:20 pm' , totalSeats: '02' , Seats : 'B2,C2'},
+      {key: 1, type: "Past" ,content: 'ticket 1', isActive: false , event: 'Event Name' , date: '25 June 01:20 pm' , totalSeats: '02' , Seats : 'B2,C2'},
+      {key: 1, type: "Past" ,content: 'ticket 1', isActive: false , event: 'Event Name' , date: '25 June 01:20 pm' , totalSeats: '02' , Seats : 'B2,C2'},
+  ],
   }),
 
   getters: {
@@ -174,5 +194,27 @@ export const usePlaneData = defineStore("planeData", {
         console.log(error);
       }
     },
+
+    async addList() {
+      try {
+        const currentType = ref(['currect','Past','Waitlist'])
+      // this.count++
+        const lastIndex = this.List.length - 1
+        for (let i = lastIndex + 1; i < lastIndex + 8; i++) {
+          this.List.push({
+              key: i,
+              type: currentType.value[Math.floor(Math.random() * currentType.value.length)],
+              content: `ticket No .${i}`,
+              isActive: false,
+              event: 'Event Name',
+              date: '25 June 01:20 pm',
+              totalSeats: '02',
+              Seats: 'B2,C2'
+          })
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
   },
 });

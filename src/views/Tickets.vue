@@ -27,8 +27,8 @@ const loadMore = (e) => {
     hideLoading.value = true
     setTimeout(() => {
       hideLoading.value = false
+      planeStore.increment()
     }, 1000)
-    planeStore.increment()
   }
 
   // if (scrollTop + clientHeight >= scrollHeight) {

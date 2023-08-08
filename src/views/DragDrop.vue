@@ -191,7 +191,7 @@ const onScroll = (e) => {
 .cardLeft {
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
-  width: 300px;
+  width: 260px;
 }
 
 .cardRight {

@@ -34,7 +34,7 @@ import { RouterView } from 'vue-router'
   </DataTable> -->
 </template>
 
-<script setup>
+<!-- <script setup>
 // const columns = ref([
 //   { key: 'equipment_type', name: 'AIoT設備類型', colWidth: 'width: 100px;', class: 'text-cell', sortable: true, sorted: null , type: ''},
 //   { key: 'equipment_name', name: 'AIoT設備名稱', colWidth: 'width: 100px;', class: 'text-cell', sortable: true, sorted: null , type: ''},
@@ -45,7 +45,7 @@ import { RouterView } from 'vue-router'
 //   { key: 'last_updated_date', name: '上次更新日期', colWidth: 'width: 100px;', class: 'text-cell', sortable: true, sorted: null , type: 'date'},
 //   { key: 'action', name: '動作', colWidth: 'width: 100px;', class: 'text-cell center-table-text', sortable: false, sorted: null , type: 'action'}
 // ]);
-</script>
+</script> -->
 
 <style scoped>
 header {
