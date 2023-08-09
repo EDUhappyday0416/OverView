@@ -1,12 +1,14 @@
 import { defineStore } from 'pinia'
-import { register , login } from '../api/login'
+import { register , login , profile } from '../api/login'
 import Cookies from 'js-cookie';
+
 export const useLogin = defineStore('login' , {
     state: () => ({
         user: {},
         token: null,
         title: '',
-        error: null
+        error: null,
+        userInfo:[]
     }),
     actions:{
         async registerUser(parmas) {
@@ -22,8 +24,8 @@ export const useLogin = defineStore('login' , {
         async loginUser (parmas) {
             try {
                 const { data } = await login(parmas)
-                this.token = data.token
-                Cookies.set('token', data.token);
+                this.token = data.access_token
+                Cookies.set('token', data.access_token);
                 return data
             } catch (error) {
                 this.error = error
@@ -33,6 +35,17 @@ export const useLogin = defineStore('login' , {
         async removeToken () {
             this.token = null;
             Cookies.remove('token');
+        },
+        async getUserData () {
+            try {
+                const { data } = await profile()
+                console.log(data)
+                this.userInfo = data
+                return data
+            } catch (error) {
+                this.error = error
+                return error
+            }
         }
 
     }

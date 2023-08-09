@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 18,
+            "activePatchIndex": 26,
             "patches": [
                 {
                     "date": 1691464188079,
@@ -80,6 +80,38 @@
                 {
                     "date": 1691474013691,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,22 +13,5 @@\n         url: \"login\",\r\n         method: \"post\",\r\n         data\r\n     })\r\n-}\n-import { request } from \"../../utils/service\"\r\n-\r\n-export async function register(data) {\r\n-    return request({\r\n-        url: \"register\",\r\n-        method: \"post\",\r\n-        data\r\n-    })\r\n-}\r\n-\r\n-export async function login(data) {\r\n-    return request({\r\n-        url: \"login\",\r\n-        method: \"post\",\r\n-        data\r\n-    })\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1691555275963,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import { request } from \"../../utils/service\"\r\n \r\n export async function register(data) {\r\n     return request({\r\n-        url: \"register\",\r\n+        url: \"api/v1/auth/login\",\r\n         method: \"post\",\r\n         data\r\n     })\r\n }\r\n"
+                },
+                {
+                    "date": 1691555289096,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,17 @@\n+import { request } from \"../../utils/service\"\r\n+\r\n+export async function register(data) {\r\n+    return request({\r\n+        url: \"api/v1/auth/login\",\r\n+        method: \"post\",\r\n+        data\r\n+    })\r\n+}\r\n+\r\n+export async function login(data) {\r\n+    return request({\r\n+        url: \"login\",\r\n+        method: \"post\",\r\n+        data\r\n+    })\r\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1691555378868,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,17 @@\n+import { request } from \"../../utils/service\"\r\n+\r\n+export async function register(data) {\r\n+    return request({\r\n+        url: \"register\",\r\n+        method: \"post\",\r\n+        data\r\n+    })\r\n+}\r\n+\r\n+export async function login(data) {\r\n+    return request({\r\n+        url: \"api/v1/auth/login\",\r\n+        method: \"post\",\r\n+        data\r\n+    })\r\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1691555648534,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,43 +9,17 @@\n }\r\n \r\n export async function login(data) {\r\n     return request({\r\n-        url: \"api/v1/auth/login\",\r\n-        method: \"post\",\r\n-        data\r\n-    })\r\n-}\n-import { request } from \"../../utils/service\"\r\n-\r\n-export async function register(data) {\r\n-    return request({\r\n-        url: \"api/v1/auth/login\",\r\n-        method: \"post\",\r\n-        data\r\n-    })\r\n-}\r\n-\r\n-export async function login(data) {\r\n-    return request({\r\n         url: \"login\",\r\n         method: \"post\",\r\n         data\r\n     })\r\n-}\n-import { request } from \"../../utils/service\"\r\n-\r\n-export async function register(data) {\r\n-    return request({\r\n-        url: \"api/v1/auth/login\",\r\n-        method: \"post\",\r\n-        data\r\n-    })\r\n }\r\n \r\n-export async function login(data) {\r\n+export async function profile () {\r\n     return request({\r\n-        url: \"login\",\r\n+        url: \"profile\",\r\n         method: \"post\",\r\n         data\r\n     })\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1691555761686,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n         data\r\n     })\r\n }\r\n \r\n-export async function profile () {\r\n+export async function profile (data) {\r\n     return request({\r\n         url: \"profile\",\r\n         method: \"post\",\r\n         data\r\n"
+                },
+                {
+                    "date": 1691557121468,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,25 @@\n+import { request } from \"../../utils/service\"\r\n+\r\n+export async function register(data) {\r\n+    return request({\r\n+        url: \"register\",\r\n+        method: \"post\",\r\n+        data\r\n+    })\r\n+}\r\n+\r\n+export async function login(data) {\r\n+    return request({\r\n+        url: \"login\",\r\n+        method: \"post\",\r\n+        data\r\n+    })\r\n+}\r\n+\r\n+export async function profile (data) {\r\n+    return request({\r\n+        url: \"profile\",\r\n+        method: \"post\",\r\n+        data\r\n+    })\r\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1691558594315,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,24 @@\n+import { request } from \"../../utils/service\"\r\n+\r\n+export async function register(data) {\r\n+    return request({\r\n+        url: \"register\",\r\n+        method: \"post\",\r\n+        data\r\n+    })\r\n+}\r\n+\r\n+export async function login(data) {\r\n+    return request({\r\n+        url: \"login\",\r\n+        method: \"post\",\r\n+        data\r\n+    })\r\n+}\r\n+\r\n+export async function profile () {\r\n+    return request({\r\n+        url: \"profile\",\r\n+        method: \"post\",\r\n+    })\r\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1691559469558,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,57 +18,7 @@\n \r\n export async function profile () {\r\n     return request({\r\n         url: \"profile\",\r\n-        method: \"post\",\r\n+        method: \"get\",\r\n     })\r\n-}\n-import { request } from \"../../utils/service\"\r\n-\r\n-export async function register(data) {\r\n-    return request({\r\n-        url: \"register\",\r\n-        method: \"post\",\r\n-        data\r\n-    })\r\n-}\r\n-\r\n-export async function login(data) {\r\n-    return request({\r\n-        url: \"login\",\r\n-        method: \"post\",\r\n-        data\r\n-    })\r\n-}\r\n-\r\n-export async function profile (data) {\r\n-    return request({\r\n-        url: \"profile\",\r\n-        method: \"post\",\r\n-        data\r\n-    })\r\n-}\n-import { request } from \"../../utils/service\"\r\n-\r\n-export async function register(data) {\r\n-    return request({\r\n-        url: \"register\",\r\n-        method: \"post\",\r\n-        data\r\n-    })\r\n-}\r\n-\r\n-export async function login(data) {\r\n-    return request({\r\n-        url: \"login\",\r\n-        method: \"post\",\r\n-        data\r\n-    })\r\n-}\r\n-\r\n-export async function profile (data) {\r\n-    return request({\r\n-        url: \"profile\",\r\n-        method: \"post\",\r\n-        data\r\n-    })\r\n }\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1691464188079,

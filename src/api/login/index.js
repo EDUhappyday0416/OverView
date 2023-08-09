@@ -15,3 +15,10 @@ export async function login(data) {
         data
     })
 }
+
+export async function profile () {
+    return request({
+        url: "profile",
+        method: "get",
+    })
+}

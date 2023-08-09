@@ -24,8 +24,8 @@ import { ref } from 'vue'
 import { useLogin } from '../stores/login'
 import { useRouter } from 'vue-router'
 const router = useRouter()
-const email = ref('eve.holt@reqres.in')
-const password = ref('cityslicka')
+const email = ref('john@mail.com')
+const password = ref('changeme')
 const loginStore = useLogin()
 
 const loginUser = () => {
@@ -35,7 +35,7 @@ const loginUser = () => {
   }
   console.log(loginStore)
   loginStore.loginUser(data).then((response) => {
-    if (response.token) {
+    if (response.access_token) {
       // 或其他判斷token的方法
       router.push({ path: '/about' })
     }

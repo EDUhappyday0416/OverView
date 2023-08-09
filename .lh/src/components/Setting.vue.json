@@ -1,0 +1,78 @@
+{
+    "sourceFile": "src/components/Setting.vue",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 15,
+            "patches": [
+                {
+                    "date": 1691573089984,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1691573917694,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,9 @@\n+<script setup>\r\n+</script>\r\n+<template>\r\n+    <div>\r\n+        meny\r\n+    </div>\r\n+</template>\r\n+\r\n+<style scoped lang=\"scss\"></style>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1691573958669,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,9 @@\n <script setup>\r\n </script>\r\n <template>\r\n     <div>\r\n-        meny\r\n+        Hi\r\n     </div>\r\n </template>\r\n \r\n-<style scoped lang=\"scss\"></style>\n-<script setup>\r\n-</script>\r\n-<template></template>\r\n-\r\n <style scoped lang=\"scss\"></style>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1691573964115,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,5 +5,7 @@\n         Hi\r\n     </div>\r\n </template>\r\n \r\n-<style scoped lang=\"scss\"></style>\n\\ No newline at end of file\n+<style scoped lang=\"scss\">\r\n+\r\n+</style>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1691573970575,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n <script setup>\r\n </script>\r\n <template>\r\n     <div>\r\n-        Hi\r\n+        Hi XXX\r\n     </div>\r\n </template>\r\n \r\n <style scoped lang=\"scss\">\r\n"
+                },
+                {
+                    "date": 1691574142277,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,14 @@\n+<script setup>\r\n+</script>\r\n+<template>\r\n+    <div>\r\n+        <div>Hi XXX</div>\r\n+        <div>\r\n+            <img src=\"\" alt=\"\">\r\n+        </div>\r\n+    </div>\r\n+</template>\r\n+\r\n+<style scoped lang=\"scss\">\r\n+\r\n+</style>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1691574173104,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,14 @@\n+<script setup>\r\n+</script>\r\n+<template>\r\n+    <div class=\"setting\">\r\n+        <div class=\"setting__name\">Hi XXX</div>\r\n+        <div class=\"setting__img\">\r\n+            <img src=\"\" alt=\"\">\r\n+        </div>\r\n+    </div>\r\n+</template>\r\n+\r\n+<style scoped lang=\"scss\">\r\n+\r\n+</style>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1691574196328,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,14 @@\n+<script setup>\r\n+</script>\r\n+<template>\r\n+    <div class=\"setting\">\r\n+        <div class=\"setting__name\">Hi XXX</div>\r\n+        <div class=\"setting__img\">\r\n+            <img src=\"@/assets/logo.svg\" alt=\"\">\r\n+        </div>\r\n+    </div>\r\n+</template>\r\n+\r\n+<style scoped lang=\"scss\">\r\n+\r\n+</style>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1691574201547,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,14 @@\n+<script setup>\r\n+</script>\r\n+<template>\r\n+    <div class=\"setting\">\r\n+        <div class=\"setting__name\">Hi XXX</div>\r\n+        <div class=\"setting__img\">\r\n+            <img src=\"@/assets/logo.svg\" alt=\"\">\r\n+        </div>\r\n+    </div>\r\n+</template>\r\n+\r\n+<style scoped lang=\"scss\">\r\n+\r\n+</style>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1691574217367,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,17 @@\n+<script setup>\r\n+</script>\r\n+<template>\r\n+    <div class=\"setting\">\r\n+        <div class=\"setting__name\">Hi XXX</div>\r\n+        <div class=\"setting__img\">\r\n+            <img src=\"@/assets/logo.svg\" alt=\"\">\r\n+        </div>\r\n+    </div>\r\n+</template>\r\n+\r\n+<style scoped lang=\"scss\">\r\n+.setting {\r\n+    display: flex;\r\n+}\r\n+\r\n+</style>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1691574258650,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,74 +11,12 @@\n \r\n <style scoped lang=\"scss\">\r\n .setting {\r\n     display: flex;\r\n+\r\n+    &__setting{\r\n+        max-width: 100%;\r\n+        height: auto;\r\n+    }\r\n }\r\n \r\n-</style>\n-<script setup>\r\n-</script>\r\n-<template>\r\n-    <div class=\"setting\">\r\n-        <div class=\"setting__name\">Hi XXX</div>\r\n-        <div class=\"setting__img\">\r\n-            <img src=\"@/assets/logo.svg\" alt=\"\">\r\n-        </div>\r\n-    </div>\r\n-</template>\r\n-\r\n-<style scoped lang=\"scss\">\r\n-\r\n-</style>\n-<script setup>\r\n-</script>\r\n-<template>\r\n-    <div class=\"setting\">\r\n-        <div class=\"setting__name\">Hi XXX</div>\r\n-        <div class=\"setting__img\">\r\n-            <img src=\"@/assets/logo.svg\" alt=\"\">\r\n-        </div>\r\n-    </div>\r\n-</template>\r\n-\r\n-<style scoped lang=\"scss\">\r\n-\r\n-</style>\n-<script setup>\r\n-</script>\r\n-<template>\r\n-    <div class=\"setting\">\r\n-        <div class=\"setting__name\">Hi XXX</div>\r\n-        <div class=\"setting__img\">\r\n-            <img src=\"\" alt=\"\">\r\n-        </div>\r\n-    </div>\r\n-</template>\r\n-\r\n-<style scoped lang=\"scss\">\r\n-\r\n-</style>\n-<script setup>\r\n-</script>\r\n-<template>\r\n-    <div>\r\n-        <div>Hi XXX</div>\r\n-        <div>\r\n-            <img src=\"\" alt=\"\">\r\n-        </div>\r\n-    </div>\r\n-</template>\r\n-\r\n-<style scoped lang=\"scss\">\r\n-\r\n-</style>\n-<script setup>\r\n-</script>\r\n-<template>\r\n-    <div>\r\n-        Hi XXX\r\n-    </div>\r\n-</template>\r\n-\r\n-<style scoped lang=\"scss\">\r\n-\r\n </style>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1691574274490,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n <style scoped lang=\"scss\">\r\n .setting {\r\n     display: flex;\r\n \r\n-    &__setting{\r\n+    &__img{\r\n         max-width: 100%;\r\n         height: auto;\r\n     }\r\n }\r\n"
+                },
+                {
+                    "date": 1691574355947,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,12 @@\n \r\n     &__img{\r\n         max-width: 100%;\r\n         height: auto;\r\n+\r\n+        img{\r\n+            width: 40px;\r\n+        }\r\n     }\r\n }\r\n \r\n </style>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1691574372205,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,27 @@\n+<script setup>\r\n+</script>\r\n+<template>\r\n+    <div class=\"setting\">\r\n+        <div class=\"setting__name\">Hi XXX</div>\r\n+        <div class=\"setting__img\">\r\n+            <img src=\"@/assets/logo.svg\" alt=\"\">\r\n+        </div>\r\n+    </div>\r\n+</template>\r\n+\r\n+<style scoped lang=\"scss\">\r\n+.setting {\r\n+    display: flex;\r\n+    background-color: aquamarine;\r\n+\r\n+    &__img{\r\n+        max-width: 100%;\r\n+        height: auto;\r\n+\r\n+        img{\r\n+            width: 40px;\r\n+        }\r\n+    }\r\n+}\r\n+\r\n+</style>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1691574421519,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,29 @@\n+<script setup>\r\n+</script>\r\n+<template>\r\n+    <div class=\"setting\">\r\n+        <div class=\"setting__name\">Hi XXX</div>\r\n+        <div class=\"setting__img\">\r\n+            <img src=\"@/assets/logo.svg\" alt=\"\">\r\n+        </div>\r\n+    </div>\r\n+</template>\r\n+\r\n+<style scoped lang=\"scss\">\r\n+.setting {\r\n+    display: flex;\r\n+    background-color: aquamarine;\r\n+    justify-content: space-between;\r\n+    padding: 10px;\r\n+\r\n+    &__img{\r\n+        max-width: 100%;\r\n+        height: auto;\r\n+\r\n+        img{\r\n+            width: 40px;\r\n+        }\r\n+    }\r\n+}\r\n+\r\n+</style>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1691574477451,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,29 @@\n+<script setup>\r\n+</script>\r\n+<template>\r\n+    <div class=\"setting\">\r\n+        <div class=\"setting__name\">Hi XXX</div>\r\n+        <div class=\"setting__img\">\r\n+            <img src=\"@/assets/logo.svg\" alt=\"\">\r\n+        </div>\r\n+    </div>\r\n+</template>\r\n+\r\n+<style scoped lang=\"scss\">\r\n+.setting {\r\n+    display: flex;\r\n+    background-color: aquamarine;\r\n+    justify-content: space-between;\r\n+    padding: 10px;\r\n+\r\n+    &__img{\r\n+        max-width: 100%;\r\n+        height: auto;\r\n+\r\n+        img{\r\n+            width: 30px;\r\n+        }\r\n+    }\r\n+}\r\n+\r\n+</style>\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1691573089984,
+            "name": "Commit-0",
+            "content": "<script setup>\r\n</script>\r\n<template></template>\r\n\r\n<style scoped lang=\"scss\"></style>"
+        }
+    ]
+}

@@ -41,47 +41,27 @@ const router = createRouter({
     },
   ]
 })
-router.beforeEach((to, from, next) => {
-  NProgress.start();
-  const token = Cookies.get('token');
-  // 白名單路由列表
-  const whiteList = ['/login', '/register'];
+// router.beforeEach((to, from, next) => {
+//   NProgress.start();
+//   const token = Cookies.get('token');
+//   const whiteList = ['/login', '/register'];
 
-  if (token) {
-    if (to.path === "/login") {
-      next({ path: '/about' });
-      NProgress.done();
-    } else {
-      next();
-    }
-  } else {
-    if (whiteList.includes(to.path)) {
-      next();
-    } else {
-      next("/login");
-      NProgress.done();
-    }
-  }
-  // if (to.path == '/login') {
-  //   if (token) {
-  //     next({ path: '/About' });
-  //   } else {
-  //     next();
-  //   }
-  // } else {
-  //   // 如果不是 /login，判断是否有 token
-  //   if (!token) {
-  //     // 如果没有，则跳至登录页面
-  //     next({ path: '/login' });
-  //     console.log('9999999');
-  //   } else {
-  //     // 如果有 token，且不在登录页面，则继续执行或重定向到 OverView（根据您的需求）
-  //     console.log('66666');
-  //     next();  // 只是继续执行
-  //     // next({ path: '/About' });  // 如果想要每次检测到 token 就重定向到 OverView
-  //   }
-  // }
-});
+//   if (token) {
+//     if (to.path === "/login") {
+//       next({ path: '/about' });
+//       NProgress.done();
+//     } else {
+//       next();
+//     }
+//   } else {
+//     if (whiteList.includes(to.path)) {
+//       next();
+//     } else {
+//       next("/login");
+//       NProgress.done();
+//     }
+//   }
+// });
 
 router.afterEach(() => {
   NProgress.done()

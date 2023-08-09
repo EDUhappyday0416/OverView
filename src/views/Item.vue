@@ -1,7 +1,6 @@
 <template>
   <div>
-    <div @click="logout">登出</div>
-    <div class="header">
+    <!-- <div class="header">
       <div
         class="noActive"
         :class="{ active: initTab == 'currect' }"
@@ -19,7 +18,9 @@
       >
         Waitlist
       </div>
-    </div>
+    </div> -->
+    
+    <Header @activeHeader="headerGet" :class="{ active: initTab == 'Waitlist' }"/>
     <div class="drag" @scroll="onScroll">
       <div
         class="drag__main"
@@ -61,13 +62,31 @@ import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { usePlaneData } from '../stores/counter'
 import { useLogin } from '../stores/login'
-
+// import Cookies from 'js-cookie';
+import Header from '../components/Header.vue'
 import Loading from '../components/Loading.vue'
+
+
+// const token = Cookies.get('token');
 
 const hideLoading = ref(false)
 const store = usePlaneData()
 const storeLogout = useLogin()
-console.log('store', store.List)
+storeLogout.getUserData()
+
+
+
+// storeLogout.getUserData(token).then((response) => {
+//   console.log(response)
+// })
+
+const userInfo = storeLogout.userInfo
+console.log('storeLogout.userInfo' , userInfo)
+
+
+const headerGet = (data) => {
+  initTab.value = data
+}
 
 const router = useRouter()
 const route = useRoute()
@@ -80,11 +99,11 @@ const logout = () => {
   storeLogout.removeToken()
   router.push(`/`)
 }
+
+
 const showInfo = ref(null)
 const initTab = ref('currect')
-const currentChange = (type) => {
-  initTab.value = type
-}
+
 const getCurrentChange = computed(() => {
   return store.List.filter((item) => item.type == initTab.value)
 })
@@ -107,18 +126,12 @@ const onScroll = (e) => {
 .show {
   background-color: white;
 }
-.active {
-  border-bottom: 1px solid black;
-}
+
 .noActive {
   cursor: pointer;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-}
+
 .drag {
   height: calc(100vh - 40px);
   background-color: #f9f9f9;

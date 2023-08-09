@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { ref, defineProps, defineEmits, computed, shallowRef } from 'vue'
 import Tickets from '../views/Tickets.vue'
 import Past from './Past.vue'
@@ -24,8 +24,8 @@ const setActiveTab = (stab) => {
     tab.isActive = tab.title == stab.title
   })
 }
-</script>
-<template>
+</script> -->
+<!-- <template>
   <div class="header">
     <div
       class="header__title"
@@ -38,8 +38,8 @@ const setActiveTab = (stab) => {
     </div>
   </div>
   <component :is="currentTabView"> </component>
-</template>
-<style scoped lang="scss">
+</template> -->
+<!-- <style scoped lang="scss">
 .header {
   display: flex;
   justify-content: space-between;
@@ -61,4 +61,4 @@ const setActiveTab = (stab) => {
 .active {
   border-bottom: 4.3px solid white;
 }
-</style>
+</style> -->
