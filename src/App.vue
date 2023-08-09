@@ -1,13 +1,20 @@
 <script setup>
-import { RouterView } from 'vue-router'
 import topMenu from './components/Setting.vue'
-
-// import HelloWorld from './components/HelloWorld.vue'
+import { useRoute, RouterView } from 'vue-router'
+import { computed } from 'vue'
+const route = useRoute()
+const isLogin = computed(() => {
+  return route.path
+})
+// let getRoute = router.currentRoute.value
+// console.log(getRoute)
 </script>
 
 <template>
   <!-- @/assets/logo.svg -->
-  <topMenu />
+  <!-- {{ getRoute }} -->
+  <!-- {{ router.currentRoute.value.path }} -->
+  <topMenu v-if="isLogin !== '/' && isLogin !== '/register'" />
   <RouterView />
 
   <!-- <DataTable :paginatedData="paginatedData" :columns="columns">
@@ -23,8 +30,6 @@ import topMenu from './components/Setting.vue'
       </button>
     </template>
   </DataTable> -->
-
-  
 </template>
 
 <!-- <script setup>

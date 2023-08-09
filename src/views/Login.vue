@@ -37,7 +37,7 @@ const loginUser = () => {
   loginStore.loginUser(data).then((response) => {
     if (response.access_token) {
       // 或其他判斷token的方法
-      router.push({ path: '/about' })
+      router.push({ path: '/dashboard' })
     }
   })
 }

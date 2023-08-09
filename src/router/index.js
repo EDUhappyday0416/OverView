@@ -1,33 +1,37 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { createRouter, createWebHistory } from 'vue-router'
+// import HomeView from '../views/HomeView.vue'
 import NProgress from "nprogress"
 import "nprogress/nprogress.css"
-import Cookies from 'js-cookie';
 
 NProgress.configure({ showSpinner: false })
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: HomeView
-    },
+    // {
+    //   path: '/home',
+    //   name: 'home',
+    //   component: HomeView,
+    // },
     {
       path: '/register',
       name: 'register',
       component: () => import('../views/Register.vue')
     },
     {
-      path: '/login',
+      path: '/dashboard',
+      name: 'dashboard',
+      component: () => import('../views/Dashboard.vue')
+    },
+    {
+      path: '/',
       name: 'login',
-      component: () => import('../views/Login.vue')
+      component: () => import('../views/Login.vue'),
     },
     {
       path: '/about',
       name: 'about',
-      component: () => import('../views/Item.vue')
+      component: () => import('../views/Item.vue'),
     },
     {
       path: '/OverView',

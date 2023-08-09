@@ -19,8 +19,7 @@
         Waitlist
       </div>
     </div> -->
-    
-    <Header @activeHeader="headerGet" :class="{ active: initTab == 'Waitlist' }"/>
+    <Header @activeHeader="headerGet" :class="{ active: initTab == 'Waitlist' }" />
     <div class="drag" @scroll="onScroll">
       <div
         class="drag__main"
@@ -66,23 +65,11 @@ import { useLogin } from '../stores/login'
 import Header from '../components/Header.vue'
 import Loading from '../components/Loading.vue'
 
-
 // const token = Cookies.get('token');
 
 const hideLoading = ref(false)
 const store = usePlaneData()
 const storeLogout = useLogin()
-storeLogout.getUserData()
-
-
-
-// storeLogout.getUserData(token).then((response) => {
-//   console.log(response)
-// })
-
-const userInfo = storeLogout.userInfo
-console.log('storeLogout.userInfo' , userInfo)
-
 
 const headerGet = (data) => {
   initTab.value = data
@@ -95,11 +82,6 @@ const goPage = (i) => {
   router.push(`/DragDrop/${i}`)
   console.log(route.params)
 }
-const logout = () => {
-  storeLogout.removeToken()
-  router.push(`/`)
-}
-
 
 const showInfo = ref(null)
 const initTab = ref('currect')
@@ -130,7 +112,6 @@ const onScroll = (e) => {
 .noActive {
   cursor: pointer;
 }
-
 
 .drag {
   height: calc(100vh - 40px);

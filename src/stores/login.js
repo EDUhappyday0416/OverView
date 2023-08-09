@@ -2,6 +2,8 @@ import { defineStore } from 'pinia'
 import { register , login , profile } from '../api/login'
 import Cookies from 'js-cookie';
 
+
+
 export const useLogin = defineStore('login' , {
     state: () => ({
         user: {},
@@ -38,14 +40,13 @@ export const useLogin = defineStore('login' , {
         },
         async getUserData () {
             try {
-                const { data } = await profile()
-                console.log(data)
-                this.userInfo = data
+                const { data } = await profile();
+                this.userInfo = data;
                 return data
             } catch (error) {
-                this.error = error
-                return error
-            }
+                this.error = error;
+                throw new Error('User must be authenticated');
+            } 
         }
 
     }
