@@ -33,11 +33,11 @@ const router = createRouter({
       name: 'about',
       component: () => import('../views/Item.vue'),
     },
-    {
-      path: '/OverView',
-      name: 'OverView',
-      component: () => import('../views/OverView.vue')
-    },
+    // {
+    //   path: '/OverView',
+    //   name: 'OverView',
+    //   component: () => import('../views/OverView.vue')
+    // },
     {
       path: '/Item',
       name: 'Item',
