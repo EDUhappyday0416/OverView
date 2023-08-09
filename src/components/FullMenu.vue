@@ -5,6 +5,7 @@
     </div>
     <div @click="goPath('about')">About</div>
     <div @click="goPath('dashboard')">Message</div>
+    <div @click="logout">登出</div>
   </div>
 </template>
 <script setup>
@@ -13,9 +14,15 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const { openMenu } = defineProps(['openMenu'])
 const emit = defineEmits(['update:openMenu'])
+import { useLogin } from '../stores/login'
+const storeLogout = useLogin()
 
 const close = () => {
   emit('update:openMenu', false)
+}
+const logout = () => {
+  storeLogout.removeToken()
+  router.push(`/`)
 }
 const goPath = (path) => {
   emit('update:openMenu', false)
