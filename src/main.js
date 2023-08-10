@@ -8,7 +8,7 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 /* import font awesome icon component */
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-/* import specific icons */
+import VueApexCharts from "vue3-apexcharts";/* import specific icons */
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
 
 /* add icons to the library */
@@ -23,5 +23,6 @@ pinia.use(piniaPluginPersistedstate)
 app.component('font-awesome-icon', FontAwesomeIcon)
 app.use(router)
 app.use(createPinia())
+app.use(VueApexCharts);
 app.mount('#app')
 

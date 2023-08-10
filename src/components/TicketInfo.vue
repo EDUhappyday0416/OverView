@@ -44,7 +44,7 @@
       <div class="modal__bottom">
         <div>Qr Code</div>
         <div class="modal__bottom__qrcode">
-          <img :src="data.qrcode" alt="" class="modal__bottom__qrcode__img" />
+          <img :src="data.qrcode" alt="" class="modal__bottom__qrcode__img" loading="lazy"/>
         </div>
       </div>
     </div>

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/components/FullMenu.vue",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1691629767838,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1691629767838,
+            "name": "Commit-0",
+            "content": "<template>\r\n  <div class=\"overlay\" v-if=\"openMenu\">\r\n    <div class=\"overlay__close\" @click=\"close\">\r\n      <div>X</div>\r\n    </div>\r\n    <div @click=\"goPath('about')\">About</div>\r\n    <div @click=\"goPath('message')\">Message</div>\r\n    <div @click=\"logout\">登出</div>\r\n  </div>\r\n</template>\r\n<script setup>\r\nimport { defineProps, defineEmits } from 'vue'\r\nimport { useRouter } from 'vue-router'\r\nconst router = useRouter()\r\nconst { openMenu } = defineProps(['openMenu'])\r\nconst emit = defineEmits(['update:openMenu'])\r\nimport { useLogin } from '../stores/login'\r\nconst storeLogout = useLogin()\r\n\r\nconst close = () => {\r\n  emit('update:openMenu', false)\r\n}\r\nconst logout = () => {\r\n  storeLogout.removeToken()\r\n  router.push(`/`)\r\n}\r\nconst goPath = (path) => {\r\n  emit('update:openMenu', false)\r\n  router.push({ name: path })\r\n}\r\n</script>\r\n<style lang=\"scss\" scoped>\r\n.overlay {\r\n  position: absolute;\r\n  height: 100vh;\r\n  left: 0;\r\n  right: 0;\r\n  width: 100%;\r\n  margin: auto;\r\n  padding: 10px 0;\r\n  color: black;\r\n  text-align: center;\r\n  font-size: 35px;\r\n  z-index: 100;\r\n  align-items: center;\r\n  justify-content: center;\r\n  display: flex;\r\n  background-color: rgb(0, 0, 0);\r\n  background-color: rgba(0, 0, 0, 0.9);\r\n  color: #818181;\r\n  flex-direction: column;\r\n  cursor: pointer;\r\n\r\n  &__close {\r\n    position: absolute;\r\n    top: 10px;\r\n    right: 10px;\r\n    font-size: 30px;\r\n    cursor: pointer;\r\n  }\r\n}\r\n</style>\r\n"
+        }
+    ]
+}

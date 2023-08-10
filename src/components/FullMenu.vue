@@ -4,7 +4,7 @@
       <div>X</div>
     </div>
     <div @click="goPath('about')">About</div>
-    <div @click="goPath('dashboard')">Message</div>
+    <div @click="goPath('message')">Message</div>
     <div @click="logout">登出</div>
   </div>
 </template>

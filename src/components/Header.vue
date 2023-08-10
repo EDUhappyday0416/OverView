@@ -43,7 +43,7 @@ const setActiveTab = (stab) => {
     color: var(--secondary-color);
     border-bottom: 1px solid #ddd;
     transition: 0.4s ease-in;
-    padding: 20px 30px;
+    padding: 4px 30px;
     border-bottom: 1px solid transparent;
   }
 }

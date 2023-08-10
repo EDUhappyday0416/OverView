@@ -108,7 +108,7 @@ const data = ref([])
           <div class="tieket__doash__bottom"></div>
         </div>
         <div class="tieket__right">
-          <img :src="item.qrcode" alt="" />
+          <img :src="item.qrcode" alt="" loading="lazy"/>
         </div>
       </div>
     </div>

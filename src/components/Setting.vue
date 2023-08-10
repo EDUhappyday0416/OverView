@@ -28,7 +28,7 @@ const openMenu = () => {
     <div class="setting__name">Hi {{ userInfo.name }}</div>
     <div class="setting__right">
       <div class="setting__img">
-        <img :src="userInfo.avatar" alt="" />
+        <img src="https://images.unsplash.com/photo-1587080266227-677cc2a4e76e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80" alt="" loading="lazy"/>
       </div>
       <!-- <div class="setting__logout" @click="logout">登出</div> -->
       <div class="setting__img" @click="openMenu">
@@ -47,7 +47,6 @@ const openMenu = () => {
 <style scoped lang="scss">
 .setting {
   display: flex;
-  background-color: aquamarine;
   justify-content: space-between;
   padding: 10px;
   align-items: center;
@@ -59,9 +58,12 @@ const openMenu = () => {
     max-width: 100%;
     height: auto;
     padding: 0px 8px;
-
+    display: flex;
     img {
       width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      object-fit: cover;
     }
   }
 }
