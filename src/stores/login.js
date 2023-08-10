@@ -1,27 +1,28 @@
 import { defineStore } from 'pinia'
-import { register , login , profile } from '../api/login'
+import { register , login , profile} from '../api/login'
 import Cookies from 'js-cookie';
-
-
-
+import { useRouter, useRoute } from 'vue-router'
 export const useLogin = defineStore('login' , {
     state: () => ({
         user: {},
         token: null,
         title: '',
         error: null,
-        userInfo:[]
+        userInfo:[],
+        // createUser:[]
     }),
     actions:{
         async registerUser(parmas) {
             try {
-                const { data } = await register(parmas)
-                this.token = data.token
+                // const { data } = await register(parmas)
+                // this.token = data.token
+                // return data
+                const { data } = await register(parmas);
                 return data
             } catch (error) {
                 this.error = error
                 return error
-            }
+            }   
         },
         async loginUser (parmas) {
             try {
@@ -44,8 +45,11 @@ export const useLogin = defineStore('login' , {
                 this.userInfo = data;
                 return data
             } catch (error) {
-                this.error = error;
-                throw new Error('User must be authenticated');
+                console.log(error)
+                // if (error.response.status !== 200) {
+                //     // this.router.push({ name: 'login' }); 
+                // }
+                return Promise.reject(error.message);
             } 
         }
 

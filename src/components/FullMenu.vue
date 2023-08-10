@@ -3,7 +3,8 @@
     <div class="overlay__close" @click="close">
       <div>X</div>
     </div>
-    <div @click="goPath('about')">About</div>
+    <div @click="goPath('dashboard')">Dashboard</div>
+    <div @click="goPath('about')">Item</div>
     <div @click="goPath('message')">Message</div>
     <div @click="logout">登出</div>
   </div>
@@ -22,7 +23,7 @@ const close = () => {
 }
 const logout = () => {
   storeLogout.removeToken()
-  router.push(`/`)
+  router.push(`/login`)
 }
 const goPath = (path) => {
   emit('update:openMenu', false)

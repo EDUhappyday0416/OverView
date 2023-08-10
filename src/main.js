@@ -1,6 +1,6 @@
 import './assets/main.css'
 
-import { createApp } from 'vue'
+import { createApp , markRaw} from 'vue'
 import { createPinia } from 'pinia'
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -19,6 +19,9 @@ import router from './router'
 
 const app = createApp(App)
 const pinia = createPinia()
+pinia.use(({ store }) => {
+    store.router = markRaw(router)
+});
 pinia.use(piniaPluginPersistedstate)
 app.component('font-awesome-icon', FontAwesomeIcon)
 app.use(router)

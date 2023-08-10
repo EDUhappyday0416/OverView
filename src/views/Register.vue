@@ -13,6 +13,12 @@
         <input type="password" v-model="password" />
       </div>
     </div>
+    <div class="register__form">
+      <div class="register__password__label">name</div>
+      <div class="register__password">
+        <input type="text" v-model="name" />
+      </div>
+    </div>
     <div class="register__btn">
       <button @click="registerUser()">註冊</button>
     </div>
@@ -25,22 +31,23 @@ import { useLogin } from '../stores/login'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 
-const email = ref('eve.holt@reqres.in')
-const password = ref('pistol')
+const email = ref('')
+const name = ref('')
+const avatar = ref('https://api.lorem.space/image/face?w=640&h=480&r=867')
+
+const password = ref('')
 const loginStore = useLogin()
 
 const registerUser = () => {
   const data = {
+    name: name.value,
     email: email.value,
-    password: password.value
+    password: password.value,
+    avatar: avatar.value
   }
   loginStore.registerUser(data).then((res) => {
-    if (res.token) {
-      alert('註冊成功')
-      router.push({ path: '/login' })
-    } else {
-      alert('註冊失敗')
-    }
+    console.log(res)
+    // router.push({ path: '/dashboard' })
   })
 }
 

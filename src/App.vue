@@ -14,7 +14,7 @@ const isLogin = computed(() => {
   <!-- @/assets/logo.svg -->
   <!-- {{ getRoute }} -->
   <!-- {{ router.currentRoute.value.path }} -->
-  <topMenu v-if="isLogin !== '/' && isLogin !== '/register'" />
+  <topMenu v-if="isLogin !== '/login' && isLogin !== '/register'" />
   <RouterView />
 
   <!-- <DataTable :paginatedData="paginatedData" :columns="columns">

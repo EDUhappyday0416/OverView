@@ -7,9 +7,9 @@ const SUCCESS_RESPONSE_DATA = {
 /* 抓取成功 */
 export function getSuccessApi () {
     return new Promise((resolve) => {
-    setTimeout(() => {
-        resolve(SUCCESS_RESPONSE_DATA)
-    }, 1000)
+        setTimeout(() => {
+            resolve(SUCCESS_RESPONSE_DATA)
+        }, 1000)
     })
 }
 
