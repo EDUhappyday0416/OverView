@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 47,
+            "activePatchIndex": 48,
             "patches": [
                 {
                     "date": 1691630179117,
@@ -196,6 +196,10 @@
                 {
                     "date": 1691645950733,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n <template>\r\n   <div class=\"card\">\r\n-    <div class=\"card__wrapper\" @scroll=\"loadMore\">\r\n+    <div class=\"card__wrapper\" >\r\n       <div class=\"card__user reverse\">\r\n         <div class=\"card__user__message left\">早啊早啊早啊</div>\r\n         <div class=\"card__user__avatar\">\r\n           <img\r\n@@ -200,19 +200,13 @@\n     top: document.body.scrollHeight,\r\n     behavior: 'smooth'\r\n   })\r\n   newMessage.value = ''\r\n+  \r\n }\r\n \r\n-const loadMore = (e) => {\r\n-  const { scrollHeight, scrollTop, clientHeight } = e.target\r\n-  const scrollDistance = scrollHeight - (scrollTop + clientHeight);\r\n-  window.scrollBy({\r\n-    top: scrollDistance,\r\n-    behavior: 'smooth'\r\n-  });\r\n-}\r\n \r\n+\r\n </script>\r\n <style lang=\"scss\" scoped>\r\n .card {\r\n   height: 94%;\r\n"
+                },
+                {
+                    "date": 1691728208368,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -200,9 +200,8 @@\n     top: document.body.scrollHeight,\r\n     behavior: 'smooth'\r\n   })\r\n   newMessage.value = ''\r\n-  \r\n }\r\n \r\n \r\n \r\n@@ -288,6 +287,7 @@\n   font-size: inherit;\r\n   font-weight: 500;\r\n   line-height: inherit;\r\n   transition: 0.3s ease;\r\n+  font-size: 16px;\r\n }\r\n </style>\r\n"
                 }
             ],
             "date": 1691630179117,

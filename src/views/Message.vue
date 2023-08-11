@@ -288,5 +288,6 @@ input {
   font-weight: 500;
   line-height: inherit;
   transition: 0.3s ease;
+  font-size: 16px;
 }
 </style>

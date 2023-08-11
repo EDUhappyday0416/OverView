@@ -1,0 +1,34 @@
+{
+    "sourceFile": "src/api/upload/index.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1691729405211,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1691729456117,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,14 @@\n import { request } from \"../../utils/service\"\r\n \r\n export async function upImageLoad(file) {\r\n+    let formData = new FormData();\r\n+    formData.append('image', file);\r\n     return request({\r\n         url: \"files/upload\",\r\n         method: \"post\",\r\n-        data\r\n+        data: formData,\r\n+        headers: {\r\n+            \"Content-Type\": \"multipart/form-data\"\r\n+        }\r\n     })\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1691730812148,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,14 @@\n+import { request } from \"../../utils/service\"\r\n+\r\n+export async function upImageLoad(file) {\r\n+    let formData = new FormData();\r\n+    formData.append('image', file);\r\n+    return request({\r\n+        url: \"files/upload\",\r\n+        method: \"post\",\r\n+        data: formData,\r\n+        headers: {\r\n+            \"Content-Type\": \"multipart/form-data\"\r\n+        }\r\n+    })\r\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1691730828982,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,19 +10,5 @@\n         headers: {\r\n             \"Content-Type\": \"multipart/form-data\"\r\n         }\r\n     })\r\n-}\n-import { request } from \"../../utils/service\"\r\n-\r\n-export async function upImageLoad(file) {\r\n-    let formData = new FormData();\r\n-    formData.append('image', file);\r\n-    return request({\r\n-        url: \"files/upload\",\r\n-        method: \"post\",\r\n-        data: formData,\r\n-        headers: {\r\n-            \"Content-Type\": \"multipart/form-data\"\r\n-        }\r\n-    })\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1691731185025,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,14 @@\n+import { request } from \"../../utils/service\"\r\n+\r\n+export async function upImageLoad(file) {\r\n+    let formData = new FormData();\r\n+    formData.append('file', file);\r\n+    return request({\r\n+        url: \"files/upload\",\r\n+        method: \"post\",\r\n+        data: formData,\r\n+        headers: {\r\n+            \"Content-Type\": \"multipart/form-data\"\r\n+        }\r\n+    })\r\n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1691729405211,
+            "name": "Commit-0",
+            "content": "import { request } from \"../../utils/service\"\r\n\r\nexport async function upImageLoad(file) {\r\n    return request({\r\n        url: \"files/upload\",\r\n        method: \"post\",\r\n        data\r\n    })\r\n}"
+        }
+    ]
+}

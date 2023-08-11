@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/views/register.vue",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1691728210870,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1691728210870,
+            "name": "Commit-0",
+            "content": "<template>\r\n  <div class=\"register\">\r\n    <div class=\"register__label\">REGISTER ACCOUNT</div>\r\n    <div class=\"register__form\">\r\n      <div class=\"register__email__label\">Email</div>\r\n      <div class=\"register__email\">\r\n        <input type=\"text\" v-model=\"email\" />\r\n      </div>\r\n    </div>\r\n    <div class=\"register__form\">\r\n      <div class=\"register__password__label\">Password</div>\r\n      <div class=\"register__password\">\r\n        <input type=\"password\" v-model=\"password\" />\r\n      </div>\r\n    </div>\r\n    <div class=\"register__form\">\r\n      <div class=\"register__password__label\">name</div>\r\n      <div class=\"register__password\">\r\n        <input type=\"text\" v-model=\"name\" />\r\n      </div>\r\n    </div>\r\n    <div class=\"register__btn\">\r\n      <button @click=\"registerUser()\">註冊</button>\r\n    </div>\r\n    <div class=\"register__goBtn\" @click=\"goLogin()\">已有帳號？</div>\r\n  </div>\r\n</template>\r\n<script setup>\r\nimport { ref } from 'vue'\r\nimport { useLogin } from '../stores/login'\r\nimport { useRouter } from 'vue-router'\r\nconst router = useRouter()\r\n\r\nconst email = ref('')\r\nconst name = ref('')\r\nconst avatar = ref('https://api.lorem.space/image/face?w=640&h=480&r=867')\r\n\r\nconst password = ref('')\r\nconst loginStore = useLogin()\r\n\r\nconst registerUser = () => {\r\n  const data = {\r\n    name: name.value,\r\n    email: email.value,\r\n    password: password.value,\r\n    avatar: avatar.value\r\n  }\r\n  loginStore.registerUser(data).then((res) => {\r\n    console.log(res)\r\n    // router.push({ path: '/dashboard' })\r\n  })\r\n}\r\n\r\nconst goLogin = () => {\r\n  router.push({ path: '/login' })\r\n}\r\n</script>\r\n\r\n<style lang=\"scss\" scoped>\r\ninput {\r\n  outline: none;\r\n  display: block;\r\n  background: rgba(0, 0, 0, 0.1);\r\n  width: 100%;\r\n  border: 0;\r\n  border-radius: 4px;\r\n  box-sizing: border-box;\r\n  padding: 12px 20px;\r\n  color: rgba(0, 0, 0, 0.6);\r\n  font-family: inherit;\r\n  font-size: inherit;\r\n  font-weight: 500;\r\n  line-height: inherit;\r\n  transition: 0.3s ease;\r\n  font-size: 16px;\r\n}\r\n.register {\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: center;\r\n  height: 100vh;\r\n  padding: 25px;\r\n\r\n  &__goBtn {\r\n    margin-top: 10px;\r\n    text-align: right;\r\n    cursor: pointer;\r\n  }\r\n\r\n  &__form {\r\n    padding: 10px 0;\r\n  }\r\n\r\n  &__label {\r\n    font-size: 1.5rem;\r\n    font-weight: 500;\r\n    text-align: center;\r\n    margin-bottom: 1rem;\r\n  }\r\n\r\n  &__btn button {\r\n    outline: none;\r\n    width: 100%;\r\n    border: 0;\r\n    border-radius: 4px;\r\n    padding: 12px 20px;\r\n    color: #ffffff;\r\n    font-family: inherit;\r\n    font-size: inherit;\r\n    font-weight: 500;\r\n    line-height: inherit;\r\n    text-transform: uppercase;\r\n    cursor: pointer;\r\n    background: aliceblue;\r\n    color: #4285f4;\r\n  }\r\n}\r\n</style>\r\n"
+        }
+    ]
+}

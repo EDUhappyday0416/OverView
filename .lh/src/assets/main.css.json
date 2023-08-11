@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 8,
+            "activePatchIndex": 9,
             "patches": [
                 {
                     "date": 1691130467019,
@@ -40,6 +40,10 @@
                 {
                     "date": 1691636717741,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n   height: 100vh;\r\n   display: flex;\r\n   flex-direction: column;\r\n   width: 100vw;\r\n-  background-image: linear-gradient(to top, #feada6 0%, #f5efef 100%);\r\n+  background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);\r\n }\r\n body {\r\n   margin: 0;\r\n   padding: 0;\r\n@@ -40,46 +40,4 @@\n     display: flex;\r\n     place-items: center;\r\n   } */\r\n }\r\n-@import './base.css';\r\n-\r\n-#app {\r\n-  /* max-width: 1280px;\r\n-  margin: 0 auto;\r\n-  overflow: auto;\r\n-  height: 100vh;\r\n-  font-weight: normal;\r\n-  display: grid; */\r\n-  max-width: 414px;\r\n-  margin: 0 auto;\r\n-  font-weight: normal;\r\n-  height: 100vh;\r\n-  display: flex;\r\n-  flex-direction: column;\r\n-  width: 100vw;\r\n-}\r\n-body {\r\n-  margin: 0;\r\n-  padding: 0;\r\n-  overflow: hidden; \r\n-}\r\n-\r\n-a,\r\n-.green {\r\n-  text-decoration: none;\r\n-  color: hsla(160, 100%, 37%, 1);\r\n-  transition: 0.4s;\r\n-}\r\n-\r\n-@media (hover: hover) {\r\n-  a:hover {\r\n-    background-color: hsla(160, 100%, 37%, 0.2);\r\n-  }\r\n-}\r\n-\r\n-@media (min-width: 1024px) {\r\n-  /* body {\r\n-    display: flex;\r\n-    place-items: center;\r\n-  } */\r\n-}\r\n"
+                },
+                {
+                    "date": 1691728156119,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,8 +21,12 @@\n   padding: 0;\r\n   overflow: hidden; \r\n }\r\n \r\n+input {\r\n+  font-size: 16px;\r\n+}\r\n+\r\n a,\r\n .green {\r\n   text-decoration: none;\r\n   color: hsla(160, 100%, 37%, 1);\r\n"
                 }
             ],
             "date": 1691130467019,

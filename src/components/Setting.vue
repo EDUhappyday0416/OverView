@@ -1,6 +1,7 @@
 <script setup>
-import { ref } from 'vue'
+import { ref , computed} from 'vue'
 import { useLogin } from '../stores/login'
+
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import { useRouter } from 'vue-router'
@@ -22,13 +23,30 @@ const openMenu = () => {
 //   storeLogout.removeToken()
 //   router.push(`/`)
 // }
+
+const getInitImage = ref(null)
+const filesChange = (file) => {
+  console.log(file[0])
+  storeLogout.upDateImages(file[0]).then((res) => {
+    console.log(res.location)
+    getInitImage.value = res.location
+  })
+}
+const getFinalImage = computed(() => {
+  return getInitImage.value
+})
 </script>
 <template>
   <div class="setting">
     <div class="setting__name">Hi {{ userInfo.name }}</div>
     <div class="setting__right">
       <div class="setting__img">
-        <img src="https://images.unsplash.com/photo-1587080266227-677cc2a4e76e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80" alt="" loading="lazy"/>
+        <input type="file" 
+           multiple 
+           @change="filesChange( $event.target.files); fileCount = $event.target.files.length; "
+           accept="image/*" 
+           class="input-file">
+        <img :src="getFinalImage || userInfo.avatar"/>
       </div>
       <!-- <div class="setting__logout" @click="logout">登出</div> -->
       <div class="setting__img" @click="openMenu">
@@ -50,6 +68,11 @@ const openMenu = () => {
   justify-content: space-between;
   padding: 10px;
   align-items: center;
+
+  &__name {
+    font-size: 1.5rem;
+    font-weight: 200;
+  }
   &__right {
     display: flex;
   }
@@ -66,5 +89,28 @@ const openMenu = () => {
       object-fit: cover;
     }
   }
+}
+
+//hide update image css
+.setting__img {
+  position: relative;
+}
+
+.input-file {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.button-style {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: #fff;
+  cursor: pointer;
 }
 </style>

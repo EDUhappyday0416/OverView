@@ -54,7 +54,7 @@ const chartOptions = ref({
 <template>
     <div class="dashboard">
         <div class="dashboard__overview">
-            <div>
+            <div class="dashboard__overview__title">
                 My Wallet
             </div>
             <div>
@@ -82,6 +82,13 @@ const chartOptions = ref({
         display: flex;
         justify-content: space-between;
         margin-bottom: 20px;
+        align-items: center;
+
+
+        &__title {
+            font-size: 2rem;
+            font-weight: bold;
+        }
        
     }
     &__card{

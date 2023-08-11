@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia'
 import { register , login , profile} from '../api/login'
+import { upImageLoad } from '../api/upload'
+
 import Cookies from 'js-cookie';
 import { useRouter, useRoute } from 'vue-router'
 export const useLogin = defineStore('login' , {
@@ -9,6 +11,7 @@ export const useLogin = defineStore('login' , {
         title: '',
         error: null,
         userInfo:[],
+        fileImg:''
         // createUser:[]
     }),
     actions:{
@@ -43,6 +46,19 @@ export const useLogin = defineStore('login' , {
             try {
                 const { data } = await profile();
                 this.userInfo = data;
+                return data
+            } catch (error) {
+                console.log(error)
+                // if (error.response.status !== 200) {
+                //     // this.router.push({ name: 'login' }); 
+                // }
+                return Promise.reject(error.message);
+            } 
+        },
+        async upDateImages (file) {
+            try {
+                const { data } = await upImageLoad(file);
+                this.fileImg = data;
                 return data
             } catch (error) {
                 console.log(error)

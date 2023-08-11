@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/components/CustomDiv.vue",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1691730184612,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1691730184612,
+            "name": "Commit-0",
+            "content": "<template>\r\n    <input v-model=\"value\" :class=\"{ 'validation-failed' : validationMsg}\" class=\"form-control form-in\" type=\"text\" :name=\"name\" :placeholder=\"placeholder\"/>\r\n    <label class=\"font-weight-bold ml-2 mt-1 text-danger\" v-if=\"validationMsg\">{{ validationMsg }}</label>\r\n</template>\r\n\r\n<script>\r\nexport default {\r\n    name: 'FormInput',\r\n    props: {\r\n        name: String,\r\n        placeholder: String,\r\n        modelValue: String\r\n    },\r\n    computed: {\r\n        validationMsg(){\r\n            return this.value.match(/^\\d*$/) ? '' : 'Not a number!!!'\r\n        },\r\n        value: {\r\n            get(){\r\n                return this.modelValue;\r\n            },\r\n            set(value){\r\n                this.$emit('update:modelValue', value)\r\n            }\r\n        }\r\n    }\r\n}\r\n</script>"
+        }
+    ]
+}

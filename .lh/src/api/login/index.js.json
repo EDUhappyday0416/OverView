@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 26,
+            "activePatchIndex": 27,
             "patches": [
                 {
                     "date": 1691464188079,
@@ -112,6 +112,10 @@
                 {
                     "date": 1691559469558,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,57 +18,7 @@\n \r\n export async function profile () {\r\n     return request({\r\n         url: \"profile\",\r\n-        method: \"post\",\r\n+        method: \"get\",\r\n     })\r\n-}\n-import { request } from \"../../utils/service\"\r\n-\r\n-export async function register(data) {\r\n-    return request({\r\n-        url: \"register\",\r\n-        method: \"post\",\r\n-        data\r\n-    })\r\n-}\r\n-\r\n-export async function login(data) {\r\n-    return request({\r\n-        url: \"login\",\r\n-        method: \"post\",\r\n-        data\r\n-    })\r\n-}\r\n-\r\n-export async function profile (data) {\r\n-    return request({\r\n-        url: \"profile\",\r\n-        method: \"post\",\r\n-        data\r\n-    })\r\n-}\n-import { request } from \"../../utils/service\"\r\n-\r\n-export async function register(data) {\r\n-    return request({\r\n-        url: \"register\",\r\n-        method: \"post\",\r\n-        data\r\n-    })\r\n-}\r\n-\r\n-export async function login(data) {\r\n-    return request({\r\n-        url: \"login\",\r\n-        method: \"post\",\r\n-        data\r\n-    })\r\n-}\r\n-\r\n-export async function profile (data) {\r\n-    return request({\r\n-        url: \"profile\",\r\n-        method: \"post\",\r\n-        data\r\n-    })\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1691729406366,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,24 +1,40 @@\n import { request } from \"../../utils/service\"\r\n \r\n export async function register(data) {\r\n     return request({\r\n-        url: \"register\",\r\n+        url: \"users\",\r\n         method: \"post\",\r\n         data\r\n     })\r\n }\r\n \r\n export async function login(data) {\r\n     return request({\r\n-        url: \"login\",\r\n+        url: \"auth/login\",\r\n         method: \"post\",\r\n         data\r\n     })\r\n }\r\n \r\n export async function profile () {\r\n     return request({\r\n-        url: \"profile\",\r\n+        url: \"auth/profile\",\r\n\\ No newline at end of file\n         method: \"get\",\r\n     })\r\n-}\n+}\r\n+\r\n+export async function getNewToken () {\r\n+    return request({\r\n+        url: \"auth/refresh-token\",\r\n+        method: \"get\",\r\n+    })\r\n+}\r\n+\r\n+\r\n+\r\n+// export async function createUser (data) {\r\n+//     return request({\r\n+//         url: \"users\",\r\n+//         method: \"POST\",\r\n+//     })\r\n+// }\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1691464188079,
