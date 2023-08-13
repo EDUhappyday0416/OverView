@@ -23,10 +23,11 @@ export async function profile () {
     })
 }
 
-export async function getNewToken () {
+export async function getNewToken (data) {
     return request({
         url: "auth/refresh-token",
-        method: "get",
+        method: "post",
+        data
     })
 }
 

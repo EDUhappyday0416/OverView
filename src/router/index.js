@@ -10,7 +10,7 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes: [
     {
-      path: '/home',
+      path: '/',
       name: 'home',
       component: HomeView,
     },
@@ -50,6 +50,11 @@ const router = createRouter({
       name: 'Item',
       component: () => import('../views/Item.vue')
     },
+    {
+      path: '/ShoppingCart',
+      name: 'ShoppingCart',
+      component: () => import('../views/ShoppingCart.vue')
+    },
   ]
 })
 router.beforeEach((to, from, next) => {
@@ -68,10 +73,12 @@ router.beforeEach((to, from, next) => {
     if (whiteList.includes(to.path)) {
       next();
     } else {
-      next("/");
+      next("/home");
       NProgress.done();
     }
   }
+  // if (to.name !== 'login' && !token) next({ name: 'login' })
+  // else next()
 });
 
 router.afterEach(() => {

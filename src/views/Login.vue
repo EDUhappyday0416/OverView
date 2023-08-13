@@ -24,8 +24,8 @@ import { ref } from 'vue'
 import { useLogin } from '../stores/login'
 import { useRouter } from 'vue-router'
 const router = useRouter()
-const email = ref('john@mail.com')
-const password = ref('changeme')
+const email = ref('frances@kk.kk')
+const password = ref('123456')
 const loginStore = useLogin()
 
 const loginUser = () => {

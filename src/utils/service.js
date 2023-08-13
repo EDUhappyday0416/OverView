@@ -13,19 +13,26 @@ function createRequest(service) {
             if (error.response) {
                 switch (error.response.status) {
                     case 401:
-                        alert("token 無效");
-                        console.log(error.message);
+                        //重新授權
+                        // const refreshToken = Cookies.get('refreshToken');
+                        // const { data } = axios.post('https://api.escuelajs.co/api/v1/auth/refresh-token', { refreshToken });
+                        // Cookies.set('token', data.access_token);
+                        // Cookies.set('refresh_token', data.refresh_token);
+                        // console.log(error.message);
+                        alert('未授權請重新登入')
+                        break;
+                    case 401:
+                        alert('拒絕訪問')
                         break;
                     case 404:
-                        alert("頁面不存在");
                         console.log(error.message);
+                        alert('資料來源不存在')
                         break;
                     case 500:
-                        alert("程式發生問題");
                         console.log(error.message);
+                        alert('內部系統發生錯誤')
                         break;
                     default:
-                        alert("程式發生問題");
                         console.log(error.message);
                 }
             }

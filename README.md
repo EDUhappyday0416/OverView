@@ -1,57 +1,48 @@
-# vue_3_project
+# 訂票系統
 
-This template should help get you started developing with Vue 3 in Vite.
+活動搜尋：
 
-## Recommended IDE Setup
+允許用戶按照日期、地點、活動類型或關鍵字進行搜尋。
+活動列表與詳細資訊：
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+顯示即將舉行的活動列表。
+每個活動都應該有詳細的描述，如日期、時間、地點、活動介紹、主辦單位、演出者或嘉賓資訊等。
 
-## Customize configuration
+座位選擇：
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+若活動有固定座位，提供一個可視化的座位圖供用戶選擇。
+顯示那些座位已被預訂。
+購物車與結帳：
 
-## Project Setup
+讓用戶可以選購多場活動的票券。
+提供清晰的結帳流程，並列明所有的費用明細。
+付款整合：
 
-```sh
-npm install
-```
+支援多種付款方式。
+安全的付款流程和購票確認。
+電子票據與QR碼：
 
-### Compile and Hot-Reload for Development
+提供電子票據供用戶列印或在手機上顯示。
+QR碼供活動現場掃描，快速進場。
+用戶帳戶與訂單管理：
 
-```sh
-npm run dev
-```
+查看自己的訂單、票據和活動資訊。
+修改或取消訂單（如果活動政策允許）。
+活動評價與留言：
 
-### Compile and Minify for Production
+活動結束後，用戶可以對活動進行評價和留言。
+活動推薦與提醒：
 
-```sh
-npm run build
-```
+根據用戶的喜好和購票歷史，推薦相關的活動。
+活動前發送提醒，確保用戶不會錯過。
+常見問題與客戶支援：
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+提供常見問題的解答。
+提供聯絡方式供用戶查詢或反映問題。
+多語言支援：
 
-```sh
-npm run test:unit
-```
+若活動涵蓋多國或多語言區域，應提供相應的語言選項。
+社交媒體整合：
 
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
-
-```sh
-npm run test:e2e:dev
-```
-
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
-
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
-
-```sh
-npm run build
-npm run test:e2e
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+允許用戶在社交媒體上分享活動資訊。
+顯示來自社交媒體的活動評論或貼文。

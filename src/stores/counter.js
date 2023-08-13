@@ -164,7 +164,7 @@ export const usePlaneData = defineStore("planeData", {
       {key: 1, type: "Past" ,content: 'ticket 1', isActive: false , event: 'Event Name' , date: '25 June 01:20 pm' , totalSeats: '02' , Seats : 'B2,C2'},
       {key: 1, type: "Past" ,content: 'ticket 1', isActive: false , event: 'Event Name' , date: '25 June 01:20 pm' , totalSeats: '02' , Seats : 'B2,C2'},
       {key: 1, type: "Past" ,content: 'ticket 1', isActive: false , event: 'Event Name' , date: '25 June 01:20 pm' , totalSeats: '02' , Seats : 'B2,C2'},
-  ],
+    ],
   }),
 
   getters: {

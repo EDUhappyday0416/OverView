@@ -33,7 +33,7 @@ const router = useRouter()
 
 const email = ref('')
 const name = ref('')
-const avatar = ref('https://api.lorem.space/image/face?w=640&h=480&r=867')
+const avatar = ref('')
 
 const password = ref('')
 const loginStore = useLogin()
@@ -43,11 +43,11 @@ const registerUser = () => {
     name: name.value,
     email: email.value,
     password: password.value,
-    avatar: avatar.value
+    avatar: 'https://cdn-icons-png.flaticon.com/512/666/666201.png'
   }
   loginStore.registerUser(data).then((res) => {
     console.log(res)
-    // router.push({ path: '/dashboard' })
+    router.push({ path: '/login' })
   })
 }
 

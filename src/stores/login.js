@@ -1,9 +1,12 @@
 import { defineStore } from 'pinia'
 import { register , login , profile} from '../api/login'
-import { upImageLoad } from '../api/upload'
+import { upImageLoad , getImageLoad } from '../api/upload'
+import NProgress from 'nprogress'
 
 import Cookies from 'js-cookie';
 import { useRouter, useRoute } from 'vue-router'
+NProgress.configure({ showSpinner: false })
+
 export const useLogin = defineStore('login' , {
     state: () => ({
         user: {},
@@ -11,27 +14,30 @@ export const useLogin = defineStore('login' , {
         title: '',
         error: null,
         userInfo:[],
-        fileImg:''
+        fileImg:'',
+        refresh_token:null
         // createUser:[]
     }),
     actions:{
-        async registerUser(parmas) {
+        async registerUser(params) {
             try {
-                // const { data } = await register(parmas)
+                // const { data } = await register(params)
                 // this.token = data.token
                 // return data
-                const { data } = await register(parmas);
+                const { data } = await register(params);
                 return data
             } catch (error) {
                 this.error = error
                 return error
             }   
         },
-        async loginUser (parmas) {
+        async loginUser (params) {
             try {
-                const { data } = await login(parmas)
-                this.token = data.access_token
+                const { data } = await login(params)
+                this.token = data.access_token;
+                this.refresh_token = data.refresh_token
                 Cookies.set('token', data.access_token);
+                Cookies.set('refresh_token', data.refresh_token);
                 return data
             } catch (error) {
                 this.error = error
@@ -48,23 +54,33 @@ export const useLogin = defineStore('login' , {
                 this.userInfo = data;
                 return data
             } catch (error) {
-                console.log(error)
-                // if (error.response.status !== 200) {
-                //     // this.router.push({ name: 'login' }); 
-                // }
                 return Promise.reject(error.message);
             } 
         },
         async upDateImages (file) {
             try {
+                NProgress.start()
                 const { data } = await upImageLoad(file);
                 this.fileImg = data;
+                NProgress.done()
                 return data
             } catch (error) {
+                NProgress.done()
+                return Promise.reject(error.message);
+            } 
+        },
+        async getImg (file) {
+            try {
+                const response = await getImageLoad(file);
+                    if (response.data) {
+                    const blob = new Blob([response.data], { type: 'image/png' }); // Assuming it's always a WebP format
+                    this.fileImg = blob;
+                }
+                NProgress.done();
+                return this.fileImg;
+            } catch (error) {
                 console.log(error)
-                // if (error.response.status !== 200) {
-                //     // this.router.push({ name: 'login' }); 
-                // }
+                NProgress.done()
                 return Promise.reject(error.message);
             } 
         }

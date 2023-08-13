@@ -1,11 +1,21 @@
 <script setup>
 import topMenu from './components/Setting.vue'
 import { useRoute, RouterView } from 'vue-router'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
+import { useLogin } from './stores/login'
+import cookie from 'js-cookie'
+
 const route = useRoute()
+const storeLogout = useLogin()
+
 const isLogin = computed(() => {
   return route.path
 })
+// const getInitImage = ref(localStorage.getItem('imageName') || '')
+// if (cookie.get('token') !== undefined && cookie.get('token') !== '') {
+//   storeLogout.getUserData()
+// }
+
 // let getRoute = router.currentRoute.value
 // console.log(getRoute)
 </script>

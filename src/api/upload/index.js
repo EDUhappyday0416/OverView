@@ -12,3 +12,10 @@ export async function upImageLoad(file) {
         }
     })
 }
+export async function getImageLoad(fileName) {
+    return request({
+        url: `files/${fileName}`,
+        method: "get",
+        responseType: 'blob'
+    })
+}

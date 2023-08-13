@@ -3,9 +3,12 @@
     <div class="overlay__close" @click="close">
       <div>X</div>
     </div>
+    <div @click="goPath('home')">Home</div>
     <div @click="goPath('dashboard')">Dashboard</div>
     <div @click="goPath('about')">Item</div>
     <div @click="goPath('message')">Message</div>
+    <div @click="goPath('ShoppingCart')">Shop</div>
+
     <div @click="logout">登出</div>
   </div>
 </template>
@@ -23,6 +26,7 @@ const close = () => {
 }
 const logout = () => {
   storeLogout.removeToken()
+  localStorage.removeItem('imageName')
   router.push(`/login`)
 }
 const goPath = (path) => {

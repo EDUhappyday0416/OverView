@@ -1,52 +1,82 @@
 <script setup>
-import { ref , computed} from 'vue'
+import { ref, watch } from 'vue'
 import { useLogin } from '../stores/login'
 
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-import { useRouter } from 'vue-router'
 
 import FullMenu from '../components/FullMenu.vue'
+import { countBy } from 'lodash-es'
 NProgress.configure({ showSpinner: false })
 const storeLogout = useLogin()
+import cookie from 'js-cookie'
 const userInfo = ref([])
 NProgress.start()
-storeLogout.getUserData().then((res) => {
-  userInfo.value = res
-  NProgress.done()
-})
+
+if (cookie.get('token') !== undefined && cookie.get('token') !== '') {
+  storeLogout.getUserData().then((res) => {
+    userInfo.value = res
+    NProgress.done()
+  })
+}
+NProgress.done()
+
 const open = ref(false)
 const openMenu = () => {
   open.value = !open.value
 }
-// const logout = () => {
-//   storeLogout.removeToken()
-//   router.push(`/`)
-// }
 
-const getInitImage = ref(null)
-const filesChange = (file) => {
-  console.log(file[0])
-  storeLogout.upDateImages(file[0]).then((res) => {
-    console.log(res.location)
-    getInitImage.value = res.location
-  })
+const getInitImage = ref(localStorage.getItem('imageName') || '')
+
+const filesChange = async (file) => {
+  try {
+    const res = await storeLogout.upDateImages(file[0])
+    localStorage.setItem('imageName', res.filename)
+    getInitImage.value = res.filename
+    fetchImage(res.filename)
+  } catch (error) {
+    console.error('Error uploading file:', error)
+  }
 }
-const getFinalImage = computed(() => {
-  return getInitImage.value
-})
+
+const getUrlImage = ref('')
+
+const fetchImage = async (imageName) => {
+  try {
+    const res = await storeLogout.getImg(imageName)
+    console.log(res)
+    const urlCreator = window.URL || window.webkitURL
+    getUrlImage.value = urlCreator.createObjectURL(res)
+  } catch (error) {
+    console.error('Error fetching image:', error)
+  }
+}
+
+watch(
+  getUrlImage,
+  (newValue, oldValue) => {
+    console.log('New Image URL:', newValue)
+  },
+  { immediate: true }
+)
+
+if (getInitImage.value) {
+  fetchImage(getInitImage.value)
+}
 </script>
 <template>
   <div class="setting">
     <div class="setting__name">Hi {{ userInfo.name }}</div>
     <div class="setting__right">
       <div class="setting__img">
-        <input type="file" 
-           multiple 
-           @change="filesChange( $event.target.files); fileCount = $event.target.files.length; "
-           accept="image/*" 
-           class="input-file">
-        <img :src="getFinalImage || userInfo.avatar"/>
+        <input
+          type="file"
+          multiple
+          @change="filesChange($event.target.files)"
+          accept="image/*"
+          class="input-file"
+        />
+        <img :src="getUrlImage || userInfo.avatar" />
       </div>
       <!-- <div class="setting__logout" @click="logout">登出</div> -->
       <div class="setting__img" @click="openMenu">
