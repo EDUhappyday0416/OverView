@@ -2,10 +2,11 @@ import { defineStore } from 'pinia'
 import { products } from '../api/products'
 export const useProduct = defineStore("productData", {
     state: () => ({
-        data:[]
+        data:[],
+        rawItems:[]
     }),
     getters: {
-       
+        doubleCount: (state) => state.rawItems.length
     },
     actions: {
         async getProducts() {
@@ -18,6 +19,10 @@ export const useProduct = defineStore("productData", {
                 this.error = error
                 return error
             }   
+        },
+
+        addItem(item) {
+            this.rawItems.push(item)
         },
     }
 });

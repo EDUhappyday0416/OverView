@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import NotFound from '../views/NotFound.vue'
 import NProgress from "nprogress"
 import "nprogress/nprogress.css"
 import Cookies from 'js-cookie';
@@ -9,8 +10,12 @@ NProgress.configure({ showSpinner: false })
 const router = createRouter({
   history: createWebHashHistory(),
   routes: [
+    // {
+    //   path: '/',
+    //   redirect: '/home'
+    // },
     {
-      path: '/',
+      path: '/home',
       name: 'home',
       component: HomeView,
     },
@@ -55,13 +60,18 @@ const router = createRouter({
       name: 'ShoppingCart',
       component: () => import('../views/ShoppingCart.vue')
     },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: NotFound
+    }
   ]
 })
 router.beforeEach((to, from, next) => {
   NProgress.start();
   const token = Cookies.get('token');
   const whiteList = ['/login', '/register'];
-
+  console.log(token)
   if (token) {
     if (to.path === "/login") {
       next({ path: '/about' });

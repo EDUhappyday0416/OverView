@@ -1,11 +1,18 @@
 <script setup>
+import { computed } from 'vue'
 import { useProduct } from '../stores/products'
 const getProduct = useProduct()
 getProduct.getProducts()
+
+
+const products = computed(() => getProduct.data)
+const addChar = (item) => {
+  getProduct.addItem(item)
+}
 </script>
 <template>
   <div class="cart">
-    <div v-for="(item, i) in getProduct.data" :key="i" class="cart__main">
+    <div v-for="(item, i) in products" :key="i" class="cart__main">
       <div class="cart__img">
         <img :src="item.image" alt="" />
       </div>
@@ -14,6 +21,11 @@ getProduct.getProducts()
         <div>price ${{ item.price }}</div>
         <div>Rating: {{ item.rating.rate }}</div>
       </div>
+
+      <!-- <div @click="addChar">ADD CHAR</div> -->
+      <button @click="addChar(item)">ADD CHAR</button>
+      <div></div>
+
     </div>
   </div>
 </template>

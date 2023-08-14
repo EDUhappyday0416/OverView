@@ -3,11 +3,15 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 1,
             "patches": [
                 {
                     "date": 1691629767838,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1691990570748,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,10 +2,14 @@\n   <div class=\"overlay\" v-if=\"openMenu\">\r\n     <div class=\"overlay__close\" @click=\"close\">\r\n       <div>X</div>\r\n     </div>\r\n-    <div @click=\"goPath('about')\">About</div>\r\n+    <div @click=\"goPath('home')\">Home</div>\r\n+    <div @click=\"goPath('dashboard')\">Dashboard</div>\r\n+    <div @click=\"goPath('about')\">Item</div>\r\n     <div @click=\"goPath('message')\">Message</div>\r\n+    <div @click=\"goPath('ShoppingCart')\">Shop</div>\r\n+\r\n     <div @click=\"logout\">登出</div>\r\n   </div>\r\n </template>\r\n <script setup>\r\n@@ -21,9 +25,10 @@\n   emit('update:openMenu', false)\r\n }\r\n const logout = () => {\r\n   storeLogout.removeToken()\r\n-  router.push(`/`)\r\n+  localStorage.removeItem('imageName')\r\n+  router.push(`/login`)\r\n }\r\n const goPath = (path) => {\r\n   emit('update:openMenu', false)\r\n   router.push({ name: path })\r\n"
                 }
             ],
             "date": 1691629767838,

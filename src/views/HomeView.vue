@@ -9,14 +9,14 @@ const router = useRouter()
 
 const eventStore = useEventData()
 
-const goShoppingCard = () => {
-  router.push(`/ShoppingCart`)
-}
+// const goShoppingCard = () => {
+//   router.push(`/ShoppingCart`)
+// }
 </script>
 
 <template>
   <div class="all">
-    <CustomInput :placeholder="`Search`" @shoppingCart="goShoppingCard" />
+    <CustomInput :placeholder="`Search`"/>
     <div class="all__bar">
       <div class="all__content">
         <div class="all__content__list">

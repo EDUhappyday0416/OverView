@@ -14,11 +14,11 @@ function createRequest(service) {
                 switch (error.response.status) {
                     case 401:
                         //重新授權
-                        // const refreshToken = Cookies.get('refreshToken');
-                        // const { data } = axios.post('https://api.escuelajs.co/api/v1/auth/refresh-token', { refreshToken });
-                        // Cookies.set('token', data.access_token);
-                        // Cookies.set('refresh_token', data.refresh_token);
-                        // console.log(error.message);
+                        const refreshToken = Cookies.get('refreshToken') || sessionStorage.getItem("refresh_token");
+                        const { data } = axios.post('https://api.escuelajs.co/api/v1/auth/refresh-token', { refreshToken });
+                        Cookies.set('token', data.access_token);
+                        Cookies.set('refresh_token', data.refresh_token);
+                        console.log(error.message);
                         alert('未授權請重新登入')
                         break;
                     case 401:

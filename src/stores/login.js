@@ -38,6 +38,7 @@ export const useLogin = defineStore('login' , {
                 this.refresh_token = data.refresh_token
                 Cookies.set('token', data.access_token);
                 Cookies.set('refresh_token', data.refresh_token);
+                sessionStorage.setItem("refresh_token",  data.refresh_token);
                 return data
             } catch (error) {
                 this.error = error

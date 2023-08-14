@@ -1,0 +1,54 @@
+{
+    "sourceFile": "src/views/ShoppingCart.vue",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 9,
+            "patches": [
+                {
+                    "date": 1691988259171,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1691988269052,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,47 @@\n+<script setup>\r\n+import { useProduct } from '../stores/products'\r\n+const getProduct = useProduct()\r\n+getProduct.getProducts()\r\n+</script>\r\n+<template>\r\n+  <div class=\"cart\">\r\n+    <div v-for=\"(item, i) in getProduct.data\" :key=\"i\" class=\"cart__main\">\r\n+      <div class=\"cart__img\">\r\n+        <img :src=\"item.image\" alt=\"\" />\r\n+      </div>\r\n+      <div class=\"cart__content\">\r\n+        <div>{{ item.title }}</div>\r\n+        <div>price ${{ item.price }}</div>\r\n+        <div>Rating: {{ item.rating.rate }}</div>\r\n+      </div>\r\n+\r\n+      <div @click=\"addChar\">ADD CHAR</div>\r\n+      <div></div>\r\n+\r\n+    </div>\r\n+  </div>\r\n+</template>\r\n+<style lang=\"scss\" scoped>\r\n+.cart {\r\n+  overflow: auto;\r\n+  &__main {\r\n+    display: flex;\r\n+    flex-direction: column;\r\n+    align-items: center;\r\n+    background: white;\r\n+    padding: 10px;\r\n+    border-radius: 20px;\r\n+    margin: 35px;\r\n+  }\r\n+  &__img {\r\n+    img {\r\n+      width: 34vw;\r\n+    }\r\n+  }\r\n+  &__content {\r\n+    display: flex;\r\n+    flex-direction: column;\r\n+    padding: 0 30px;\r\n+  }\r\n+}\r\n+</style>\r\n"
+                },
+                {
+                    "date": 1691988283543,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,55 +1,13 @@\n <script setup>\r\n import { useProduct } from '../stores/products'\r\n const getProduct = useProduct()\r\n getProduct.getProducts()\r\n-</script>\r\n-<template>\r\n-  <div class=\"cart\">\r\n-    <div v-for=\"(item, i) in getProduct.data\" :key=\"i\" class=\"cart__main\">\r\n-      <div class=\"cart__img\">\r\n-        <img :src=\"item.image\" alt=\"\" />\r\n-      </div>\r\n-      <div class=\"cart__content\">\r\n-        <div>{{ item.title }}</div>\r\n-        <div>price ${{ item.price }}</div>\r\n-        <div>Rating: {{ item.rating.rate }}</div>\r\n-      </div>\r\n \r\n-      <div @click=\"addChar\">ADD CHAR</div>\r\n-      <div></div>\r\n \r\n-    </div>\r\n-  </div>\r\n-</template>\r\n-<style lang=\"scss\" scoped>\r\n-.cart {\r\n-  overflow: auto;\r\n-  &__main {\r\n-    display: flex;\r\n-    flex-direction: column;\r\n-    align-items: center;\r\n-    background: white;\r\n-    padding: 10px;\r\n-    border-radius: 20px;\r\n-    margin: 35px;\r\n-  }\r\n-  &__img {\r\n-    img {\r\n-      width: 34vw;\r\n-    }\r\n-  }\r\n-  &__content {\r\n-    display: flex;\r\n-    flex-direction: column;\r\n-    padding: 0 30px;\r\n-  }\r\n+const addChar = () => {\r\n+  console.log('addChar')\r\n }\r\n-</style>\r\n-<script setup>\r\n-import { useProduct } from '../stores/products'\r\n-const getProduct = useProduct()\r\n-getProduct.getProducts()\r\n </script>\r\n <template>\r\n   <div class=\"cart\">\r\n     <div v-for=\"(item, i) in getProduct.data\" :key=\"i\" class=\"cart__main\">\r\n@@ -61,9 +19,9 @@\n         <div>price ${{ item.price }}</div>\r\n         <div>Rating: {{ item.rating.rate }}</div>\r\n       </div>\r\n \r\n-      <div>ADD CHAR</div>\r\n+      <div @click=\"addChar\">ADD CHAR</div>\r\n       <div></div>\r\n \r\n     </div>\r\n   </div>\r\n"
+                },
+                {
+                    "date": 1691988356779,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,10 @@\n         <div>price ${{ item.price }}</div>\r\n         <div>Rating: {{ item.rating.rate }}</div>\r\n       </div>\r\n \r\n-      <div @click=\"addChar\">ADD CHAR</div>\r\n+      <!-- <div @click=\"addChar\">ADD CHAR</div> -->\r\n+      <button @click=\"addChar\">ADD CHAR</button>\r\n       <div></div>\r\n \r\n     </div>\r\n   </div>\r\n"
+                },
+                {
+                    "date": 1691988464705,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,10 +3,10 @@\n const getProduct = useProduct()\r\n getProduct.getProducts()\r\n \r\n \r\n-const addChar = () => {\r\n-  console.log('addChar')\r\n+const addChar = (price) => {\r\n+  console.log('price' , price)\r\n }\r\n </script>\r\n <template>\r\n   <div class=\"cart\">\r\n@@ -20,9 +20,9 @@\n         <div>Rating: {{ item.rating.rate }}</div>\r\n       </div>\r\n \r\n       <!-- <div @click=\"addChar\">ADD CHAR</div> -->\r\n-      <button @click=\"addChar\">ADD CHAR</button>\r\n+      <button @click=\"addChar(item.price)\">ADD CHAR</button>\r\n       <div></div>\r\n \r\n     </div>\r\n   </div>\r\n"
+                },
+                {
+                    "date": 1691988474942,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n         <div>Rating: {{ item.rating.rate }}</div>\r\n       </div>\r\n \r\n       <!-- <div @click=\"addChar\">ADD CHAR</div> -->\r\n-      <button @click=\"addChar(item.price)\">ADD CHAR</button>\r\n+      <button @click=\"addChar(item)\">ADD CHAR</button>\r\n       <div></div>\r\n \r\n     </div>\r\n   </div>\r\n"
+                },
+                {
+                    "date": 1691988481973,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,10 +3,10 @@\n const getProduct = useProduct()\r\n getProduct.getProducts()\r\n \r\n \r\n-const addChar = (price) => {\r\n-  console.log('price' , price)\r\n+const addChar = (item) => {\r\n+  console.log('item' , item)\r\n }\r\n </script>\r\n <template>\r\n   <div class=\"cart\">\r\n"
+                },
+                {
+                    "date": 1691988928694,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,17 +1,19 @@\n <script setup>\r\n+import { computed } from 'vue'\r\n import { useProduct } from '../stores/products'\r\n const getProduct = useProduct()\r\n getProduct.getProducts()\r\n \r\n \r\n+const products = computed(() => getProduct.data)\r\n const addChar = (item) => {\r\n   console.log('item' , item)\r\n }\r\n </script>\r\n <template>\r\n   <div class=\"cart\">\r\n-    <div v-for=\"(item, i) in getProduct.data\" :key=\"i\" class=\"cart__main\">\r\n+    <div v-for=\"(item, i) in products\" :key=\"i\" class=\"cart__main\">\r\n       <div class=\"cart__img\">\r\n         <img :src=\"item.image\" alt=\"\" />\r\n       </div>\r\n       <div class=\"cart__content\">\r\n"
+                },
+                {
+                    "date": 1691989350264,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \r\n \r\n const products = computed(() => getProduct.data)\r\n const addChar = (item) => {\r\n-  console.log('item' , item)\r\n+  getProduct.addItem(item)\r\n }\r\n </script>\r\n <template>\r\n   <div class=\"cart\">\r\n"
+                },
+                {
+                    "date": 1691989459197,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,55 @@\n+<script setup>\r\n+import { computed } from 'vue'\r\n+import { useProduct } from '../stores/products'\r\n+const getProduct = useProduct()\r\n+getProduct.getProducts()\r\n+\r\n+\r\n+const products = computed(() => getProduct.data)\r\n+const addChar = (item) => {\r\n+  getProduct.addItem(item)\r\n+}\r\n+</script>\r\n+<template>\r\n+  <div class=\"cart\">\r\n+    <div v-for=\"(item, i) in products\" :key=\"i\" class=\"cart__main\">\r\n+      <div class=\"cart__img\">\r\n+        <img :src=\"item.image\" alt=\"\" />\r\n+      </div>\r\n+      <div class=\"cart__content\">\r\n+        <div>{{ item.title }}</div>\r\n+        <div>price ${{ item.price }}</div>\r\n+        <div>Rating: {{ item.rating.rate }}</div>\r\n+      </div>\r\n+\r\n+      <!-- <div @click=\"addChar\">ADD CHAR</div> -->\r\n+      <button @click=\"addChar(item)\">ADD CHAR</button>\r\n+      <div></div>\r\n+\r\n+    </div>\r\n+  </div>\r\n+</template>\r\n+<style lang=\"scss\" scoped>\r\n+.cart {\r\n+  overflow: auto;\r\n+  &__main {\r\n+    display: flex;\r\n+    flex-direction: column;\r\n+    align-items: center;\r\n+    background: white;\r\n+    padding: 10px;\r\n+    border-radius: 20px;\r\n+    margin: 35px;\r\n+  }\r\n+  &__img {\r\n+    img {\r\n+      width: 34vw;\r\n+    }\r\n+  }\r\n+  &__content {\r\n+    display: flex;\r\n+    flex-direction: column;\r\n+    padding: 0 30px;\r\n+  }\r\n+}\r\n+</style>\r\n"
+                }
+            ],
+            "date": 1691988259170,
+            "name": "Commit-0",
+            "content": "<script setup>\r\nimport { useProduct } from '../stores/products'\r\nconst getProduct = useProduct()\r\ngetProduct.getProducts()\r\n</script>\r\n<template>\r\n  <div class=\"cart\">\r\n    <div v-for=\"(item, i) in getProduct.data\" :key=\"i\" class=\"cart__main\">\r\n      <div class=\"cart__img\">\r\n        <img :src=\"item.image\" alt=\"\" />\r\n      </div>\r\n      <div class=\"cart__content\">\r\n        <div>{{ item.title }}</div>\r\n        <div>price ${{ item.price }}</div>\r\n        <div>Rating: {{ item.rating.rate }}</div>\r\n      </div>\r\n\r\n      <div>ADD CHAR</div>\r\n      <div></div>\r\n\r\n    </div>\r\n  </div>\r\n</template>\r\n<style lang=\"scss\" scoped>\r\n.cart {\r\n  overflow: auto;\r\n  &__main {\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\r\n    background: white;\r\n    padding: 10px;\r\n    border-radius: 20px;\r\n    margin: 35px;\r\n  }\r\n  &__img {\r\n    img {\r\n      width: 34vw;\r\n    }\r\n  }\r\n  &__content {\r\n    display: flex;\r\n    flex-direction: column;\r\n    padding: 0 30px;\r\n  }\r\n}\r\n</style>\r\n"
+        }
+    ]
+}

@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/stores/products.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1691989396218,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1691989458474,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,28 @@\n+import { defineStore } from 'pinia'\r\n+import { products } from '../api/products'\r\n+export const useProduct = defineStore(\"productData\", {\r\n+    state: () => ({\r\n+        data:[],\r\n+        rawItems:[]\r\n+    }),\r\n+    getters: {\r\n+       \r\n+    },\r\n+    actions: {\r\n+        async getProducts() {\r\n+            try {\r\n+                const item = await products();\r\n+                console.log(item)\r\n+                this.data = item.data\r\n+                return item.data\r\n+            } catch (error) {\r\n+                this.error = error\r\n+                return error\r\n+            }   \r\n+        },\r\n+\r\n+        addItem(item) {\r\n+            this.rawItems.push(item)\r\n+        },\r\n+    }\r\n+});\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1691990219512,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,28 @@\n+import { defineStore } from 'pinia'\r\n+import { products } from '../api/products'\r\n+export const useProduct = defineStore(\"productData\", {\r\n+    state: () => ({\r\n+        data:[],\r\n+        rawItems:[]\r\n+    }),\r\n+    getters: {\r\n+        doubleCount: (state) => state.rawItems.length\r\n+    },\r\n+    actions: {\r\n+        async getProducts() {\r\n+            try {\r\n+                const item = await products();\r\n+                console.log(item)\r\n+                this.data = item.data\r\n+                return item.data\r\n+            } catch (error) {\r\n+                this.error = error\r\n+                return error\r\n+            }   \r\n+        },\r\n+\r\n+        addItem(item) {\r\n+            this.rawItems.push(item)\r\n+        },\r\n+    }\r\n+});\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1691989396218,
+            "name": "Commit-0",
+            "content": "import { defineStore } from 'pinia'\r\nimport { products } from '../api/products'\r\nexport const useProduct = defineStore(\"productData\", {\r\n    state: () => ({\r\n        data:[],\r\n        rawItems:[]\r\n    }),\r\n    getters: {\r\n       \r\n    },\r\n    actions: {\r\n        async getProducts() {\r\n            try {\r\n                const item = await products();\r\n                console.log(item)\r\n                this.data = item.data\r\n                return item.data\r\n            } catch (error) {\r\n                this.error = error\r\n                return error\r\n            }   \r\n        },\r\n\r\n        addItem(item) {\r\n            this.rawItems.push(item)\r\n        },\r\n    }\r\n});"
+        }
+    ]
+}
