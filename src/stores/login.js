@@ -34,6 +34,7 @@ export const useLogin = defineStore('login' , {
         async loginUser (params) {
             try {
                 const { data } = await login(params)
+                console.log(data)
                 this.token = data.access_token;
                 this.refresh_token = data.refresh_token
                 Cookies.set('token', data.access_token);

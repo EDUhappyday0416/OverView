@@ -61,6 +61,11 @@ const router = createRouter({
       component: () => import('../views/ShoppingCart.vue')
     },
     {
+      path: '/ShopItem',
+      name: 'ShopItem',
+      component: () => import('../views/ShopItem.vue')
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'not-found',
       component: NotFound
@@ -74,7 +79,7 @@ router.beforeEach((to, from, next) => {
   console.log(token)
   if (token) {
     if (to.path === "/login") {
-      next({ path: '/about' });
+      next({ path: '/home' });
       NProgress.done();
     } else {
       next();
@@ -83,7 +88,7 @@ router.beforeEach((to, from, next) => {
     if (whiteList.includes(to.path)) {
       next();
     } else {
-      next("/home");
+      next({ name: 'home' });
       NProgress.done();
     }
   }

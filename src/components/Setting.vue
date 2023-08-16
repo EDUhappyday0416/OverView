@@ -5,7 +5,7 @@ import { useProduct } from '../stores/products'
 
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-
+import Loading from '../components/Loading.vue'
 import FullMenu from '../components/FullMenu.vue'
 import { countBy } from 'lodash-es'
 import { useRouter } from 'vue-router'
@@ -15,6 +15,7 @@ import cookie from 'js-cookie'
 const userInfo = ref([])
 const router = useRouter()
 NProgress.start()
+const hideLoading = ref(false)
 const getProduct = useProduct()
 if (cookie.get('token') !== undefined && cookie.get('token') !== '') {
   storeLogout.getUserData().then((res) => {
@@ -43,18 +44,15 @@ const filesChange = async (file) => {
 }
 const doubleCount = computed(() => getProduct.doubleCount)
 const getUrlImage = ref('')
-
 const fetchImage = async (imageName) => {
   try {
-    const res = await storeLogout.getImg(imageName)
-    console.log(res)
+    const res = storeLogout.getImg(imageName)
     const urlCreator = window.URL || window.webkitURL
-    getUrlImage.value = urlCreator.createObjectURL(res)
+    getUrlImage.value = urlCreator.createObjectURL(res) 
   } catch (error) {
     console.error('Error fetching image:', error)
   }
 }
-
 watch(
   getUrlImage,
   (newValue, oldValue) => {
@@ -67,8 +65,18 @@ if (getInitImage.value) {
   fetchImage(getInitImage.value)
 }
 
+
 const goShopping = () => {
   router.push({ path: '/ShoppingCart' })
+}
+const goShopItem = (path) => {
+  router.push({ name: path })
+}
+
+const imgError = () => {
+  let img = e.srcElement;
+  img.src = "https://images.unsplash.com/photo-1587080266227-677cc2a4e76e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=934&amp;q=80";
+  img.onerror = null;
 }
 </script>
 <template>
@@ -83,7 +91,7 @@ const goShopping = () => {
           accept="image/*"
           class="input-file"
         />
-        <img :src="getUrlImage || userInfo.avatar" />
+        <img :src="getUrlImage || userInfo.avatar" :error="imgError"/>
       </div>
       <!-- <div class="setting__logout" @click="logout">登出</div> -->
       <div class="setting__img" @click="openMenu">
@@ -99,10 +107,14 @@ const goShopping = () => {
           <path
             d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"
           />
-        </svg>{{ doubleCount }}
+        </svg>
+        {{ doubleCount }}
       </div>
+      <div @click="goShopItem('ShopItem')">go</div>
     </div>
   </div>
+  <Loading :loading="hideLoading" />
+
   <FullMenu :openMenu="open" @update:openMenu="open = $event" />
 </template>
 

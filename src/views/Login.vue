@@ -22,8 +22,9 @@
 <script setup>
 import { ref } from 'vue'
 import { useLogin } from '../stores/login'
-import { useRouter } from 'vue-router'
+import { useRouter , useRoute} from 'vue-router'
 const router = useRouter()
+const route = useRoute()
 const email = ref('frances@kk.kk')
 const password = ref('123456')
 const loginStore = useLogin()
@@ -39,6 +40,13 @@ const loginUser = () => {
       router.push({ path: '/dashboard' })
     }
   })
+  // loginStore.loginUser(data , loggedIn => {
+  //   if (!loggedIn) {
+  //     alert('登入失敗')
+  //   }else{
+  //     router.replace(route.query.redirect || '/dashboard')
+  //   }
+  // })
 }
 
 const goRegister = () => {

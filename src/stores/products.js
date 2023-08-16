@@ -24,5 +24,11 @@ export const useProduct = defineStore("productData", {
         addItem(item) {
             this.rawItems.push(item)
         },
+    },
+    persist: {
+        enabled: true,
+        strategies:[
+            { storage : localStorage, paths : ['doubleCount'] }
+        ]
     }
 });
