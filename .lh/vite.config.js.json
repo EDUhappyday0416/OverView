@@ -3,11 +3,15 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 1,
             "patches": [
                 {
                     "date": 1691468619989,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1692337421347,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,8 +11,9 @@\n   },\r\n   plugins: [\r\n     vue(),\r\n   ],\r\n+  external: ['vue'],\r\n   resolve: {\r\n     // alias: {\r\n     //   '@': fileURLToPath(new URL('./src', import.meta.url))\r\n     // }\r\n"
                 }
             ],
             "date": 1691468619989,
