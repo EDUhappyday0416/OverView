@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 8,
+            "activePatchIndex": 9,
             "patches": [
                 {
                     "date": 1692157261561,
@@ -40,6 +40,10 @@
                 {
                     "date": 1692158146228,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,16 @@\n+<template>\r\n+    <!-- doubleCount: {{ doubleCount }}\r\n+    <div v-for=\"(item , i) in productsData\">\r\n+        {{ item }}\r\n+    </div> -->\r\n+\r\n+    <div>\r\n+\r\n+    </div>\r\n+</template>\r\n+<script setup>\r\n+import { computed  } from 'vue'\r\n+import { useProduct } from '../stores/products'\r\n+const getProduct = useProduct()\r\n+const productsData = computed(() => getProduct.data)\r\n+</script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1692176368146,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,25 +3,9 @@\n     <div v-for=\"(item , i) in productsData\">\r\n         {{ item }}\r\n     </div> -->\r\n \r\n-    <div>\r\n-\r\n-    </div>\r\n-</template>\r\n-<script setup>\r\n-import { computed  } from 'vue'\r\n-import { useProduct } from '../stores/products'\r\n-const getProduct = useProduct()\r\n-const productsData = computed(() => getProduct.data)\r\n-</script>\n-<template>\r\n-    doubleCount: {{ doubleCount }}\r\n-    <div v-for=\"(item , i) in productsData\">\r\n-        {{ item }}\r\n-    </div>\r\n-\r\n-    <div>\r\n+    <div class=\"shoppingCart\">\r\n         \r\n     </div>\r\n </template>\r\n <script setup>\r\n"
                 }
             ],
             "date": 1692157261561,

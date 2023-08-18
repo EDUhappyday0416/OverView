@@ -4,8 +4,8 @@
         {{ item }}
     </div> -->
 
-    <div>
-
+    <div class="shoppingCart">
+        
     </div>
 </template>
 <script setup>
