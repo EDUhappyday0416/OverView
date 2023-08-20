@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'vue3-project'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_BC83982BB46F44F2BC110EF109D9CD2A }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A430005C6F544A5593F54E1FB5CB65AE }}
           package: .
