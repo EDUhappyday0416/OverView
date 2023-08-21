@@ -43,18 +43,16 @@ function createRequest(service) {
         },
         function (error) {
             if (error.response) {
+                console.log('error.response.status', error.response.status)
                 switch (error.response.status) {
                     case 401:
                         //重新授權
-                        const refreshToken = Cookies.get('refreshToken') || sessionStorage.getItem("refresh_token") ;
-                        const { data } = axios.post('https://api.escuelajs.co/api/v1/auth/refresh-token',{ refreshToken : refresh_token});
-                        Cookies.set('token', data.access_token);
-                        Cookies.set('refresh_token', data.refresh_token);
+                        // const refreshToken = Cookies.get('refreshToken') || sessionStorage.getItem("refresh_token") ;
+                        // const { data } = axios.post('https://api.escuelajs.co/api/v1/auth/refresh-token',{ refreshToken : refresh_token});
+                        // Cookies.set('token', data.access_token);
+                        // Cookies.set('refresh_token', data.refresh_token);
                         console.log(error.message);
-                        alert('未授權請重新登入或重新註冊')
-                        break;
-                    case 401:
-                        alert('拒絕訪問')
+                        alert('未授權重新註冊')
                         break;
                     // case 404:
                     //     console.log(error.message);
@@ -68,21 +66,23 @@ function createRequest(service) {
                         console.log(error.message);
                 }
                 if(typeof error.response.data !== 'object') {
-                    alert('服务端异常！')
+                    alert('服務器異常！')
                     return Promise.reject(error)
                 }
 
-                if (error.response.resultCode !== 200) {
-                    if (error.response.message) alert(error.response.message)
-                    if (error.response.resultCode == 416) {
-                        router.push({ path: '/login' })
-                    }
-                    if (error.response.data && window.location.hash == '#/login') {
-                        setLocal('token', error.response.data)
-                        axios.defaults.headers['token'] = error.response.data
-                    }
-                    return Promise.reject(error.response)
-                }
+                // if (error.response.resultCode !== 200) {
+                //     if (error.response.message) alert(error.response.message)
+                //     if (error.response.resultCode == 416) {
+                //         router.push({ path: '/login' })
+                //     }
+                //     if (error.response.data && window.location.hash == '#/login') {
+                //         console.log(error.response.data)
+                //         console.log(error.response)
+                //         setLocal('token', error.response.data)
+                //         axios.defaults.headers['token'] = error.response.data
+                //     }
+                //     return Promise.reject(error.response)
+                // }
             }
             if (!window.navigator.onLine) {
                 alert("請重新連線後重整網頁");

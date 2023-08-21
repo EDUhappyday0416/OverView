@@ -1,14 +1,21 @@
 <script setup>
-import { computed } from 'vue'
+import { computed , onMounted } from 'vue'
 import { useProduct } from '../stores/products'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+
 const getProduct = useProduct()
 getProduct.getProducts()
 
-
+NProgress.start()
 const products = computed(() => getProduct.data)
 const addChar = (item) => {
   getProduct.addItem(item)
 }
+onMounted(() => {
+  NProgress.done()
+})
+NProgress.configure({ showSpinner: false })
 </script>
 <template>
   <div class="cart">

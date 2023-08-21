@@ -47,19 +47,20 @@ const getUrlImage = ref('')
 const fetchImage = async (imageName) => {
   try {
     const res = storeLogout.getImg(imageName)
+    console.log('res' , res)
     const urlCreator = window.URL || window.webkitURL
     getUrlImage.value = urlCreator.createObjectURL(res) 
   } catch (error) {
-    console.error('Error fetching image:', error)
+    console.error('image error:', error)
   }
 }
-watch(
-  getUrlImage,
-  (newValue, oldValue) => {
-    console.log('New Image URL:', newValue)
-  },
-  { immediate: true }
-)
+// watch(
+//   getUrlImage,
+//   (newValue, oldValue) => {
+//     console.log('New Image URL:', newValue)
+//   },
+//   { immediate: true }
+// )
 
 if (getInitImage.value) {
   fetchImage(getInitImage.value)

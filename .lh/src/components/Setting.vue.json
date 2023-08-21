@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 104,
+            "activePatchIndex": 106,
             "patches": [
                 {
                     "date": 1691573089984,
@@ -424,6 +424,14 @@
                 {
                     "date": 1692157982426,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -68,9 +68,9 @@\n \r\n const goShopping = () => {\r\n   router.push({ path: '/ShoppingCart' })\r\n }\r\n-const goShopItem = () => {\r\n+const goShopItem = (path) => {\r\n   router.push({ name: path })\r\n }\r\n \r\n const imgError = () => {\r\n@@ -108,10 +108,10 @@\n             d=\"M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z\"\r\n           />\r\n         </svg>\r\n         {{ doubleCount }}\r\n-        <div @click=\"goShopItem('ShopItem')\">go</div>\r\n       </div>\r\n+      <div @click=\"goShopItem('ShopItem')\">go</div>\r\n     </div>\r\n   </div>\r\n   <Loading :loading=\"hideLoading\" />\r\n \r\n"
+                },
+                {
+                    "date": 1692580970219,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,18 +49,18 @@\n     const res = storeLogout.getImg(imageName)\r\n     const urlCreator = window.URL || window.webkitURL\r\n     getUrlImage.value = urlCreator.createObjectURL(res) \r\n   } catch (error) {\r\n-    console.error('Error fetching image:', error)\r\n+    console.error('image error:', error)\r\n   }\r\n }\r\n-watch(\r\n-  getUrlImage,\r\n-  (newValue, oldValue) => {\r\n-    console.log('New Image URL:', newValue)\r\n-  },\r\n-  { immediate: true }\r\n-)\r\n+// watch(\r\n+//   getUrlImage,\r\n+//   (newValue, oldValue) => {\r\n+//     console.log('New Image URL:', newValue)\r\n+//   },\r\n+//   { immediate: true }\r\n+// )\r\n \r\n if (getInitImage.value) {\r\n   fetchImage(getInitImage.value)\r\n }\r\n"
+                },
+                {
+                    "date": 1692581364987,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -46,8 +46,9 @@\n const getUrlImage = ref('')\r\n const fetchImage = async (imageName) => {\r\n   try {\r\n     const res = storeLogout.getImg(imageName)\r\n+    console.log('res' , res)\r\n     const urlCreator = window.URL || window.webkitURL\r\n     getUrlImage.value = urlCreator.createObjectURL(res) \r\n   } catch (error) {\r\n     console.error('image error:', error)\r\n"
                 }
             ],
             "date": 1691573089984,

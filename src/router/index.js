@@ -88,7 +88,8 @@ router.beforeEach((to, from, next) => {
     if (whiteList.includes(to.path)) {
       next();
     } else {
-      next({ name: 'home' });
+      // next({ name: 'home' });
+      next({ path: '/login' });
       NProgress.done();
     }
   }
