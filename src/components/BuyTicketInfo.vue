@@ -24,13 +24,15 @@ defineProps({
 </template>
 <style lang="scss" scoped>
 .buy {
+
   &__col {
     background-color: #8ec5fc;
     background-image: linear-gradient(62deg, #8ec5fc 0%, #e0c3fc 100%);
     border-radius: 24px;
     padding-bottom: 15px;
     position: relative;
-    margin: 32px 0;
+    /*margin: 32px 0;*/
+    margin: 14px;
     &__date {
       position: absolute;
       left: 85%;

@@ -91,7 +91,7 @@ const eventStore = useEventData()
   display: flex;
   justify-content: space-around;
   flex-direction: column;
-  padding: 10px;
+  /*padding: 10px;*/
 
   &__bar {
     overflow: auto;
@@ -134,6 +134,8 @@ const eventStore = useEventData()
   }
 
   .buy {
+    background: white;
+    border-radius: 28px;
     &__title {
       margin: 10px 0;
       font-size: 1.5rem;
