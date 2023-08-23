@@ -93,6 +93,8 @@ const forstData = computed(() => forst.forstInfo)
   }
 
   .buy {
+    background: white;
+    border-radius: 28px;
     &__title {
       margin: 10px 0;
       font-size: 1.5rem;

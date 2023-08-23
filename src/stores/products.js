@@ -1,5 +1,8 @@
 import { defineStore } from 'pinia'
 import { products } from '../api/products'
+import NProgress from "nprogress"
+import "nprogress/nprogress.css"
+
 export const useProduct = defineStore("productData", {
     state: () => ({
         data:[],
@@ -12,8 +15,10 @@ export const useProduct = defineStore("productData", {
         async getProducts() {
             try {
                 const item = await products();
-                console.log(item)
+                NProgress.start();
                 this.data = item.data
+                NProgress.done();
+
                 return item.data
             } catch (error) {
                 this.error = error

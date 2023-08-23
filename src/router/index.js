@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import NotFound from '../views/NotFound.vue'
+// import NotFound from '../views/NotFound.vue'
 import NProgress from "nprogress"
 import "nprogress/nprogress.css"
 import Cookies from 'js-cookie';
@@ -15,7 +15,7 @@ const router = createRouter({
     //   redirect: '/home'
     // },
     {
-      path: '/home',
+      path: '/',
       name: 'home',
       component: HomeView,
     },
@@ -65,19 +65,21 @@ const router = createRouter({
       name: 'ShopItem',
       component: () => import('../views/ShopItem.vue')
     },
-    {
-      path: '/:pathMatch(.*)*',
-      name: 'not-found',
-      component: NotFound
-    }
+    // {
+    //   path: '/:pathMatch(.*)*',
+    //   name: 'not-found',
+    //   // component: NotFound
+    // }
   ]
 })
+
 router.beforeEach((to, from, next) => {
   NProgress.start();
+
   const token = Cookies.get('token');
   const whiteList = ['/login', '/register'];
-  console.log(token)
-  if (token) {
+
+  if (token) { 
     if (to.path === "/login") {
       next({ path: '/home' });
       NProgress.done();
@@ -88,14 +90,33 @@ router.beforeEach((to, from, next) => {
     if (whiteList.includes(to.path)) {
       next();
     } else {
-      // next({ name: 'home' });
       next({ path: '/login' });
       NProgress.done();
     }
   }
-  // if (to.name !== 'login' && !token) next({ name: 'login' })
-  // else next()
 });
+// router.beforeEach((to, from, next) => {
+//   NProgress.start();
+//   const token = Cookies.get('token');
+//   const whiteList = ['/login', '/register'];
+//   console.log(token)
+//   if (token) {
+//     if (to.path === "/login") {
+//       next({ path: '/home' });
+//       NProgress.done();
+//     } else {
+//       next();
+//     }
+//   } else {
+//     if (whiteList.includes(to.path)) {
+//       next();
+//     } else {
+//       // next({ path: '/login' });
+//       next();
+//       NProgress.done();
+//     }
+//   }
+// });
 
 router.afterEach(() => {
   NProgress.done()
