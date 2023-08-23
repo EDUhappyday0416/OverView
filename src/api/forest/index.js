@@ -7,3 +7,10 @@ export async function getForstInfo() {
         method: "get",
     })
 }
+
+export async function getForstQuery(Region,Typ,heigh) {
+    return axios({
+        url: `https://recreation.forest.gov.tw/Forest/QueryForest?Region=${Region}&Typ=${Typ}&Keyword=&Height=${heigh}&IsOpen=open&Traffic=&RT_Length=&RT_Time=&sort=&PageIndex=0&PageSize=36&topic=`,
+        method: "get",
+    })
+}

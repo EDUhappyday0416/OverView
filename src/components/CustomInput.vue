@@ -10,6 +10,7 @@ defineProps({
 
 <template>
   <div class="input">
+    
     <input type="text" :placeholder="placeholder" />
     <div class="input__svg" @click="$emit('searchBun')">
       <svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 512 512">

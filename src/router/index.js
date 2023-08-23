@@ -10,10 +10,6 @@ NProgress.configure({ showSpinner: false })
 const router = createRouter({
   history: createWebHashHistory(),
   routes: [
-    // {
-    //   path: '/',
-    //   redirect: '/home'
-    // },
     {
       path: '/',
       name: 'home',
@@ -64,6 +60,11 @@ const router = createRouter({
       path: '/ShopItem',
       name: 'ShopItem',
       component: () => import('../views/ShopItem.vue')
+    },
+    {
+      path: '/HikingRrail',
+      name: 'HikingRrail',
+      component: () => import('../views/HikingRrail.vue')
     },
     // {
     //   path: '/:pathMatch(.*)*',

@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import CustomInput from '../components/CustomInput.vue'
 import BuyTicketInfo from '../components/BuyTicketInfo.vue'
 // import { useEventData } from '../stores/event'
@@ -16,22 +16,57 @@ const forstData = computed(() => forst.forstInfo)
 // const goShoppingCard = () => {
 //   router.push(`/ShoppingCart0
 // }
+
+// const placeItem = ref(['北部', '南部', '中部', '西部'])
+// const place = ref([])
+
+// const heightItem = ref(['1000', '2000', '3000', '4000'])
+// const height = ref([])
+
+// const levelItem = ref(['新手', '入門', '中級', '高手'])
+// const level = ref([])
+
+const search = ref('')
 </script>
 
 <template>
   <div class="all">
-    <CustomInput :placeholder="`Search`" />
+    <!-- <v-select v-model="place" :items="placeItem" label="區域" multiple persistent-hint></v-select>
+    <v-select
+      v-model="height"
+      :items="heightItem"
+      label="高度(m)"
+      multiple
+      persistent-hint
+    ></v-select>
+    <v-select v-model="level" :items="levelItem" label="難度" multiple persistent-hint></v-select> -->
+    <!-- <CustomInput :placeholder="`Search`" /> -->
+    <v-text-field v-model="search" label="關鍵字"></v-text-field>
     <div class="all__bar">
       <div class="all__content">
         <div class="all__content__list">
           <div class="all__content__list__item">
-            <div class="all__content__list__item__title">自然步道</div>
+            <div class="all__content__list__item__title" @click="router.push('/HikingRrail')">
+              <v-btn variant="tonal"> 自然步道 </v-btn>
+            </div>
           </div>
           <div class="all__content__list__item">
-            <div class="all__content__list__item__title">最新消息</div>
+            <div class="all__content__list__item__title">
+              <v-btn variant="tonal"> 最新消息 </v-btn>
+            </div>
+          </div>
+          <div class="all__content__list__item">
+            <div class="all__content__list__item__title">
+              <v-btn variant="tonal"> 最新消息 </v-btn>
+            </div>
+          </div>
+          <div class="all__content__list__item">
+            <div class="all__content__list__item__title">
+              <v-btn variant="tonal"> 最新消息 </v-btn>
+            </div>
           </div>
         </div>
-        <div class="all__content__btn">全部分類</div>
+        <v-btn block color="indigo-darken-3" size="x-large" variant="flat"> 全部分類 </v-btn>
       </div>
       <div class="buy">
         <div class="buy__title">最新公告</div>
@@ -58,7 +93,7 @@ const forstData = computed(() => forst.forstInfo)
     // justify-content: space-around;
     background: white;
     border-radius: 4px;
-    padding: 10px 0;
+    padding: 10px;
 
     &__btn {
       display: flex;
@@ -82,8 +117,6 @@ const forstData = computed(() => forst.forstInfo)
         align-items: center;
         margin: 0 8px;
         padding: 4px;
-        border-radius: 40px;
-        background: antiquewhite;
         cursor: pointer;
         &__title {
           font-size: 1rem;
