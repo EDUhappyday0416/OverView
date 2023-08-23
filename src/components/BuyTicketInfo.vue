@@ -8,38 +8,35 @@ defineProps({
 </script>
 <template>
   <div class="buy__col" v-for="(item, i) in data" :key="i">
-    <div class="buy__col__date">{{ item.date }}</div>
-    <img :src="item.imageUrl" alt="" />
-    <template v-for="(contents, j) in item.contents" :key="j">
-      <div class="buy__col__content">
-        <div class="buy__col__title">{{ contents.title }}</div>
-        <div class="buy__col__time">{{ contents.time }}</div>
-      </div>
-      <div class="buy__col__content">
-        <div class="buy__col__description">{{ contents.description }}</div>
-        <div class="buy__col__price">{{ contents.price }}</div>
-      </div>
-    </template>
+    <div class="buy__col__date">{{ item.ANN_DATE }}</div>
+    <img :src="item.PIC_URL" alt="" />
+    <div class="buy__col__content">
+      <div class="buy__col__title">{{ item.TITLE }}</div>
+      <div class="buy__col__time">{{ item.time }}</div>
+    </div>
+    <div class="buy__col__content">
+      <div class="buy__col__description">{{ item.CONTENT }}</div>
+      <!-- <div class="buy__col__price">{{ item.CATEGORY }}</div> -->
+    </div>
   </div>
 </template>
 <style lang="scss" scoped>
 .buy {
   &__col {
-    background-color: #8ec5fc;
-    background-image: linear-gradient(62deg, #8ec5fc 0%, #e0c3fc 100%);
     border-radius: 24px;
     padding-bottom: 15px;
     position: relative;
-    margin: 32px 0;
+    margin: 30px 12px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     &__date {
       position: absolute;
-      left: 85%;
-      background: aliceblue;
+      left: 78%;
+      background: #fafafa;
       text-align: center;
     }
 
     &__title {
-      font-size: 1.5rem;
+      font-size: 1.1rem;
     }
     &__content {
       display: flex;

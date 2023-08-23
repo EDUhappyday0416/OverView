@@ -14,7 +14,6 @@
   display: flex;
   flex-direction: column;
   width: 100vw;
-  background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
 }
 body {
   margin: 0;
