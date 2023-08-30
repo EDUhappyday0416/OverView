@@ -14,3 +14,12 @@ export async function getForstQuery(Region,Typ,heigh) {
         method: "get",
     })
 }
+
+export async function getForstData() {
+    return axios({
+        url: `http://127.0.0.1:8080/api/insert_forest_data/`,
+        method: "get",
+    })
+}
+
+

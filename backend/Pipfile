@@ -4,18 +4,11 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "*"
-pandas = "*"
-requests = "*"
-pydantic = "*"
-loguru = "*"
-selenium = "*"
-sqlalchemy = "*"
-mysql-connector = "*"
 mysql-connector-python = "*"
+mysql-connector = "*"
 django-cors-headers = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.11"
+python_version = "3.6"

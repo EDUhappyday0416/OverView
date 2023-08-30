@@ -29,10 +29,12 @@ const levelItem = ref(['新手', '入門', '中級', '高手'])
 const level = ref([])
 
 const search = ref('')
-
+forst.getQueryForst().then((res) => {
+  console.log(res)
+})
 const sendForst = () => {
   console.log(place.value)
-  forst.getQueryForst(place.value, '', '').then((res) => {
+  forst.getQueryForst().then((res) => {
     console.log(res)
   })
 }

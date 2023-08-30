@@ -7,21 +7,12 @@ import pandas as pd
 import requests
 from loguru import logger
 from pydantic import BaseModel
-from selenium import webdriver
-driver = webdriver.Chrome()
-driver.get('https://www.twse.com.tw/zh/page/trading/exchange/MI_INDEX.html')
 
 
-def clear_data(
-    df: pd.DataFrame,
-) -> pd.DataFrame:
+def clear_data(df: pd.DataFrame,) -> pd.DataFrame:
     """資料清理, 將文字轉成數字"""
     df["Dir"] = (
-        df["Dir"]
-        .str.split(">")
-        .str[1]
-        .str.split("<")
-        .str[0]
+        df["Dir"].str.split(">").str[1].str.split("<").str[0]
     )
     df["Change"] = (
         df["Dir"] + df["Change"]
@@ -61,6 +52,8 @@ def colname_zh2en(
     df: pd.DataFrame,
     colname: typing.List[str],
 ) -> pd.DataFrame:
+
+    print('colname', colname)
     """資料欄位轉換, 英文有助於接下來存入資料庫"""
     taiwan_stock_price = {
         "證券代號": "StockID",
@@ -80,10 +73,14 @@ def colname_zh2en(
         "最後揭示賣量": "",
         "本益比": "",
     }
+
     df.columns = [
         taiwan_stock_price[col]
         for col in colname
     ]
+
+    print('df.columns===>', df.columns)
+
     df = df.drop([""], axis=1)
     return df
 
@@ -102,9 +99,7 @@ def twse_header():
     }
 
 
-def crawler_twse(
-    date: str,
-) -> pd.DataFrame:
+def crawler_twse(date: str,) -> pd.DataFrame:
     """
     證交所網址
     https://www.twse.com.tw/zh/page/trading/exchange/MI_INDEX.html
@@ -120,11 +115,9 @@ def crawler_twse(
     # 避免被證交所 ban ip, 在每次爬蟲時, 先 sleep 5 秒
     time.sleep(5)
     # request method
-    # res = requests.get(
-    #   url, headers=twse_header()
-    # )
-    res = requests.get(url, headers=twse_header(), timeout=10)
-
+    res = requests.get(
+        url, headers=twse_header()
+    )
     if (
         res.json()["stat"]
         == "很抱歉，沒有符合條件的資料!"
@@ -248,5 +241,3 @@ def main(
 if __name__ == "__main__":
     start_date, end_date = sys.argv[1:]
     main(start_date, end_date)
-
-driver.quit()
