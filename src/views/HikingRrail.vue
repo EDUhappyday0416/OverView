@@ -45,7 +45,34 @@ const sendForst = () => {
   })
 }
 
-const forstInfo = computed(() => forst.queryInfo)
+const pages = ref(1)
+
+let isLoading = false
+const loadMore = (e) => {
+  if (isLoading) return
+  const { scrollHeight, scrollTop, clientHeight } = e.target
+  if (scrollTop + clientHeight >= scrollHeight * 0.9) {
+    isLoading = true // Set the flag to true to prevent further loading
+    setTimeout(() => {
+      pages.value += 1
+      console.log(pages.value)
+      isLoading = false // Reset the flag
+    }, 1000)
+  }
+
+  // if (scrollTop + clientHeight >= scrollHeight) {
+  //   this.page += 1
+  //   let data = {
+  //     page: this.page,
+  //     limit: 10
+  //   }
+  //   this.getIntegralLogs(data).then((res) => {
+  //     if (res.data != '') {
+  //       this.dataList = this.dataList.concat(res.data)
+  //     }
+  //   })
+  // }
+}
 </script>
 <template>
   <div>
@@ -90,7 +117,7 @@ const forstInfo = computed(() => forst.queryInfo)
       </v-dialog>
     </div>
 
-    <div class="forst pa-3">
+    <div class="forst pa-3" @scroll="loadMore">
       <v-card class="mx-auto ma-3" v-for="(item, i) in data" :key="i">
         <v-img :src="`https://recreation.forest.gov.tw/${item.Photo}`" height="200px" cover></v-img>
         <v-card-title> {{ item.AdminName }} </v-card-title>
