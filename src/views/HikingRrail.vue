@@ -35,17 +35,16 @@ const dialog = ref('false')
 //   console.log(res)
 //   data.value = res.data
 // })
+const pages = ref(1)
 
-forst.getQueryForst(place.value, height.value).then((res) => {
+forst.getQueryForst(place.value, height.value, pages.value).then((res) => {
   data.value = res.data
 })
 const sendForst = () => {
-  forst.getQueryForst(place.value, height.value).then((res) => {
+  forst.getQueryForst(place.value, height.value, pages.value).then((res) => {
     console.log(res)
   })
 }
-
-const pages = ref(1)
 
 let isLoading = false
 const loadMore = (e) => {
@@ -55,7 +54,10 @@ const loadMore = (e) => {
     isLoading = true // Set the flag to true to prevent further loading
     setTimeout(() => {
       pages.value += 1
-      console.log(pages.value)
+      forst.getQueryForst(place.value, height.value, pages.value).then((res) => {
+        // data.value = res.data
+        data.value = data.value.concat(res.data)
+      })
       isLoading = false // Reset the flag
     }, 1000)
   }
@@ -116,12 +118,11 @@ const loadMore = (e) => {
         </v-card>
       </v-dialog>
     </div>
-
     <div class="forst pa-3" @scroll="loadMore">
       <v-card class="mx-auto ma-3" v-for="(item, i) in data" :key="i">
         <v-img :src="`https://recreation.forest.gov.tw/${item.Photo}`" height="200px" cover></v-img>
-        <v-card-title> {{ item.AdminName }} </v-card-title>
-        <v-card-subtitle> {{ item.Name }} </v-card-subtitle>
+        <v-card-title> {{ item.Name }} </v-card-title>
+        <v-card-subtitle> {{ item.AdminName }} </v-card-subtitle>
         <v-card-actions>
           <v-btn color="orange-lighten-2" variant="text"> Explore </v-btn>
           <v-spacer></v-spacer>

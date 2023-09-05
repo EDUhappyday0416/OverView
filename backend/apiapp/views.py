@@ -42,7 +42,7 @@ def insert_forest_data(request):
                      'RT_Length': '',
                      'RT_Time': '',
                      'sort': '',
-                     'PageIndex': '0',
+                     'PageIndex': '',
                      'PageSize': '36',
                      'topic': ''}
             print('request', request)
@@ -57,6 +57,7 @@ def insert_forest_data(request):
             # query['IsOpen'] = ''
 
             resp = requests.get(url, params=query, headers=headers)
+            print('resp', resp)
 
             response_data = resp.json()  # 从您的源获取response_data对象
             conn = mysql.connector.connect(
@@ -69,6 +70,7 @@ def insert_forest_data(request):
             cursor = conn.cursor()
             inserted_records = []
             for item in response_data['data']:
+                print('item', item)
                 id_value = None
                 try:
                     id_value = int(item.get('id'))
@@ -106,7 +108,7 @@ def insert_forest_data(request):
                 for record in inserted_records
             ]
             if inserted_data:
-                return JsonResponse({'message': f'{len(inserted_data)} records inserted successfully', 'data': inserted_data}, status=201)
+                return JsonResponse({'message': f'{len(inserted_data)} records inserted successfully', 'data': inserted_data, }, status=201)
             else:
                 return JsonResponse({'message': 'No records inserted'}, status=400)
         except:
