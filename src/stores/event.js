@@ -55,9 +55,9 @@ export const useEventData = defineStore("eventData", {
      }),
     getters: {},
     actions: {
-        async getForstInfo() {
+        async getForstInfo(startDate,endDate) {
             try {
-                const { data } = await getForstInfo();
+                const { data } = await getForstInfo(startDate,endDate);
                 return data
                 
             } catch (error) {

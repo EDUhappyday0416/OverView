@@ -7,9 +7,9 @@ export const useForstData = defineStore("forstData", {
      }),
     getters: {},
     actions: {
-        async getForstInfoMethod() {
+        async getForstInfoMethod(startDate,endDate) {
             try {
-                const { data } = await getForstInfo();
+                const { data } = await getForstInfo(startDate,endDate);
                 console.log(data)
                 this.forstInfo = data;
                 return data

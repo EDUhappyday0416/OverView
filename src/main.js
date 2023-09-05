@@ -15,7 +15,9 @@ import { createVuetify } from 'vuetify'
 import { aliases, mdi } from 'vuetify/iconsets/mdi'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
-
+import { VBtn } from 'vuetify/components/VBtn'
+import { VDatePicker } from 'vuetify/labs/VDatePicker'
+// import { VuetifyDateAdapter } from 'vuetify/labs/date/adapters/vuetify'
 import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
 import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
 
@@ -33,15 +35,29 @@ pinia.use(({ store }) => {
 pinia.use(piniaPersist)
 pinia.use(piniaPluginPersistedstate)
 app.component('font-awesome-icon', FontAwesomeIcon)
+app.component('v-date-picker', VDatePicker)
+
 
 const vuetify = createVuetify({
     components,
     directives,
+    aliases: {
+        MyBtn: VBtn,
+    },
+    date: {
+        // adapter: VuetifyDateAdapter,
+    },
     icons: {
-    defaultSet: 'mdi',
-        aliases,
+        defaultSet: 'mdi',
         sets: {
             mdi,
+        },
+        defaults: {
+            MyBtn: {
+                color: 'primary',
+                class: 'my-btn',
+                variant: 'tonal',
+            },
         },
     },
 })

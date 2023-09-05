@@ -1,16 +1,34 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref , watch} from 'vue'
 import CustomInput from '../components/CustomInput.vue'
 import BuyTicketInfo from '../components/BuyTicketInfo.vue'
 // import { useEventData } from '../stores/event'
 import { useForstData } from '../stores/forst'
 import { useRouter, useRoute } from 'vue-router'
+import { useDate } from 'vuetify/labs/date'
+
+import BaseDialog from '../components/BaseDialog.vue';
 
 const router = useRouter()
 
+const date = useDate()
+console.log(date)
 // const eventStore = useEventData()
 const forst = useForstData()
-forst.getForstInfoMethod()
+
+const startDate = ref('2021-09-01')
+const endDate = ref('2021-09-01')
+const menu2 = ref(false)
+const getToday = computed(() => {
+  console.log()
+  const getToday = new Date();
+  const year = getToday.getFullYear();
+  const month = String(getToday.getMonth() + 1).padStart(2, '0');
+  const day = String(getToday.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+});
+ 
+
 const forstData = computed(() => forst.forstInfo)
 
 // const goShoppingCard = () => {
@@ -27,6 +45,60 @@ const forstData = computed(() => forst.forstInfo)
 // const level = ref([])
 
 const search = ref('')
+
+const dialog = ref(false)
+
+
+const dates = ref(['2019-09-10', '2019-09-20'])
+const chip1 = ref(true)
+
+
+const showDialog = ref(false);
+const dateOfBirth = ref('2018-09-15');
+
+watch(
+  ()=> dateOfBirth.value,
+  newValue => {
+    console.log(newValue)
+  }
+)
+
+const getComputedDate = computed(() => {
+    if (!dateOfBirth.value) return '';
+    const dateObj = new Date(dateOfBirth.value);
+    console.log(dateObj)
+    const year = dateObj.getFullYear();
+    const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+    const day = String(dateObj.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+})
+
+// forst.getForstInfoMethod(dateOfBirth.value , dateOfBirth.value).then((res) => {
+//   console.log(res)
+// })
+const showCalendar = (show) => {
+  console.log(show)
+  showDialog.value = show;
+  
+}
+
+const formatDate = (date) => {
+  if (!date) return '';
+  const dateObj = new Date(date);
+  const year = dateObj.getFullYear();
+  const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+  const day = String(dateObj.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+const saveValue = (value) => {
+  console.log(value)
+  const dateStart = formatDate(value)
+  const dateEnd = formatDate(dateOfBirth.value)
+  forst.getForstInfoMethod(dateStart , dateEnd).then((res) => {
+    console.log(res)
+  })
+}
+
 </script>
 
 <template>
@@ -42,6 +114,7 @@ const search = ref('')
     <v-select v-model="level" :items="levelItem" label="難度" multiple persistent-hint></v-select> -->
     <!-- <CustomInput :placeholder="`Search`" /> -->
     <v-text-field v-model="search" label="關鍵字"></v-text-field>
+    
     <div class="all__bar">
       <div class="all__content">
         <div class="all__content__list">
@@ -60,16 +133,28 @@ const search = ref('')
               <v-btn variant="tonal"> 最新消息 </v-btn>
             </div>
           </div>
-          <div class="all__content__list__item">
-            <div class="all__content__list__item__title">
-              <v-btn variant="tonal"> 最新消息 </v-btn>
-            </div>
-          </div>
         </div>
         <v-btn block color="indigo-darken-3" size="x-large" variant="flat"> 全部分類 </v-btn>
       </div>
       <div class="buy">
         <div class="buy__title">最新公告</div>
+        <v-text-field
+          v-model="getComputedDate"
+          type="text"
+          label="*Date of Birth"
+          append-inner-icon="mdi-calendar"
+          :clearable="true"
+          density="compact"
+          variant="outlined"
+          @click:append-inner="showCalendar(true)"
+        >
+        </v-text-field>
+        <BaseDialog
+          @save="saveValue"
+          v-model:isVisible="showDialog"
+          v-model:dateOfBirth="dateOfBirth"
+          :startDate="`2023-01-01`"
+        ></BaseDialog>
         <BuyTicketInfo :data="forstData" />
       </div>
     </div>

@@ -108,7 +108,7 @@ const loadMore = (e) => {
               persistent-hint
             ></v-select>
             <v-text-field v-model="search" label="關鍵字"></v-text-field>
-            <v-btn @click="sendForst">送出</v-btn>
+            <v-btn @sendForst="sendForst">送出</v-btn>
           </v-card-text>
           <v-card-actions>
             <v-btn color="primary" block @click="dialog = false">Close Dialog</v-btn>
