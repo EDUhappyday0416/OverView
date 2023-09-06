@@ -7,7 +7,7 @@ defineProps({
 })
 </script>
 <template>
-  <div class="buy__col" v-for="(item, i) in data" :key="i">
+  <!-- <div class="buy__col" v-for="(item, i) in data" :key="i">
     <div class="buy__col__date">{{ item.ANN_DATE }}</div>
     <img :src="item.PIC_URL" alt="" />
     <div class="buy__col__content">
@@ -16,9 +16,17 @@ defineProps({
     </div>
     <div class="buy__col__content">
       <div class="buy__col__description">{{ item.CONTENT }}</div>
-      <!-- <div class="buy__col__price">{{ item.CATEGORY }}</div> -->
     </div>
-  </div>
+  </div> -->
+
+  <v-list lines="three">
+    <v-list-item
+      v-for="(item, i) in data"
+      :key="i"
+      :title="item.TITLE"
+      :subtitle="item.CONTENT"
+    ></v-list-item>
+  </v-list>
 </template>
 <style lang="scss" scoped>
 .buy {
