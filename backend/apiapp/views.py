@@ -10,7 +10,7 @@ import json
 import requests
 from django.http import HttpResponse
 import mysql.connector
-
+from bs4 import BeautifulSoup
 
 @api_view(['GET', 'POST'])
 @csrf_exempt
@@ -111,3 +111,47 @@ def insert_forest_data(request):
                 return JsonResponse({'message': 'No records inserted'}, status=400)
         except:
             return JsonResponse({"message": 'Error inserting records'}, status=500)
+
+
+def getMountainData(request):
+    headers = {
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36'
+    }
+    base_url = 'https://hiking.biji.co/index.php?q=mountain&act=famous-list&id=1&page='
+    mountain_data = []
+    totalPage = 7
+
+
+    try:
+        response = requests.get(base_url, headers=headers, timeout=5)
+
+        for i in range(1, totalPage + 1):
+            url = f"{base_url}{i}"
+            response = requests.get(url, headers=headers)
+            if response.status_code == 200:
+                soup = BeautifulSoup(response.text, 'html.parser')
+                target_ul = soup.find('ul', class_='famous-list grid grid-cols-3 gap-4') 
+                
+                if target_ul:
+                    lis = target_ul.find_all('li', class_='relative rounded overflow-hidden shadow-z2')
+                    
+                    for li in lis:
+                        name = li.find('h2').text.strip() if li.find('h2') else None
+                        height = li.find('span').text.replace('標高：', '').strip() if li.find('span') else None
+                        location = li.find('div', class_='absolute inset-x-0 bottom-0 text-sm bg-gradient-to-b from-transparent to-black/80 text-white text-shadow p-4 pt-10 space-y-1.5').find_all('div')[1].text.strip() if li.find('div', class_='absolute inset-x-0 bottom-0 text-sm bg-gradient-to-b from-transparent to-black/80 text-white text-shadow p-4 pt-10 space-y-1.5') else None
+                        image = li.findAll('img')[0]['src']
+                        mountain_data.append({
+                            'name': name,
+                            'height': height,
+                            'location': location,
+                            'images':image
+                        })
+
+            else:
+                return JsonResponse({'status': 'error', 'message': 'Failed to get data'})
+        return JsonResponse({'status': 'success', 'data': mountain_data , 'message' : f"Successfully fetched data for page {i}"})
+    except Exception as e:
+        return JsonResponse({'status': 'error', 'message': str(e)})
+
+
+

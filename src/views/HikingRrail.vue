@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
-import { useForstData } from '../stores/forst'
-const forst = useForstData()
+import { useForestData } from '../stores/forest'
+const forest = useForestData()
 const placeItem = ref([
   {
     title: '北部',
@@ -31,16 +31,16 @@ const level = ref([])
 const search = ref('')
 const data = ref([])
 const dialog = ref('false')
-// forst.getQueryForst(place.value, height.value).then((res) => {
+// forest.getQueryForest(place.value, height.value).then((res) => {
 //   console.log(res)
 //   data.value = res.data
 // })
 
-forst.getQueryForst(place.value, height.value).then((res) => {
+forest.getQueryForest(place.value, height.value).then((res) => {
   data.value = res.data
 })
-const sendForst = () => {
-  forst.getQueryForst(place.value, height.value).then((res) => {
+const sendForest = () => {
+  forest.getQueryForest(place.value, height.value).then((res) => {
     console.log(res)
   })
 }
@@ -108,7 +108,7 @@ const loadMore = (e) => {
               persistent-hint
             ></v-select>
             <v-text-field v-model="search" label="關鍵字"></v-text-field>
-            <v-btn @sendForst="sendForst">送出</v-btn>
+            <v-btn @sendForest="sendForest">送出</v-btn>
           </v-card-text>
           <v-card-actions>
             <v-btn color="primary" block @click="dialog = false">Close Dialog</v-btn>
@@ -117,7 +117,7 @@ const loadMore = (e) => {
       </v-dialog>
     </div>
 
-    <div class="forst pa-3" @scroll="loadMore">
+    <div class="forest pa-3" @scroll="loadMore">
       <v-card class="mx-auto ma-3" v-for="(item, i) in data" :key="i">
         <v-img :src="`https://recreation.forest.gov.tw/${item.Photo}`" height="200px" cover></v-img>
         <v-card-title> {{ item.AdminName }} </v-card-title>
@@ -141,7 +141,7 @@ const loadMore = (e) => {
 </template>
 
 <style>
-.forst {
+.forest {
   width: 100%;
   overflow: auto;
   height: calc(100vh - 144px);

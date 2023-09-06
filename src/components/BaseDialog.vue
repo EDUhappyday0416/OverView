@@ -82,6 +82,7 @@ const pickerUpdate = (value) => {
 
 const saveValue = () => {
     // emit('update:dateOfBirth', getComputedDate);
+    console.log('date.value' , date.value)
     emit('save' , date.value)
     closeCalendar();
 };
