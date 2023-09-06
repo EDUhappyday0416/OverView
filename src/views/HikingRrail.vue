@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
-import { useForstData } from '../stores/forst'
-const forst = useForstData()
+import { useForestData } from '../stores/forest'
+const forest = useForestData()
 const placeItem = ref([
   {
     title: '北部',
@@ -151,14 +151,15 @@ const loadMore = (e) => {
             <v-text-field v-model="search" label="關鍵字"></v-text-field>
           </v-card-text>
           <v-card-actions>
-            <v-btn color="primary" block @click="sendForst">送出</v-btn>
+            <v-btn @sendForest="sendForest">送出</v-btn>
             <!-- <v-btn color="primary" block @click="dialog = false">Close Dialog</v-btn> -->
           </v-card-actions>
         </v-card>
       </v-dialog>
     </div>
-    <div class="forst" @scroll="loadMore">
-      <!-- <v-card class="d-flex flex-column" max-width="344" v-for="(item, i) in data" :key="i">
+
+    <div class="forest pa-3" @scroll="loadMore">
+      <v-card class="mx-auto ma-3" v-for="(item, i) in data" :key="i">
         <v-img :src="`https://recreation.forest.gov.tw/${item.Photo}`" height="200px" cover></v-img>
         <v-card-title> {{ item.Name }} </v-card-title>
         <v-card-subtitle> {{ item.AdminName }} </v-card-subtitle>
@@ -166,7 +167,7 @@ const loadMore = (e) => {
           <v-chip> {{ item.TypName }} </v-chip>
           <v-chip class="ma-2" color="red" text-color="white"> {{ item.OpenText }} </v-chip>
         </v-card-actions>
-      </v-card> -->
+      </v-card>
       <v-row dense no-gutters>
         <v-col
           v-for="(item, i) in data"
@@ -198,7 +199,7 @@ const loadMore = (e) => {
 </template>
 
 <style>
-.forst {
+.forest {
   width: 100%;
   overflow: auto;
   max-width: 1920px;

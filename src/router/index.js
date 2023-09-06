@@ -66,6 +66,11 @@ const router = createRouter({
       name: 'HikingRrail',
       component: () => import('../views/HikingRrail.vue')
     },
+    {
+      path: '/Mountain',
+      name: 'Mountain',
+      component: () => import('../views/Mountain.vue')
+    },
     // {
     //   path: '/:pathMatch(.*)*',
     //   name: 'not-found',

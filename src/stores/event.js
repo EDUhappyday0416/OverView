@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { getForstInfo  } from '../api/forest'
+import { getForestInfo  } from '../api/forest'
 export const useEventData = defineStore("eventData", {
     state: () => ({ 
         event: [
@@ -55,9 +55,9 @@ export const useEventData = defineStore("eventData", {
      }),
     getters: {},
     actions: {
-        async getForstInfo(startDate,endDate) {
+        async getForestInfo(startDate,endDate) {
             try {
-                const { data } = await getForstInfo(startDate,endDate);
+                const { data } = await getForestInfo(startDate,endDate);
                 return data
                 
             } catch (error) {

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export async function getForstInfo(startDate,endDate) {
+export async function getForestInfo(startDate,endDate) {
     return axios({
         url: `https://recreation.forest.gov.tw/mis/api/news?startDate=${startDate}&endDate=${endDate}`,
         method: "get",
@@ -20,6 +20,12 @@ export async function getForstData(Region,heigh,pagesize,type) {
     return axios({
         url: `http://127.0.0.1:8001/api/insert_forest_data?Region=${Region}&Typ=${type}&Keyword=&Height=${heigh}&IsOpen=&Traffic=&RT_Length=&RT_Time=&sort=&PageIndex=${pagesize}&PageSize=36&topic=`,
         method: "get",
+    })
+}
+
+export async function getMountainData() {
+    return axios({
+        url: `http://127.0.0.1:8001/api/getMountainData/`,
     })
 }
 

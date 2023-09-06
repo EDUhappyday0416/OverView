@@ -1,35 +1,34 @@
 <script setup>
-import { computed, ref , watch} from 'vue'
+import { computed, ref , watch , onMounted} from 'vue'
 import CustomInput from '../components/CustomInput.vue'
 import BuyTicketInfo from '../components/BuyTicketInfo.vue'
 // import { useEventData } from '../stores/event'
-import { useForstData } from '../stores/forst'
+import { useForestData } from '../stores/forest'
 import { useRouter, useRoute } from 'vue-router'
 import { useDate } from 'vuetify/labs/date'
 
 import BaseDialog from '../components/BaseDialog.vue';
+
+onMounted(() => {
+  forest.getForestInfoMethod(dateOfBirth.value , dateOfBirth.value).then((res) => {
+    console.log(res)
+  })
+})
+
+const init = () => {
+  console.log('init')
+}
 
 const router = useRouter()
 
 const date = useDate()
 console.log(date)
 // const eventStore = useEventData()
-const forst = useForstData()
+const forest = useForestData()
 
-const startDate = ref('2021-09-01')
-const endDate = ref('2021-09-01')
-const menu2 = ref(false)
-const getToday = computed(() => {
-  console.log()
-  const getToday = new Date();
-  const year = getToday.getFullYear();
-  const month = String(getToday.getMonth() + 1).padStart(2, '0');
-  const day = String(getToday.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
-});
- 
 
-const forstData = computed(() => forst.forstInfo)
+
+const forestData = computed(() => forest.forestInfo)
 
 // const goShoppingCard = () => {
 //   router.push(`/ShoppingCart0
@@ -64,16 +63,17 @@ watch(
 )
 
 const getComputedDate = computed(() => {
-    if (!dateOfBirth.value) return '';
-    const dateObj = new Date(dateOfBirth.value);
-    console.log(dateObj)
-    const year = dateObj.getFullYear();
-    const month = String(dateObj.getMonth() + 1).padStart(2, '0');
-    const day = String(dateObj.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
+    // if (!dateOfBirth.value) return '';
+    // const dateObj = new Date(dateOfBirth.value);
+    // console.log(dateObj)
+    // const year = dateObj.getFullYear();
+    // const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+    // const day = String(dateObj.getDate()).padStart(2, '0');
+    // return `${year}-${month}-${day}`;
+    return formatDate(dateOfBirth.value)
 })
 
-// forst.getForstInfoMethod(dateOfBirth.value , dateOfBirth.value).then((res) => {
+// forest.getForestInfoMethod(dateOfBirth.value , dateOfBirth.value).then((res) => {
 //   console.log(res)
 // })
 const showCalendar = (show) => {
@@ -90,11 +90,14 @@ const formatDate = (date) => {
   const day = String(dateObj.getDate()).padStart(2, '0');
   return `${year}-${month}-${day}`;
 };
+
+
 const saveValue = (value) => {
   console.log(value)
   const dateStart = formatDate(value)
+  console.log('dateStart' , dateStart)
   const dateEnd = formatDate(dateOfBirth.value)
-  forst.getForstInfoMethod(dateStart , dateEnd).then((res) => {
+  forest.getForestInfoMethod(dateStart , dateEnd).then((res) => {
     console.log(res)
   })
 }
@@ -153,9 +156,8 @@ const saveValue = (value) => {
           @save="saveValue"
           v-model:isVisible="showDialog"
           v-model:dateOfBirth="dateOfBirth"
-          :startDate="`2023-01-01`"
         ></BaseDialog>
-        <BuyTicketInfo :data="forstData" />
+        <BuyTicketInfo :data="forestData" />
       </div>
     </div>
   </div>
