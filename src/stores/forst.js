@@ -18,9 +18,9 @@ export const useForstData = defineStore("forstData", {
                 return Promise.reject(error.message);
             }
         },
-        async getQueryForst(Region,heigh,pagesize) {
+        async getQueryForst(Region,heigh,pagesize,type) {
             try {
-                const { data } = await getForstData(Region,heigh,pagesize);
+                const { data } = await getForstData(Region,heigh,pagesize,type);
                 this.queryInfo = data;
                 return data
                 

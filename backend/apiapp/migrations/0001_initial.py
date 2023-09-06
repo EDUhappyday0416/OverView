@@ -15,7 +15,8 @@ class Migration(migrations.Migration):
             name='ForestInfo',
             fields=[
                 ('ID', models.IntegerField(primary_key=True, serialize=False)),
-                ('AdminName', models.JSONField()),
+                # ('AdminName', models.JSONField()),
+                ('AdminName', models.CharField(max_length=255)),
                 ('Name', models.CharField(max_length=255)),
                 ('OpenText', models.CharField(max_length=255)),
                 ('Photo', models.CharField(max_length=255)),

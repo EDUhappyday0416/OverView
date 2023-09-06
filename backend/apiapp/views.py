@@ -77,21 +77,34 @@ def insert_forest_data(request):
                 except ValueError:
                     pass  # 跳过无法转换为整数的值
 
-                if id_value is not None:
-                    admin_name = json.loads('"' + item.get('admin_name') + '"')
-                    forest_info = ForestInfo(
-                        ID=id_value,
-                        AdminName=json.dumps(admin_name, ensure_ascii=False),
-                        Name=item.get('name'),
-                        OpenText=item.get('open_text'),
-                        Photo=item.get('photo'),
-                        RegionID=item.get('region_id'),
-                        RegionID1=item.get('region_id1'),
-                        TypID=item.get('typ_id'),
-                        TypName=item.get('typ_name')
-                    )
-                    forest_info.save()
-                    inserted_records.append(forest_info)
+                # if id_value is not None:
+                #     # admin_name = json.loads(item.get('admin_name'))
+                #     forest_info = ForestInfo(
+                #         ID=id_value,
+                #         AdminName=item.get('admin_name'),
+                #         Name=item.get('name'),
+                #         OpenText=item.get('open_text'),
+                #         Photo=item.get('photo'),
+                #         RegionID=item.get('region_id'),
+                #         RegionID1=item.get('region_id1'),
+                #         TypID=item.get('typ_id'),
+                #         TypName=item.get('typ_name')
+                #     )
+                #     forest_info.save()
+                #     inserted_records.append(forest_info)
+                forest_info = ForestInfo(
+                    ID=id_value,
+                    AdminName=item.get('admin_name'),
+                    Name=item.get('name'),
+                    OpenText=item.get('open_text'),
+                    Photo=item.get('photo'),
+                    RegionID=item.get('region_id'),
+                    RegionID1=item.get('region_id1'),
+                    TypID=item.get('typ_id'),
+                    TypName=item.get('typ_name')
+                )
+                forest_info.save()
+                inserted_records.append(forest_info)
 
             inserted_data = [
                 {
