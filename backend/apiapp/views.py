@@ -10,7 +10,12 @@ import json
 import requests
 from django.http import HttpResponse
 import mysql.connector
+import configparser
 from bs4 import BeautifulSoup
+
+config = configparser.ConfigParser()
+config.read('config.ini')
+db_settings = config['mysql']
 
 @api_view(['GET', 'POST'])
 @csrf_exempt
@@ -60,11 +65,18 @@ def insert_forest_data(request):
             print('resp', resp)
 
             response_data = resp.json()  # 从您的源获取response_data对象
+            # conn = mysql.connector.connect(
+            #     host='localhost',
+            #     user='root',
+            #     password='test',
+            #     database='ForestInfo'
+            # )
+            
             conn = mysql.connector.connect(
-                host='localhost',
-                user='root',
-                password='test',
-                database='ForestInfo'
+                host=db_settings['host'],
+                user=db_settings['user'],
+                password=db_settings['password'],
+                database=db_settings['database']
             )
             # 创建游标对象
             cursor = conn.cursor()

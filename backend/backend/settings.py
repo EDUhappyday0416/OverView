@@ -94,18 +94,34 @@ TEMPLATES = [
     },
 ]
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'quickstartdb',
+        'USER':'francesmysqladmin',
+        'PASSWORD': 'Aa123456',
+        # 'HOST': 'francesbackendsql.mysql.database.azure.com',
+        'HOST':'francesbackendsql.mysql.database.azure.com',
+        'PORT': '3306',
+        # 'OPTIONS': {
+        #     'ssl': {'ca': '/var/www/html/DigiCertGlobalRootCA.crt.pem'}
+        # }
+    }
+}
+
+
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
