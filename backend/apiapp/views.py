@@ -12,6 +12,7 @@ from django.http import HttpResponse
 import mysql.connector
 from bs4 import BeautifulSoup
 
+
 @api_view(['GET', 'POST'])
 @csrf_exempt
 def insert_forest_data(request):
@@ -76,22 +77,6 @@ def insert_forest_data(request):
                     id_value = int(item.get('id'))
                 except ValueError:
                     pass  # 跳过无法转换为整数的值
-
-                # if id_value is not None:
-                #     # admin_name = json.loads(item.get('admin_name'))
-                #     forest_info = ForestInfo(
-                #         ID=id_value,
-                #         AdminName=item.get('admin_name'),
-                #         Name=item.get('name'),
-                #         OpenText=item.get('open_text'),
-                #         Photo=item.get('photo'),
-                #         RegionID=item.get('region_id'),
-                #         RegionID1=item.get('region_id1'),
-                #         TypID=item.get('typ_id'),
-                #         TypName=item.get('typ_name')
-                #     )
-                #     forest_info.save()
-                #     inserted_records.append(forest_info)
                 forest_info = ForestInfo(
                     ID=id_value,
                     AdminName=item.get('admin_name'),
@@ -136,7 +121,6 @@ def getMountainData(request):
     mountain_data = []
     totalPage = 7
 
-
     try:
         response = requests.get(base_url, headers=headers, timeout=5)
 
@@ -145,28 +129,30 @@ def getMountainData(request):
             response = requests.get(url, headers=headers)
             if response.status_code == 200:
                 soup = BeautifulSoup(response.text, 'html.parser')
-                target_ul = soup.find('ul', class_='famous-list grid grid-cols-3 gap-4') 
-                
+                target_ul = soup.find(
+                    'ul', class_='famous-list grid grid-cols-3 gap-4')
+
                 if target_ul:
-                    lis = target_ul.find_all('li', class_='relative rounded overflow-hidden shadow-z2')
-                    
+                    lis = target_ul.find_all(
+                        'li', class_='relative rounded overflow-hidden shadow-z2')
+
                     for li in lis:
-                        name = li.find('h2').text.strip() if li.find('h2') else None
-                        height = li.find('span').text.replace('標高：', '').strip() if li.find('span') else None
-                        location = li.find('div', class_='absolute inset-x-0 bottom-0 text-sm bg-gradient-to-b from-transparent to-black/80 text-white text-shadow p-4 pt-10 space-y-1.5').find_all('div')[1].text.strip() if li.find('div', class_='absolute inset-x-0 bottom-0 text-sm bg-gradient-to-b from-transparent to-black/80 text-white text-shadow p-4 pt-10 space-y-1.5') else None
+                        name = li.find('h2').text.strip(
+                        ) if li.find('h2') else None
+                        height = li.find('span').text.replace(
+                            '標高：', '').strip() if li.find('span') else None
+                        location = li.find('div', class_='absolute inset-x-0 bottom-0 text-sm bg-gradient-to-b from-transparent to-black/80 text-white text-shadow p-4 pt-10 space-y-1.5').find_all('div')[
+                            1].text.strip() if li.find('div', class_='absolute inset-x-0 bottom-0 text-sm bg-gradient-to-b from-transparent to-black/80 text-white text-shadow p-4 pt-10 space-y-1.5') else None
                         image = li.findAll('img')[0]['src']
                         mountain_data.append({
                             'name': name,
                             'height': height,
                             'location': location,
-                            'images':image
+                            'images': image
                         })
 
             else:
                 return JsonResponse({'status': 'error', 'message': 'Failed to get data'})
-        return JsonResponse({'status': 'success', 'data': mountain_data , 'message' : f"Successfully fetched data for page {i}"})
+        return JsonResponse({'status': 'success', 'data': mountain_data, 'message': f"Successfully fetched data for page {i}"})
     except Exception as e:
         return JsonResponse({'status': 'error', 'message': str(e)})
-
-
-
