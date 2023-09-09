@@ -31,7 +31,7 @@ const level = ref([])
 const search = ref('')
 const data = ref([])
 const dialog = ref(false)
-// forst.getQueryForst(place.value, height.value).then((res) => {
+// forest.getQueryForest(place.value, height.value).then((res) => {
 //   console.log(res)
 //   data.value = res.data
 // })
@@ -68,13 +68,13 @@ const viewTypeItem = ref([
   }
 ])
 
-forst.getQueryForst(place.value, height.value, pages.value, viewType.value).then((res) => {
+forest.getQueryForest(place.value, height.value, pages.value, viewType.value).then((res) => {
   data.value = res.data
 })
 const sendForst = () => {
   dialog.value = false
   pages.value = 0
-  forst.getQueryForst(place.value, height.value, pages.value, viewType.value).then((res) => {
+  forest.getQueryForest(place.value, height.value, pages.value, viewType.value).then((res) => {
     data.value = res.data
   })
 }
@@ -87,7 +87,7 @@ const loadMore = (e) => {
     isLoading = true // Set the flag to true to prevent further loading
     setTimeout(() => {
       pages.value += 1
-      forst.getQueryForst(place.value, height.value, pages.value, viewType.value).then((res) => {
+      forest.getQueryForest(place.value, height.value, pages.value, viewType.value).then((res) => {
         data.value = data.value.concat(res.data)
       })
       isLoading = false // Reset the flag
