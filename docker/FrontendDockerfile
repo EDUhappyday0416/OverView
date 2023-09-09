@@ -3,6 +3,6 @@ COPY . /app
 WORKDIR /app
 EXPOSE 8000
 
-RUN npm install -g npm
+RUN npm install --location=global npm@8
 
 RUN npm install
