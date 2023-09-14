@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-=^^g$8=a39t%cpu9td0(p_0h1_20v2+&c8ss@8mk4s14ymm6^@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['172.104.86.216', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -44,7 +44,6 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -52,17 +51,14 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
 ]
-
-# CORS_ALLOW_ALL_ORIGINS = True
-
+CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOWED_ORIGINS = [
-    "https://localhost:5173",  # 允许访问的域名
+    # "https://localhost:5173",  # 允许访问的域名
     "https://127.0.0.1:5173",
     "http://localhost:8000",
     "http://127.0.0.1:9000",
-    "http://localhost:8001",
-    # "http://127.0.0.1:8001",
-    
+    "http://localhost:5173"
+    # "http://172.104.86.216:8000"
 
 ]
 
@@ -98,34 +94,18 @@ TEMPLATES = [
     },
 ]
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'quickstartdb',
-        'USER':'francesmysqladmin',
-        'PASSWORD': 'Aa123456',
-        # 'HOST': 'francesbackendsql.mysql.database.azure.com',
-        'HOST':'francesbackendsql.mysql.database.azure.com',
-        'PORT': '3306',
-        # 'OPTIONS': {
-        #     'ssl': {'ca': '/var/www/html/DigiCertGlobalRootCA.crt.pem'}
-        # }
-    }
-}
-
-
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 
 # Password validation
