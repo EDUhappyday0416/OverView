@@ -3,7 +3,7 @@ ENV PYTHONUNBUFFERED 1
 RUN mkdir /app
 WORKDIR /app
 # COPY docker/requirements.txt /app/
-COPY ./requirements.txt /app/
+COPY ./requirements.txt app/requirements.txt
 RUN pip install -r app/requirements.txt
 COPY . /app/
 
