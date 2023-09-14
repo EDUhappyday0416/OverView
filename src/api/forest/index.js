@@ -18,14 +18,15 @@ export async function getForestData(Region,heigh,pagesize,type) {
     //0,1,2,10,11,3,12
     console.log(pagesize)
     return axios({
-        url: `http://127.0.0.1:8001/api/insert_forest_data?Region=${Region}&Typ=${type}&Keyword=&Height=${heigh}&IsOpen=&Traffic=&RT_Length=&RT_Time=&sort=&PageIndex=${pagesize}&PageSize=36&topic=`,
+        url: `http://127.0.0.1:8082/api/insert_forest_data?Region=${Region}&Typ=${type}&Keyword=&Height=${heigh}&IsOpen=&Traffic=&RT_Length=&RT_Time=&sort=&PageIndex=${pagesize}&PageSize=36&topic=`,
+        // url: `http://127.0.0.1:8001/api/insert_forest_data?Region=${Region}&Typ=${type}&Keyword=&Height=${heigh}&IsOpen=&Traffic=&RT_Length=&RT_Time=&sort=&PageIndex=${pagesize}&PageSize=36&topic=`,
         method: "get",
     })
 }
 
 export async function getMountainData() {
     return axios({
-        url: `http://127.0.0.1:8001/api/getMountainData/`,
+        url: `http://127.0.0.1:8082/api/getMountainData/`,
     })
 }
 

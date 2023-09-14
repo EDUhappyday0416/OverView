@@ -17,13 +17,11 @@ config = configparser.ConfigParser()
 config.read('config.ini')
 db_settings = config['mysql']
 
-
 @api_view(['GET', 'POST'])
 @csrf_exempt
 def insert_forest_data(request):
     response = HttpResponse()
     response.content = b'This is the response'
-
     # 設置 Cache-Control 標頭
     response['Cache-Control'] = 'max-age=0'
     print('request', request)
@@ -38,32 +36,30 @@ def insert_forest_data(request):
 
             # dict set
             query = {'Region': '',
-                     'Typ': '',
-                     'Keyword': '',
-                     'Height': '',
-                     'IsOpen': '',
-                     'Traffic': '',
-                     'RT_Status': '',
-                     'RT_Hard': '',
-                     'RT_Length': '',
-                     'RT_Time': '',
-                     'sort': '',
-                     'PageIndex': '',
-                     'PageSize': '36',
-                     'topic': ''}
-            print('request', request)
+                    'Typ': '',
+                    'Keyword': '',
+                    'Height': '',
+                    'IsOpen': '',
+                    'Traffic': '',
+                    'RT_Status': '',
+                    'RT_Hard': '',
+                    'RT_Length': '',
+                    'RT_Time': '',
+                    'sort': '',
+                    'PageIndex': '',
+                    'PageSize': '36',
+                    'topic': ''}
 
             for key in query.keys():
                 query[key] = request.GET.get(key, query[key])
 
-            print('query', query)
+            
             # 就是那些下拉參數 可以set new value
             # query['Region'] = region
             # query['Typ'] = ''
             # query['IsOpen'] = ''
 
             resp = requests.get(url, params=query, headers=headers)
-            print('resp', resp)
 
             response_data = resp.json()  # 从您的源获取response_data对象
             # conn = mysql.connector.connect(
@@ -73,17 +69,24 @@ def insert_forest_data(request):
             #     database='ForestInfo'
             # )
 
-            conn = mysql.connector.connect(
-                host=db_settings['host'],
-                user=db_settings['user'],
-                password=db_settings['password'],
-                database=db_settings['database']
-            )
+            # conn = mysql.connector.connect(
+            #     host=db_settings['HOST'],
+            #     user=db_settings['USER'],
+            #     password=db_settings['PASSWORD'],
+            #     name=db_settings['NAME']
+            # )
+
+            connection = mysql.connector.connect(
+                host=db_settings['HOST'],          
+                database=db_settings['NAME'], 
+                user=db_settings['USER'],
+                password=db_settings['PASSWORD']
+            )  # 密碼
+            
             # 创建游标对象
             cursor = conn.cursor()
             inserted_records = []
             for item in response_data['data']:
-                print('item', item)
                 id_value = None
                 try:
                     id_value = int(item.get('id'))
@@ -117,6 +120,7 @@ def insert_forest_data(request):
                 }
                 for record in inserted_records
             ]
+
             if inserted_data:
                 return JsonResponse({'message': f'{len(inserted_data)} records inserted successfully', 'data': inserted_data, }, status=201)
             else:
