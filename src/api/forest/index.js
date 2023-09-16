@@ -14,7 +14,7 @@ export async function getForestInfo(startDate,endDate) {
 //     })
 // }
 
-export async function getForstData(Region,heigh,pagesize,type) {
+export async function getForestData(Region,heigh,pagesize,type) {
     //0,1,2,10,11,3,12
     console.log(pagesize)
     return axios({
@@ -25,7 +25,8 @@ export async function getForstData(Region,heigh,pagesize,type) {
 
 export async function getMountainData() {
     return axios({
-        url: `http://127.0.0.1:8001/api/getMountainData/`,
+        // url: `http://127.0.0.1:8001/api/getMountainData/`,
+        url:`http://172.104.86.216:8000/api/getMountainData/`
     })
 }
 

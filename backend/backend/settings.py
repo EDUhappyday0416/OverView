@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'apiapp',
-    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -53,12 +53,16 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
 ]
 
+CORS_ORIGIN_ALLOW_ALL = True 
+CORS_ALLOW_CREDENTIALS = True
+
 CORS_ALLOWED_ORIGINS = [
-    # "https://localhost:5173",  # 允许访问的域名
+    # "https://localhost:5173",  
 
     "https://127.0.0.1:5173",
     "http://localhost:8000",
     "http://127.0.0.1:9000",
+    "http://127.0.0.1:5173"
 
 ]
 
