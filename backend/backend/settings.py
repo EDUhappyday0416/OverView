@@ -62,7 +62,8 @@ CORS_ALLOWED_ORIGINS = [
     "https://127.0.0.1:5173",
     "http://localhost:8000",
     "http://127.0.0.1:9000",
-    "http://127.0.0.1:5173"
+    "http://127.0.0.1:5173",
+    "https://127.0.0.1:8082"
 
 ]
 
@@ -104,12 +105,12 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 # DATABASES = {
 #     "default": {
 #         "ENGINE": "django.db.backends.mysql",
@@ -118,6 +119,17 @@ DATABASES = {
 #         },
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'DataBaseFrances123',
+        'USER': 'linpostgres',
+        'PASSWORD': 'm5AYivn+x8YfMenq',
+        'HOST': 'lin-28716-11616-pgsql-primary.servers.linodedb.net',
+        'PORT': '5432',
+    }
+}
 
 # DATABASES = {
 #     'default': {
