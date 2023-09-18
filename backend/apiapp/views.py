@@ -17,6 +17,7 @@ config = configparser.ConfigParser()
 config.read('config.ini')
 db_settings = config['mysql']
 
+
 @api_view(['GET', 'POST'])
 @csrf_exempt
 def insert_forest_data(request):
@@ -36,24 +37,23 @@ def insert_forest_data(request):
 
             # dict set
             query = {'Region': '',
-                    'Typ': '',
-                    'Keyword': '',
-                    'Height': '',
-                    'IsOpen': '',
-                    'Traffic': '',
-                    'RT_Status': '',
-                    'RT_Hard': '',
-                    'RT_Length': '',
-                    'RT_Time': '',
-                    'sort': '',
-                    'PageIndex': '',
-                    'PageSize': '36',
-                    'topic': ''}
+                     'Typ': '',
+                     'Keyword': '',
+                     'Height': '',
+                     'IsOpen': '',
+                     'Traffic': '',
+                     'RT_Status': '',
+                     'RT_Hard': '',
+                     'RT_Length': '',
+                     'RT_Time': '',
+                     'sort': '',
+                     'PageIndex': '',
+                     'PageSize': '36',
+                     'topic': ''}
 
             for key in query.keys():
                 query[key] = request.GET.get(key, query[key])
 
-            
             # 就是那些下拉參數 可以set new value
             # query['Region'] = region
             # query['Typ'] = ''
@@ -76,15 +76,10 @@ def insert_forest_data(request):
             #     name=db_settings['NAME']
             # )
 
-            connection = mysql.connector.connect(
-                host=db_settings['HOST'],          
-                database=db_settings['NAME'], 
-                user=db_settings['USER'],
-                password=db_settings['PASSWORD']
-            )  # 密碼
-            
+            forest_info_records = ForestInfo.objects.all()
+            print('forest_info_records', forest_info_records)
+
             # 创建游标对象
-            cursor = conn.cursor()
             inserted_records = []
             for item in response_data['data']:
                 id_value = None

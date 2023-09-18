@@ -1,8 +1,8 @@
 <template>
   <div style="overflow-y: auto; height: 100vh">
-    <v-row no-gutters style="height: 150px" class="d-flex justify-center">
-      <v-col class="ma-6" v-for="(item, i) in mountainData" :key="i" cols="12" sm="12" md="3">
-        <div class="ma-3">
+    <v-row no-gutters class="d-flex justify-center">
+      <v-col class="ma-2" v-for="(item, i) in mountainData" :key="i" cols="12" sm="12" md="3">
+        <div>
           <v-card class="mx-auto">
             <v-img
               :src="item.images"
@@ -10,13 +10,18 @@
               style="object-fit: cover"
               max-height="250"
               cover
-              class="bg-grey-lighten-2"
+              class="bg-grey-lighten-2 align-end text-white"
             >
+              <!-- <v-card-text class="text-black" v-text="item.name"></v-card-text> -->
+              <v-card-title>{{ item.name }} {{ item.height }}</v-card-title>
+              <v-card-text>
+                <div>{{ item.location }}</div>
+              </v-card-text>
             </v-img>
-            <v-card-title>{{ item.name }}</v-card-title>
+            <!-- <v-card-title>{{ item.height }}</v-card-title>
             <v-card-text>
               <div>{{ item.location }}</div>
-            </v-card-text>
+            </v-card-text> -->
           </v-card>
         </div>
       </v-col>
