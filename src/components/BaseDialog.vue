@@ -25,11 +25,10 @@
 </template>
   
 <script setup>
-import { ref, computed, defineEmits, watch } from 'vue';
+import { ref, defineEmits, watch } from 'vue';
 
 const emit = defineEmits(['update:isVisible', 'update:dateOfBirth','dave'])
 const date = ref();
-const isRange = ref(false);
 watch(
     () => date.value,
     (value) => {
@@ -47,15 +46,11 @@ watch(
 //     return `${year}-${month}-${day}`;
 // })
 
-const props = defineProps({
+defineProps({
     isVisible: {
         type: Boolean,
         required: true,
     },
-    // startDate :{
-    //     type: String,
-    //     required: true,
-    // },
     dateOfBirth: {
         type: [String, Date],
         required: true,
@@ -75,9 +70,9 @@ const closeCalendar = () => {
 };
 
 
-const pickerUpdate = (value) => {
-    console.log(value)
-}
+// const pickerUpdate = (value) => {
+//     console.log(value)
+// }
 
 
 const saveValue = () => {

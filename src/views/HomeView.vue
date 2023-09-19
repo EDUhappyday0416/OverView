@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref , watch , onMounted} from 'vue'
+import { computed, ref, watch, onMounted } from 'vue'
 import CustomInput from '../components/CustomInput.vue'
 import BuyTicketInfo from '../components/BuyTicketInfo.vue'
 // import { useEventData } from '../stores/event'
@@ -7,13 +7,7 @@ import { useForestData } from '../stores/forest'
 import { useRouter, useRoute } from 'vue-router'
 import { useDate } from 'vuetify/labs/date'
 
-import BaseDialog from '../components/BaseDialog.vue';
-
-onMounted(() => {
-  forest.getForestInfoMethod(dateOfBirth.value , dateOfBirth.value).then((res) => {
-    console.log(res)
-  })
-})
+import BaseDialog from '../components/BaseDialog.vue'
 
 const init = () => {
   console.log('init')
@@ -25,8 +19,6 @@ const date = useDate()
 console.log(date)
 // const eventStore = useEventData()
 const forest = useForestData()
-
-
 
 const forestData = computed(() => forest.forestInfo)
 
@@ -47,66 +39,62 @@ const search = ref('')
 
 const dialog = ref(false)
 
-
 const dates = ref(['2019-09-10', '2019-09-20'])
 const chip1 = ref(true)
 
-
-const showDialog = ref(false);
-const dateOfBirth = ref('2018-09-15');
+const showDialog = ref(false)
+const startTimeDate = ref('2023-01-01')
+const endTimeDate = ref(new Date())
 
 watch(
-  ()=> dateOfBirth.value,
-  newValue => {
+  () => startTimeDate.value,
+  (newValue) => {
     console.log(newValue)
   }
 )
-
-const getComputedDate = computed(() => {
-    // if (!dateOfBirth.value) return '';
-    // const dateObj = new Date(dateOfBirth.value);
-    // console.log(dateObj)
-    // const year = dateObj.getFullYear();
-    // const month = String(dateObj.getMonth() + 1).padStart(2, '0');
-    // const day = String(dateObj.getDate()).padStart(2, '0');
-    // return `${year}-${month}-${day}`;
-    return formatDate(dateOfBirth.value)
-})
-
-// forest.getForestInfoMethod(dateOfBirth.value , dateOfBirth.value).then((res) => {
-//   console.log(res)
-// })
-const showCalendar = (show) => {
-  console.log(show)
-  showDialog.value = show;
-  
+const getThreeMoth = (date) => {
+  const year = date.getFullYear()
+  const month = date.getMonth()
+  const day = date.getDate()
+  const threeMoth = new Date(year, month - 3, day)
+  return threeMoth
 }
+// const getComputedDate = computed(() => {
+//   return formatDate(startTimeDate.value)
+// })
+
+// const showCalendar = (show) => {
+//   console.log(show)
+//   showDialog.value = show
+// }
 
 const formatDate = (date) => {
-  if (!date) return '';
-  const dateObj = new Date(date);
-  const year = dateObj.getFullYear();
-  const month = String(dateObj.getMonth() + 1).padStart(2, '0');
-  const day = String(dateObj.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
-};
-
-
-const saveValue = (value) => {
-  console.log(value)
-  const dateStart = formatDate(value)
-  console.log('dateStart' , dateStart)
-  const dateEnd = formatDate(dateOfBirth.value)
-  forest.getForestInfoMethod(dateStart , dateEnd).then((res) => {
+  if (!date) return ''
+  const dateObj = new Date(date)
+  const year = dateObj.getFullYear()
+  const month = String(dateObj.getMonth() + 1).padStart(2, '0')
+  const day = String(dateObj.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
+onMounted(() => {
+  const dateStart = formatDate(startTimeDate.value)
+  const dateEnd = formatDate(getThreeMoth(endTimeDate.value))
+  forest.getForestInfoMethod(dateStart, dateEnd).then((res) => {
     console.log(res)
   })
-}
-
+})
+// const saveValue = () => {
+//   const dateStart = formatDate(startTimeDate.value)
+//   const dateEnd = formatDate(endTimeDate.value)
+//   forest.getForestInfoMethod(dateStart, dateEnd).then((res) => {
+//     console.log(res)
+//   })
+// }
 </script>
 
 <template>
   <div class="all">
-    <v-text-field v-model="search" label="關鍵字"></v-text-field>
+    <!--<v-text-field v-model="search" label="關鍵字"></v-text-field>-->
     <div class="all__bar">
       <div class="all__content">
         <div class="all__content__list">
@@ -116,38 +104,39 @@ const saveValue = (value) => {
             </div>
           </div>
           <div class="all__content__list__item">
-            <div class="all__content__list__item__title">
+            <div class="all__content__list__item__title" @click="router.push('/Mountain')">
               <v-btn variant="tonal"> 最新消息 </v-btn>
             </div>
           </div>
-          <div class="all__content__list__item">
+          <!-- <div class="all__content__list__item">
             <div class="all__content__list__item__title">
               <v-btn variant="tonal"> 最新消息 </v-btn>
             </div>
-          </div>
+          </div> -->
         </div>
         <v-btn block color="indigo-darken-3" size="x-large" variant="flat"> 全部分類 </v-btn>
       </div>
-      <div class="buy">
-        <div class="buy__title">最新公告</div>
-        <v-text-field
-          v-model="getComputedDate"
-          type="text"
-          label="*Date of Birth"
-          append-inner-icon="mdi-calendar"
-          :clearable="true"
-          density="compact"
-          variant="outlined"
-          @click:append-inner="showCalendar(true)"
-        >
-        </v-text-field>
+      <div class="buy__title">最新公告</div>
+      <BuyTicketInfo :data="forestData" />
+      <!--        <v-text-field-->
+      <!--          v-model="getComputedDate"-->
+      <!--          type="text"-->
+      <!--          label="選擇日期"-->
+      <!--          append-inner-icon="mdi-calendar"-->
+      <!--          :clearable="true"-->
+      <!--          density="compact"-->
+      <!--          variant="outlined"-->
+      <!--          @click:append-inner="showCalendar(true)"-->
+      <!--        >-->
+      <!--        </v-text-field>-->
+      <!-- <div class="buy">
         <BaseDialog
           @save="saveValue"
           v-model:isVisible="showDialog"
           v-model:dateOfBirth="dateOfBirth"
         ></BaseDialog>
         <BuyTicketInfo :data="forestData" />
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -158,6 +147,8 @@ const saveValue = (value) => {
   justify-content: space-around;
   flex-direction: column;
   padding: 7px;
+  max-width: 717px;
+  margin: 0 auto;
 
   &__bar {
     overflow: auto;

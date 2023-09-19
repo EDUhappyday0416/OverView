@@ -34,37 +34,35 @@ const isLogin = computed(() => {
   </v-card>
 </template> -->
 <template>
-  <v-card class="mx-auto" color="grey-lighten-3">
-    <v-layout>
-      <v-app-bar
-        color="teal-darken-4"
-        
-      >
+  <!--  <v-card class="mx-auto">-->
+  <!--  -->
+  <!--  </v-card>-->
+  <v-layout>
+    <v-app-bar color="teal-darken-4" v-if="isLogin !== '/login' && isLogin !== '/register'">
+      <template v-slot:prepend>
+        <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      </template>
 
-        <template v-slot:prepend>
-          <v-app-bar-nav-icon></v-app-bar-nav-icon>
-        </template>
+      <!-- <v-app-bar-title>Title</v-app-bar-title> -->
 
-        <!-- <v-app-bar-title>Title</v-app-bar-title> -->
+      <v-spacer></v-spacer>
 
-        <v-spacer></v-spacer>
+      <v-btn icon>
+        <v-icon>mdi-magnify</v-icon>
+      </v-btn>
 
-        <v-btn icon>
-          <v-icon>mdi-magnify</v-icon>
-        </v-btn>
+      <v-btn icon>
+        <v-icon>mdi-heart</v-icon>
+      </v-btn>
 
-        <v-btn icon>
-          <v-icon>mdi-heart</v-icon>
-        </v-btn>
+      <v-btn icon>
+        <v-icon>mdi-dots-vertical</v-icon>
+      </v-btn>
+    </v-app-bar>
 
-        <v-btn icon>
-          <v-icon>mdi-dots-vertical</v-icon>
-        </v-btn>
-      </v-app-bar>
-
-      <v-main>
-        <v-container fluid>
-          <!-- <v-row dense>
+    <v-main>
+      <v-container fluid>
+        <!-- <v-row dense>
             <v-col
               v-for="n in 8"
               :key="n"
@@ -77,20 +75,19 @@ const isLogin = computed(() => {
               ></v-card>
             </v-col>
           </v-row> -->
-          <RouterView />
-        </v-container>
-      </v-main>
-    </v-layout>
-  </v-card>
+        <RouterView />
+      </v-container>
+    </v-main>
+  </v-layout>
 </template>
 <!-- <template> -->
-  <!-- @/assets/logo.svg -->
-  <!-- {{ getRoute }} -->
-  <!-- {{ router.currentRoute.value.path }} -->
-  <!-- <topMenu v-if="isLogin !== '/login' && isLogin !== '/register'" />
+<!-- @/assets/logo.svg -->
+<!-- {{ getRoute }} -->
+<!-- {{ router.currentRoute.value.path }} -->
+<!-- <topMenu v-if="isLogin !== '/login' && isLogin !== '/register'" />
   <RouterView /> -->
 
-  <!-- <DataTable :paginatedData="paginatedData" :columns="columns">
+<!-- <DataTable :paginatedData="paginatedData" :columns="columns">
     <template #action="props">
       <button class="edit1" @click="showEditForm(props.index)" >
         <img src="../assets/icons/ico_edit.png" />

@@ -71,8 +71,13 @@ const sendForest = () => {
   })
 }
 
+
+  window.onscroll = () => {
+    console.log('222222')
+  }
 let isLoading = false
 const loadMore = (e) => {
+
   console.log(e)
   if (isLoading) return
   const { scrollHeight, scrollTop, clientHeight } = e.target
@@ -170,6 +175,8 @@ forest.getQueryForest(place.value, height.value, pages.value, viewType.value).th
 
 <style>
 .forest {
+  overflow: auto;
+  height: calc(100vh - 144px);
  /* width: 100%;
   overflow: auto;
   max-width: 1920px;
