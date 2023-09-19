@@ -106,18 +106,7 @@ const saveValue = (value) => {
 
 <template>
   <div class="all">
-    <!-- <v-select v-model="place" :items="placeItem" label="區域" multiple persistent-hint></v-select>
-    <v-select
-      v-model="height"
-      :items="heightItem"
-      label="高度(m)"
-      multiple
-      persistent-hint
-    ></v-select>
-    <v-select v-model="level" :items="levelItem" label="難度" multiple persistent-hint></v-select> -->
-    <!-- <CustomInput :placeholder="`Search`" /> -->
     <v-text-field v-model="search" label="關鍵字"></v-text-field>
-    
     <div class="all__bar">
       <div class="all__content">
         <div class="all__content__list">

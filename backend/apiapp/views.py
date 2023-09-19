@@ -18,7 +18,7 @@ config.read('config.ini')
 db_settings = config['mysql']
 # @api_view(['GET', 'POST'])
 # @csrf_exempt
-# def insert_forest_data(request):
+# def insertForestData(request):
 #     response = HttpResponse()
 #     response.content = b'This is the response'
 #     # 設置 Cache-Control 標頭
@@ -127,7 +127,7 @@ db_settings = config['mysql']
 
 @api_view(['GET', 'POST'])
 @csrf_exempt
-def insert_forest_data(request):
+def insertForestData(request):
     if request.method == 'GET':
         try:
             response_data = fetch_data_from_source(request)

@@ -1,5 +1,5 @@
 <template>
-  <div style="overflow-y: auto; height: 100vh">
+  <div class="mountain">
     <v-row no-gutters class="d-flex justify-center">
       <v-col class="ma-2" v-for="(item, i) in mountainData" :key="i" cols="12" sm="12" md="3">
         <div>
@@ -36,3 +36,13 @@ const forest = useForestData()
 const mountainData = computed(() => forest.MountainData.data)
 forest.getQueryMountainData()
 </script>
+
+<style>
+.mountain {
+  /*width: 100%;
+  overflow: auto;
+  height: calc(100vh - 100px);
+  margin: 0 auto;*/
+}
+
+</style>

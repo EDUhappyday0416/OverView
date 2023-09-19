@@ -15,10 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from apiapp.views import insert_forest_data,getMountainData
+from apiapp.views import insertForestData,getMountainData
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/insert_forest_data/', insert_forest_data, name='insert_forest_data'),
+    path('api/insertForestData/', insertForestData, name='insertForestData'),
     path('api/getMountainData/', getMountainData, name='getMountainData'),
 ]

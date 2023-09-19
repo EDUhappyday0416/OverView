@@ -1,5 +1,7 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { VInfiniteScroll } from 'vuetify/labs/VInfiniteScroll'
+
+import { ref } from 'vue'
 import { useForestData } from '../stores/forest'
 const forest = useForestData()
 const placeItem = ref([
@@ -21,20 +23,13 @@ const placeItem = ref([
   }
 ])
 const place = ref([])
-
 const heightItem = ref(['1000', '2000', '3000', '4000'])
 const height = ref([])
-
 const levelItem = ref(['新手', '入門', '中級', '高手'])
 const level = ref([])
-
 const search = ref('')
 const data = ref([])
 const dialog = ref(false)
-// forest.getQueryForest(place.value, height.value).then((res) => {
-//   console.log(res)
-//   data.value = res.data
-// })
 const pages = ref(0)
 const viewType = ref('')
 const viewTypeItem = ref([
@@ -68,10 +63,7 @@ const viewTypeItem = ref([
   }
 ])
 
-forest.getQueryForest(place.value, height.value, pages.value, viewType.value).then((res) => {
-  data.value = res.data
-})
-const sendForst = () => {
+const sendForest = () => {
   dialog.value = false
   pages.value = 0
   forest.getQueryForest(place.value, height.value, pages.value, viewType.value).then((res) => {
@@ -81,10 +73,11 @@ const sendForst = () => {
 
 let isLoading = false
 const loadMore = (e) => {
+  console.log(e)
   if (isLoading) return
   const { scrollHeight, scrollTop, clientHeight } = e.target
-  if (scrollTop + clientHeight >= scrollHeight * 0.9) {
-    isLoading = true // Set the flag to true to prevent further loading
+  if (scrollTop + clientHeight >= scrollHeight ) {
+    isLoading = true 
     setTimeout(() => {
       pages.value += 1
       forest.getQueryForest(place.value, height.value, pages.value, viewType.value).then((res) => {
@@ -93,24 +86,14 @@ const loadMore = (e) => {
       isLoading = false // Reset the flag
     }, 1000)
   }
-
-  // if (scrollTop + clientHeight >= scrollHeight) {
-  //   this.page += 1
-  //   let data = {
-  //     page: this.page,
-  //     limit: 10
-  //   }
-  //   this.getIntegralLogs(data).then((res) => {
-  //     if (res.data != '') {
-  //       this.dataList = this.dataList.concat(res.data)
-  //     }
-  //   })
-  // }
 }
+forest.getQueryForest(place.value, height.value, pages.value, viewType.value).then((res) => {
+  data.value = res.data
+})
+
 </script>
 <template>
   <div>
-    <div>自然步道</div>
     <div class="text-right">
       <v-dialog v-model="dialog">
         <template v-slot:activator="{ props }">
@@ -151,38 +134,24 @@ const loadMore = (e) => {
             <v-text-field v-model="search" label="關鍵字"></v-text-field>
           </v-card-text>
           <v-card-actions>
-            <v-btn @sendForest="sendForest">送出</v-btn>
+            <v-btn @click="sendForest">送出</v-btn>
             <!-- <v-btn color="primary" block @click="dialog = false">Close Dialog</v-btn> -->
           </v-card-actions>
         </v-card>
       </v-dialog>
     </div>
-
-    <div class="forest pa-3" @scroll="loadMore">
-      <v-card class="mx-auto ma-3" v-for="(item, i) in data" :key="i">
-        <v-img :src="`https://recreation.forest.gov.tw/${item.Photo}`" height="200px" cover></v-img>
-        <v-card-title> {{ item.Name }} </v-card-title>
-        <v-card-subtitle> {{ item.AdminName }} </v-card-subtitle>
-        <v-card-actions>
-          <v-chip> {{ item.TypName }} </v-chip>
-          <v-chip class="ma-2" color="red" text-color="white"> {{ item.OpenText }} </v-chip>
-        </v-card-actions>
-      </v-card>
-      <v-row dense no-gutters>
-        <v-col
-          v-for="(item, i) in data"
-          :key="i"
-          cols="12"
-          md="4"
-          lg="3"
-          class="justify-center d-flex"
-        >
-          <v-card class="pa-2 ma-2 w-100">
+    <div @scroll="loadMore" class="forest"> 
+      <v-row no-gutters class="d-flex justify-center" >
+        <v-col class="ma-2" v-for="(item, i) in data" :key="i" cols="12" sm="12" md="3" >
+          <v-card class="mx-auto">
             <v-img
-              class="align-end text-white"
-              height="200"
               :src="`https://recreation.forest.gov.tw/${item.Photo}`"
+              gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+              style="object-fit: cover"
+              min-height="150"
+              max-height="150"
               cover
+              class="bg-grey-lighten-2 align-end text-white"
             >
               <v-card-title>{{ item.Name }}</v-card-title>
             </v-img>
@@ -195,15 +164,20 @@ const loadMore = (e) => {
         </v-col>
       </v-row>
     </div>
+  
   </div>
 </template>
 
 <style>
 .forest {
-  width: 100%;
+ /* width: 100%;
   overflow: auto;
   max-width: 1920px;
   height: calc(100vh - 144px);
-  margin: 0 auto;
+  margin: 0 auto; */
+}
+
+.forest {
+  /*overflow-y: auto; height: 100vh*/
 }
 </style>
