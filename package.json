@@ -23,6 +23,8 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/vue-fontawesome": "^3.0.3",
     "@tensorflow/tfjs": "^4.10.0",
+    "@vuelidate/core": "^2.0.3",
+    "@vuelidate/validators": "^2.0.4",
     "apexcharts": "^3.41.1",
     "axios": "^1.4.0",
     "chart.js": "^3.9.1",
@@ -38,7 +40,8 @@
     "vue-chart-3": "^3.1.8",
     "vue-router": "^4.2.4",
     "vue3-apexcharts": "^1.4.4",
-    "vuetify": "^3.3.14"
+    "vuetify": "^3.3.14",
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "@mdi/font": "^7.2.96",
