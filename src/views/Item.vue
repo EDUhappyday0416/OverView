@@ -20,10 +20,6 @@
       </div>
     </div> -->
     <!-- <Header @activeHeader="headerGet" :class="{ active: initTab == 'Waitlist' }" /> -->
-    
-    
-    
-    
     <!-- <div class="drag" @scroll="onScroll">
       <div
         class="drag__main"
@@ -59,14 +55,14 @@
     <div>
       <v-row dense>
         <v-col
-          v-for="n in 8"
-          :key="n"
+          v-for="(item, i) in getCurrentChange"
+          :key="i"
           cols="12"
         >
           <v-card
-            :title="`Content ${n}`"
-            :subtitle="`Subtitle for Content ${n}`"
-            text="Lorem ipsum dolor sit amet consectetur, adipisicing elit.?"
+            :title="`${item.event}`"
+            :subtitle="`${item.content}`"
+            :text="`${item.date}`"
           ></v-card>
         </v-col>
       </v-row>

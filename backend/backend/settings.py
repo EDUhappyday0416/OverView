@@ -127,8 +127,10 @@ DATABASES = {
         'NAME': 'DataBaseFrances123',
         'USER': 'linpostgres',
         'PASSWORD': 'm5AYivn+x8YfMenq',
-        # 'HOST': 'lin-28716-11616-pgsql-primary.servers.linodedb.net',
-        'HOST': 'lin-28716-11616-pgsql-primary-private.servers.linodedb.net',
+        # local
+        'HOST': 'lin-28716-11616-pgsql-primary.servers.linodedb.net',
+        # remote
+        # 'HOST': 'lin-28716-11616-pgsql-primary-private.servers.linodedb.net', 
         'PORT': '5432',
     }
 }

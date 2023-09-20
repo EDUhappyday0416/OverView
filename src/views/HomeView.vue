@@ -43,8 +43,8 @@ const dates = ref(['2019-09-10', '2019-09-20'])
 const chip1 = ref(true)
 
 const showDialog = ref(false)
-const startTimeDate = ref('2023-01-01')
-const endTimeDate = ref(new Date())
+const startTimeDate = ref(new Date()) // three month ago
+const endTimeDate = ref(new Date()) //today
 
 watch(
   () => startTimeDate.value,
@@ -77,8 +77,9 @@ const formatDate = (date) => {
   return `${year}-${month}-${day}`
 }
 onMounted(() => {
-  const dateStart = formatDate(startTimeDate.value)
-  const dateEnd = formatDate(getThreeMoth(endTimeDate.value))
+  const dateStart = formatDate(getThreeMoth(startTimeDate.value))
+  console.log(dateStart)
+  const dateEnd = formatDate(endTimeDate.value)
   forest.getForestInfoMethod(dateStart, dateEnd).then((res) => {
     console.log(res)
   })
@@ -105,19 +106,21 @@ onMounted(() => {
           </div>
           <div class="all__content__list__item">
             <div class="all__content__list__item__title" @click="router.push('/Mountain')">
-              <v-btn variant="tonal"> 最新消息 </v-btn>
+              <v-btn variant="tonal"> 百岳 </v-btn>
             </div>
           </div>
-          <!-- <div class="all__content__list__item">
-            <div class="all__content__list__item__title">
-              <v-btn variant="tonal"> 最新消息 </v-btn>
+          <div class="all__content__list__item">
+            <div class="all__content__list__item__title" @click="router.push('/MountainForm')">
+              <v-btn variant="tonal"> 揪團 </v-btn>
             </div>
-          </div> -->
+          </div>
         </div>
         <v-btn block color="indigo-darken-3" size="x-large" variant="flat"> 全部分類 </v-btn>
       </div>
-      <div class="buy__title">最新公告</div>
-      <BuyTicketInfo :data="forestData" />
+      <div class="all__news">
+        <div class="buy__title">最新公告</div>
+        <BuyTicketInfo :data="forestData" />
+      </div>
       <!--        <v-text-field-->
       <!--          v-model="getComputedDate"-->
       <!--          type="text"-->
@@ -147,13 +150,13 @@ onMounted(() => {
   justify-content: space-around;
   flex-direction: column;
   padding: 7px;
-  max-width: 717px;
+  max-width: 1250px;
   margin: 0 auto;
 
   &__bar {
-    overflow: auto;
+    /*overflow: auto;*/
     // flex: 1;
-    height: calc(100vh - 144px);
+    /*height: calc(100vh - 144px);*/
   }
   &__content {
     // display: flex;
@@ -190,6 +193,10 @@ onMounted(() => {
         }
       }
     }
+  }
+
+  &__news {
+    /*height: 15vh;*/
   }
 
   .buy {

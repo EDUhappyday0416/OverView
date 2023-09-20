@@ -216,8 +216,8 @@ const send = () => {
   transition: 0.2s;
   background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
   &__wrapper {
-    overflow: auto;
-    height: 100vh;
+    max-width: 1250px;
+    margin:0 auto;
   }
   &__user {
     display: flex;

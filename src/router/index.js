@@ -71,6 +71,12 @@ const router = createRouter({
       name: 'Mountain',
       component: () => import('../views/Mountain.vue')
     },
+    {
+      path: '/MountainForm',
+      name: 'MountainForm',
+      component: () => import('../views/MountainForm.vue')
+    },
+    
     // {
     //   path: '/:pathMatch(.*)*',
     //   name: 'not-found',
