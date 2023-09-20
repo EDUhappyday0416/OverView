@@ -36,7 +36,7 @@ const loginUser = () => {
   console.log(loginStore)
   loginStore.loginUser(data).then((response) => {
     if (response.access_token) {
-      router.push({ path: '/dashboard' })
+      router.push({ path: '/' })
     }
   })
   // loginStore.loginUser(data , loggedIn => {
