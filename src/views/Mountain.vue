@@ -30,19 +30,23 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
+import { useQuasar } from 'quasar'
 import { useForestData } from '../stores/forest'
+
+const $q = useQuasar()
 const forest = useForestData()
 const mountainData = computed(() => forest.MountainData.data)
-forest.getQueryMountainData()
+
+onMounted(() => {
+  $q.loading.show({
+    delay: 400,
+    message: '請稍等...'
+  })
+  forest.getQueryMountainData().then((res) => {
+    if (res) $q.loading.hide()
+  })
+})
 </script>
 
-<style>
-.mountain {
-  /*width: 100%;
-  overflow: auto;
-  height: calc(100vh - 100px);
-  margin: 0 auto;*/
-}
-
-</style>
+<style></style>

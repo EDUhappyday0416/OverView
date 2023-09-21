@@ -1,14 +1,11 @@
 <script setup>
 import { computed, ref, watch, onMounted } from 'vue'
-import CustomInput from '../components/CustomInput.vue'
+// import CustomInput from '../components/CustomInput.vue'
 import BuyTicketInfo from '../components/BuyTicketInfo.vue'
-// import { useEventData } from '../stores/event'
 import { useForestData } from '../stores/forest'
-import { useRouter, useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { useDate } from 'vuetify/labs/date'
-
-import BaseDialog from '../components/BaseDialog.vue'
-
+import Loading from '../components/Loading.vue'
 const init = () => {
   console.log('init')
 }
@@ -16,33 +13,11 @@ const init = () => {
 const router = useRouter()
 
 const date = useDate()
-console.log(date)
 // const eventStore = useEventData()
 const forest = useForestData()
 
 const forestData = computed(() => forest.forestInfo)
 
-// const goShoppingCard = () => {
-//   router.push(`/ShoppingCart0
-// }
-
-// const placeItem = ref(['北部', '南部', '中部', '西部'])
-// const place = ref([])
-
-// const heightItem = ref(['1000', '2000', '3000', '4000'])
-// const height = ref([])
-
-// const levelItem = ref(['新手', '入門', '中級', '高手'])
-// const level = ref([])
-
-const search = ref('')
-
-const dialog = ref(false)
-
-const dates = ref(['2019-09-10', '2019-09-20'])
-const chip1 = ref(true)
-
-const showDialog = ref(false)
 const startTimeDate = ref(new Date()) // three month ago
 const endTimeDate = ref(new Date()) //today
 
@@ -78,12 +53,12 @@ const formatDate = (date) => {
 }
 onMounted(() => {
   const dateStart = formatDate(getThreeMoth(startTimeDate.value))
-  console.log(dateStart)
   const dateEnd = formatDate(endTimeDate.value)
   forest.getForestInfoMethod(dateStart, dateEnd).then((res) => {
     console.log(res)
   })
 })
+
 // const saveValue = () => {
 //   const dateStart = formatDate(startTimeDate.value)
 //   const dateEnd = formatDate(endTimeDate.value)
@@ -97,6 +72,7 @@ onMounted(() => {
   <div class="all">
     <!--<v-text-field v-model="search" label="關鍵字"></v-text-field>-->
     <div class="all__bar">
+      <Loading @showLoading="showLoading" />
       <div class="all__content">
         <div class="all__content__list">
           <div class="all__content__list__item">

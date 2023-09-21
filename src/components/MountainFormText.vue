@@ -92,21 +92,4 @@ const props = defineProps({
 })
 </script>
 
-<style lang="scss" scoped>
-input {
-  outline: none;
-  display: block;
-  background: rgba(0, 0, 0, 0.1);
-  width: 100%;
-  border: 0;
-  border-radius: 4px;
-  box-sizing: border-box;
-  padding: 12px 20px;
-  color: rgba(0, 0, 0, 0.6);
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: 500;
-  line-height: inherit;
-  transition: 0.3s ease;
-}
-</style>
+<style lang="scss" scoped></style>

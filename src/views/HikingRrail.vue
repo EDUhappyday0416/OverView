@@ -1,8 +1,8 @@
 <script setup>
-import { VInfiniteScroll } from 'vuetify/labs/VInfiniteScroll'
-
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useForestData } from '../stores/forest'
+import Loading from '../components/Loading.vue'
+import { useQuasar } from 'quasar'
 const forest = useForestData()
 const placeItem = ref([
   {
@@ -62,27 +62,36 @@ const viewTypeItem = ref([
     value: 12
   }
 ])
-
+const $q = useQuasar()
+onMounted(() => {
+  $q.loading.show({
+    delay: 400,
+    message: '請稍等...'
+  })
+  forest.getQueryForest(place.value, height.value, pages.value, viewType.value).then((res) => {
+    $q.loading.hide()
+    data.value = res.data
+  })
+})
 const sendForest = () => {
   dialog.value = false
   pages.value = 0
+  $q.loading.show({
+    delay: 400,
+    message: '請稍等...'
+  })
   forest.getQueryForest(place.value, height.value, pages.value, viewType.value).then((res) => {
     data.value = res.data
+    $q.loading.hide()
   })
 }
 
-
-  window.onscroll = () => {
-    console.log('222222')
-  }
 let isLoading = false
 const loadMore = (e) => {
-
-  console.log(e)
   if (isLoading) return
   const { scrollHeight, scrollTop, clientHeight } = e.target
-  if (scrollTop + clientHeight >= scrollHeight ) {
-    isLoading = true 
+  if (scrollTop + clientHeight >= scrollHeight) {
+    isLoading = true
     setTimeout(() => {
       pages.value += 1
       forest.getQueryForest(place.value, height.value, pages.value, viewType.value).then((res) => {
@@ -92,10 +101,6 @@ const loadMore = (e) => {
     }, 1000)
   }
 }
-forest.getQueryForest(place.value, height.value, pages.value, viewType.value).then((res) => {
-  data.value = res.data
-})
-
 </script>
 <template>
   <div>
@@ -145,9 +150,9 @@ forest.getQueryForest(place.value, height.value, pages.value, viewType.value).th
         </v-card>
       </v-dialog>
     </div>
-    <div @scroll="loadMore" class="forest"> 
-      <v-row no-gutters class="d-flex justify-center" >
-        <v-col class="ma-2" v-for="(item, i) in data" :key="i" cols="12" sm="12" md="3" >
+    <div @scroll="loadMore" class="forest">
+      <v-row no-gutters class="d-flex justify-center">
+        <v-col class="ma-2" v-for="(item, i) in data" :key="i" cols="12" sm="12" md="3">
           <v-card class="mx-auto">
             <v-img
               :src="`https://recreation.forest.gov.tw/${item.Photo}`"
@@ -169,15 +174,15 @@ forest.getQueryForest(place.value, height.value, pages.value, viewType.value).th
         </v-col>
       </v-row>
     </div>
-  
   </div>
+  <Loading @showLoading="showLoading" />
 </template>
 
 <style>
 .forest {
   overflow: auto;
   height: calc(100vh - 144px);
- /* width: 100%;
+  /* width: 100%;
   overflow: auto;
   max-width: 1920px;
   height: calc(100vh - 144px);

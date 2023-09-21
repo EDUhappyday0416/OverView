@@ -20,8 +20,8 @@
       </v-col>
     </v-row>
     <div class="text-center">
-      <v-btn @click="prompt = true"> 新增欄位 </v-btn>
-      <v-btn @click="onSubmit()"> 確認 </v-btn>
+      <v-btn class="text-none ma-4" color="grey-lighten-2" @click="prompt = true"> 新增欄位 </v-btn>
+      <v-btn class="text-none ma-4" color="teal-darken-4" @click="onSubmit()"> 確認 </v-btn>
     </div>
   </div>
   <q-dialog v-model="prompt" persistent>
