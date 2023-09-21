@@ -20,9 +20,15 @@ import { VDatePicker } from 'vuetify/labs/VDatePicker'
 // import { VuetifyDateAdapter } from 'vuetify/labs/date/adapters/vuetify'
 import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
 import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
-
+import { Quasar } from 'quasar'
 /* add icons to the library */
 library.add(faUserSecret)
+
+// Import icon libraries
+import '@quasar/extras/material-icons/material-icons.css'
+
+// Import Quasar css
+import 'quasar/src/css/index.sass'
 
 import App from './App.vue'
 import router from './router'
@@ -62,9 +68,13 @@ const vuetify = createVuetify({
     },
 })
 
+app.use(Quasar)
 app.use(router)
 app.use(createPinia())
 app.use(vuetify)
-app.use(VueApexCharts);
+app.use(Quasar, {
+    plugins: {}, // import Quasar plugins and add here
+})
+app.use(VueApexCharts); 
 app.mount('#app')
 
