@@ -5,7 +5,7 @@ import BuyTicketInfo from '../components/BuyTicketInfo.vue'
 import { useForestData } from '../stores/forest'
 import { useRouter } from 'vue-router'
 import { useDate } from 'vuetify/labs/date'
-import Loading from '../components/Loading.vue'
+// import Loading from '../components/Loading.vue'
 const init = () => {
   console.log('init')
 }
@@ -66,13 +66,16 @@ onMounted(() => {
 //     console.log(res)
 //   })
 // }
+
+const img = ref('')
 </script>
 
 <template>
+ 
   <div class="all">
     <!--<v-text-field v-model="search" label="關鍵字"></v-text-field>-->
     <div class="all__bar">
-      <Loading @showLoading="showLoading" />
+      <!-- <Loading @showLoading="showLoading" /> -->
       <div class="all__content">
         <div class="all__content__list">
           <div class="all__content__list__item">

@@ -1,29 +1,50 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useForestData } from '../stores/forest'
-import Loading from '../components/Loading.vue'
+// import Loading from '../components/Loading.vue'
 import { useQuasar } from 'quasar'
 const forest = useForestData()
 const placeItem = ref([
   {
     title: '北部',
-    value: 'N'
+    value: 'N',
+    active: false
   },
   {
     title: '中部',
-    value: 'C'
+    value: 'C',
+    active: false
+
   },
   {
     title: '南部',
-    value: 'S'
+    value: 'S',
+    active: false
+
   },
   {
     title: '西部',
-    value: 'E'
+    value: 'E',
+    active: false
+
   }
 ])
 const place = ref([])
-const heightItem = ref(['1000', '2000', '3000', '4000'])
+const heightItem = ref([{
+  title: '1000',
+  value: 1000
+},{
+  title: '2000',
+  value: 2000
+},
+{
+  title: '3000',
+  value: 3000
+},
+{
+  title: '4000',
+  value: 4000
+},])
 const height = ref([])
 const levelItem = ref(['新手', '入門', '中級', '高手'])
 const level = ref([])
@@ -73,33 +94,91 @@ onMounted(() => {
     data.value = res.data
   })
 })
-const sendForest = () => {
-  dialog.value = false
+// const sendForest = () => {
+//   // dialog.value = false
+//   pages.value = 0
+//   $q.loading.show({
+//     delay: 400,
+//     message: '請稍等...'
+//   })
+//   forest.getQueryForest(place.value, height.value, pages.value, viewType.value).then((res) => {
+//     data.value = res.data
+//     $q.loading.hide()
+//   })
+// }
+
+// let isLoading = false
+const loadMore = (e) => {
+  const { scrollHeight, scrollTop, clientHeight } = e.target
+  if (scrollTop + clientHeight >= scrollHeight) {
+    $q.loading.show({
+      delay: 400,
+      message: '請稍等...'
+    })
+    setTimeout(() => {
+      pages.value += 1
+      forest.getQueryForest(place.value, height.value, pages.value, viewType.value).then((res) => {
+        data.value = data.value.concat(res.data)
+        $q.loading.hide()
+      }).catch((err) => {
+        $q.loading.hide()
+        console.log(err)
+      })
+    }, 1000)
+  }
+}
+const arr = ref([])
+const getInfo = (item , i , type) => {
+  if(item.active) { 
+    item.active = false
+      if (type === 'place') {
+        place.value = place.value.filter((v) => v !== item.value)
+      } else if (type === 'height') {
+        height.value = height.value.filter((v) => v !== item.value)
+    }
+  }else{
+    item.active = true
+    if (type === 'place') {
+      place.value.push(item.value)
+    } else if (type === 'height') {
+      height.value.push(item.value)
+    }
+  }
+
+
+  // if (type === 'place') {
+  //   if (item.active) {
+  //     item.active = false
+  //     arr.value.splice(i, 1)
+  //   }else{
+  //     item.active = true
+  //     arr.value.push(item.value)
+  //     place.value = arr.value
+  //   }
+  // } else if (type === 'height') {
+  //   if (item.active) {
+  //     item.active = false
+  //     arr.value.splice(i, 1)
+  //   }else{
+  //     item.active = true
+  //     arr.value.push(item.value)
+  //     place.value = arr.value
+  //   }
+  // }
+  
+  getSearch();
+}
+
+const getSearch = () => {
   pages.value = 0
   $q.loading.show({
     delay: 400,
     message: '請稍等...'
   })
-  forest.getQueryForest(place.value, height.value, pages.value, viewType.value).then((res) => {
+  forest.getQueryForest(place.value, height.value, pages.value, viewType.value, search.value).then((res) => {
     data.value = res.data
     $q.loading.hide()
   })
-}
-
-let isLoading = false
-const loadMore = (e) => {
-  if (isLoading) return
-  const { scrollHeight, scrollTop, clientHeight } = e.target
-  if (scrollTop + clientHeight >= scrollHeight) {
-    isLoading = true
-    setTimeout(() => {
-      pages.value += 1
-      forest.getQueryForest(place.value, height.value, pages.value, viewType.value).then((res) => {
-        data.value = data.value.concat(res.data)
-      })
-      isLoading = false // Reset the flag
-    }, 1000)
-  }
 }
 </script>
 <template>
@@ -143,15 +222,20 @@ const loadMore = (e) => {
             ></v-select>
             <v-text-field v-model="search" label="關鍵字"></v-text-field>
           </v-card-text>
-          <v-card-actions>
+          <!-- <v-card-actions>
             <v-btn @click="sendForest">送出</v-btn>
-            <!-- <v-btn color="primary" block @click="dialog = false">Close Dialog</v-btn> -->
-          </v-card-actions>
+          </v-card-actions> -->
         </v-card>
       </v-dialog>
     </div>
-    <div @scroll="loadMore" class="forest">
-      <v-row no-gutters class="d-flex justify-center">
+    <div class="d-flex justify-start">
+      <q-btn class="ma-3" v-model="item.value" :key="i" v-for="(item , i) in placeItem" @click="getInfo(item , i , 'place')" text-color="black" :color="item.active == true ? 'secondary' : 'white'" :label="item.title" />
+    </div>
+    <div class="d-flex justify-start">
+      <q-btn class="ma-3" v-model="item.value" :key="i" v-for="(item , i) in heightItem" @click="getInfo(item , i , 'height')" text-color="black" :color="item.active == true ? 'secondary' : 'white'" :label="item.title" />
+    </div>
+    <div @scroll="loadMore"  class="forest">
+      <v-row no-gutters class="d-flex justify-space-between">
         <v-col class="ma-2" v-for="(item, i) in data" :key="i" cols="12" sm="12" md="3">
           <v-card class="mx-auto">
             <v-img
@@ -175,7 +259,7 @@ const loadMore = (e) => {
       </v-row>
     </div>
   </div>
-  <Loading @showLoading="showLoading" />
+  <!-- <Loading @showLoading="showLoading" /> -->
 </template>
 
 <style>

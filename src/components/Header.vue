@@ -42,7 +42,9 @@ const menu = ref(false)
 const urlItem = ref([
   { title: '自然步道', url: '/HikingRrail' },
   { title: '百岳', url: '/Mountain' },
-  { title: '揪團', url: '/MountainForm' }
+  { title: '揪團', url: '/MountainForm' },
+  { title: '最新消息', url: '/' }
+
 ])
 
 const goPath = (item) => {
