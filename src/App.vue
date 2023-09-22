@@ -45,12 +45,10 @@ const isLogin = computed(() => {
       </template>
       <!-- <v-app-bar-title>Title</v-app-bar-title> -->
       <v-spacer></v-spacer>
-      
     </v-app-bar>
 
     <v-main>
-      <v-parallax max-height="500" width="100%" cover height="300" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/%E7%8E%89%E5%B1%B1%E4%B8%BB%E5%B3%B0_02.jpg/2560px-%E7%8E%89%E5%B1%B1%E4%B8%BB%E5%B3%B0_02.jpg"></v-parallax>
-      <v-container fluid style="max-width: 1250px;">
+      <v-container fluid style="max-width: 1250px">
         <!-- <v-row dense>
             <v-col
               v-for="n in 8"

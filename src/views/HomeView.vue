@@ -54,9 +54,12 @@ const formatDate = (date) => {
 onMounted(() => {
   const dateStart = formatDate(getThreeMoth(startTimeDate.value))
   const dateEnd = formatDate(endTimeDate.value)
-  forest.getForestInfoMethod(dateStart, dateEnd).then((res) => {
-    console.log(res)
-  })
+  forest
+    .getForestInfoMethod(dateStart, dateEnd)
+    .then((res) => {
+      console.log(res)
+    })
+    .catch((error) => console.log(error))
 })
 
 // const saveValue = () => {
@@ -64,19 +67,36 @@ onMounted(() => {
 //   const dateEnd = formatDate(endTimeDate.value)
 //   forest.getForestInfoMethod(dateStart, dateEnd).then((res) => {
 //     console.log(res)
-//   })
+//   }).catch((error) => console.log(error))
 // }
 
 const img = ref('')
 </script>
 
 <template>
- 
+  <!-- <v-parallax
+    max-height="500"
+    width="100%"
+    cover
+    height="300"
+    src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/%E7%8E%89%E5%B1%B1%E4%B8%BB%E5%B3%B0_02.jpg/2560px-%E7%8E%89%E5%B1%B1%E4%B8%BB%E5%B3%B0_02.jpg"
+  ></v-parallax> -->
+  <div class="banner_img">
+    <div class="content">
+      <div class="main"></div>
+    </div>
+    <div class="img_block">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/%E7%8E%89%E5%B1%B1%E4%B8%BB%E5%B3%B0_02.jpg/2560px-%E7%8E%89%E5%B1%B1%E4%B8%BB%E5%B3%B0_02.jpg"
+        alt=""
+      />
+    </div>
+  </div>
   <div class="all">
     <!--<v-text-field v-model="search" label="關鍵字"></v-text-field>-->
     <div class="all__bar">
       <!-- <Loading @showLoading="showLoading" /> -->
-      <div class="all__content">
+      <!-- <div class="all__content">
         <div class="all__content__list">
           <div class="all__content__list__item">
             <div class="all__content__list__item__title" @click="router.push('/HikingRrail')">
@@ -95,7 +115,7 @@ const img = ref('')
           </div>
         </div>
         <v-btn block color="indigo-darken-3" size="x-large" variant="flat"> 全部分類 </v-btn>
-      </div>
+      </div> -->
       <div class="all__news">
         <div class="buy__title">最新公告</div>
         <BuyTicketInfo :data="forestData" />
