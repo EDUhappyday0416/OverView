@@ -14,37 +14,37 @@ const placeItem = ref([
     title: '中部',
     value: 'C',
     active: false
-
   },
   {
     title: '南部',
     value: 'S',
     active: false
-
   },
   {
     title: '西部',
     value: 'E',
     active: false
-
   }
 ])
 const place = ref([])
-const heightItem = ref([{
-  title: '1000',
-  value: 1000
-},{
-  title: '2000',
-  value: 2000
-},
-{
-  title: '3000',
-  value: 3000
-},
-{
-  title: '4000',
-  value: 4000
-},])
+const heightItem = ref([
+  {
+    title: '1000',
+    value: 1000
+  },
+  {
+    title: '2000',
+    value: 2000
+  },
+  {
+    title: '3000',
+    value: 3000
+  },
+  {
+    title: '4000',
+    value: 4000
+  }
+])
 const height = ref([])
 const levelItem = ref(['新手', '入門', '中級', '高手'])
 const level = ref([])
@@ -52,7 +52,7 @@ const search = ref('')
 const data = ref([])
 const dialog = ref(false)
 const pages = ref(0)
-const viewType = ref('')
+const viewType = ref([])
 const viewTypeItem = ref([
   {
     title: '國家森林遊樂區',
@@ -89,10 +89,13 @@ onMounted(() => {
     delay: 400,
     message: '請稍等...'
   })
-  forest.getQueryForest(place.value, height.value, pages.value, viewType.value).then((res) => {
-    $q.loading.hide()
-    data.value = res.data
-  })
+  forest
+    .getQueryForest(place.value, height.value, pages.value, viewType.value)
+    .then((res) => {
+      $q.loading.hide()
+      data.value = res.data
+    })
+    .catch((error) => console.log(error))
 })
 // const sendForest = () => {
 //   // dialog.value = false
@@ -117,26 +120,28 @@ const loadMore = (e) => {
     })
     setTimeout(() => {
       pages.value += 1
-      forest.getQueryForest(place.value, height.value, pages.value, viewType.value).then((res) => {
-        data.value = data.value.concat(res.data)
-        $q.loading.hide()
-      }).catch((err) => {
-        $q.loading.hide()
-        console.log(err)
-      })
+      forest
+        .getQueryForest(place.value, height.value, pages.value, viewType.value)
+        .then((res) => {
+          data.value = data.value.concat(res.data)
+          $q.loading.hide()
+        })
+        .catch((err) => {
+          $q.loading.hide()
+          console.log(err)
+        })
     }, 1000)
   }
 }
-const arr = ref([])
-const getInfo = (item , i , type) => {
-  if(item.active) { 
+const getInfo = (item, i, type) => {
+  if (item.active) {
     item.active = false
-      if (type === 'place') {
-        place.value = place.value.filter((v) => v !== item.value)
-      } else if (type === 'height') {
-        height.value = height.value.filter((v) => v !== item.value)
+    if (type === 'place') {
+      place.value = place.value.filter((v) => v !== item.value)
+    } else if (type === 'height') {
+      height.value = height.value.filter((v) => v !== item.value)
     }
-  }else{
+  } else {
     item.active = true
     if (type === 'place') {
       place.value.push(item.value)
@@ -144,7 +149,6 @@ const getInfo = (item , i , type) => {
       height.value.push(item.value)
     }
   }
-
 
   // if (type === 'place') {
   //   if (item.active) {
@@ -165,8 +169,8 @@ const getInfo = (item , i , type) => {
   //     place.value = arr.value
   //   }
   // }
-  
-  getSearch();
+
+  getSearch()
 }
 
 const getSearch = () => {
@@ -175,10 +179,13 @@ const getSearch = () => {
     delay: 400,
     message: '請稍等...'
   })
-  forest.getQueryForest(place.value, height.value, pages.value, viewType.value, search.value).then((res) => {
-    data.value = res.data
-    $q.loading.hide()
-  })
+  forest
+    .getQueryForest(place.value, height.value, pages.value, viewType.value, search.value)
+    .then((res) => {
+      data.value = res.data
+      $q.loading.hide()
+    })
+    .catch((error) => console.log(error))
 }
 </script>
 <template>
@@ -186,7 +193,7 @@ const getSearch = () => {
     <div class="text-right">
       <v-dialog v-model="dialog">
         <template v-slot:activator="{ props }">
-          <v-btn icon="mdi-search-web" v-bind="props"></v-btn>
+          <v-btn icon="mdi-search-web" v-bind="props" v-if="false"></v-btn>
         </template>
         <v-card>
           <v-card-text>
@@ -229,12 +236,31 @@ const getSearch = () => {
       </v-dialog>
     </div>
     <div class="d-flex justify-start">
-      <q-btn class="ma-3" v-model="item.value" :key="i" v-for="(item , i) in placeItem" @click="getInfo(item , i , 'place')" text-color="black" :color="item.active == true ? 'secondary' : 'white'" :label="item.title" />
+      <q-btn
+        class="ma-3"
+        v-model="item.value"
+        :key="i"
+        v-for="(item, i) in placeItem"
+        @click="getInfo(item, i, 'place')"
+        text-color="black"
+        :color="item.active == true ? 'secondary' : 'white'"
+        :label="item.title"
+      />
     </div>
     <div class="d-flex justify-start">
-      <q-btn class="ma-3" v-model="item.value" :key="i" v-for="(item , i) in heightItem" @click="getInfo(item , i , 'height')" text-color="black" :color="item.active == true ? 'secondary' : 'white'" :label="item.title" />
+      <q-btn
+        class="ma-3"
+        v-model="item.value"
+        :key="i"
+        v-for="(item, i) in heightItem"
+        @click="getInfo(item, i, 'height')"
+        text-color="black"
+        :color="item.active == true ? 'secondary' : 'white'"
+        :label="item.title"
+      />
     </div>
-    <div @scroll="loadMore"  class="forest">
+
+    <div @scroll="loadMore" class="forest">
       <v-row no-gutters class="d-flex justify-space-between">
         <v-col class="ma-2" v-for="(item, i) in data" :key="i" cols="12" sm="12" md="3">
           <v-card class="mx-auto">
