@@ -1,4 +1,8 @@
 <template>
+  <h4 class="pa-3">
+    百岳
+  </h4>
+  <v-divider class="pa-3"></v-divider>
   <div class="mountain">
     <v-row no-gutters class="d-flex justify-center">
       <v-col class="ma-2" v-for="(item, i) in mountainData" :key="i" cols="12" sm="12" md="3">

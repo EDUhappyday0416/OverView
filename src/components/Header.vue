@@ -43,7 +43,8 @@ const urlItem = ref([
   { title: '自然步道', url: '/HikingRrail' },
   { title: '百岳', url: '/Mountain' },
   { title: '揪團', url: '/MountainForm' },
-  { title: '最新消息', url: '/' }
+  { title: '最新消息', url: '/' },
+  { title: '路線查詢與介紹' , url:'/RouteWeb'}
 
 ])
 

@@ -1,55 +1,58 @@
 <template>
   <!-- <button @click="fetchData">取得資料</button> -->
+  <h4 class="pa-3">
+    路線查詢與介紹
+  </h4>
+  <v-divider class="pa-3"></v-divider>
   <div class="d-flex">
     <div v-for="(item, i) in organBtn" :key="i" class="ma-2" @click="getActive(item, i)">
       <v-btn :active="item.active" variant="outlined"> {{ item.title }}</v-btn>
     </div>
   </div>
-  <!-- <v-btn v-for="(item, i) in myArray" variant="outlined" :key="i" @click="getInfo(item)">
+  <!-- <v-btn v-for="(item, i) in routeArray" variant="outlined" :key="i" @click="getInfo(item)">
     {{ item.Name }}</v-btn
   > -->
   <v-select
     label="路線"
-    :items="myArray"
+    :items="routeArray"
     :item-props="itemProps"
     v-model="selectedRouter"
     @update:modelValue="getInfo(selectedRouter)"
   ></v-select>
-
   <div v-if="selectedItemIndex !== null">
-    <!-- <template>
-      是否申請入園證：{{ myArray[selectedItemIndex].isFixedclimb == 1 ? '是' : '否' }}
-    </template> -->
     {{ selectedItemIndex.UnitsName }}
-    <!-- {{ myArray[selectedItemIndex].RouteLV.consort }}
-    {{ myArray[selectedItemIndex].RouteLV.equipment }}
-    {{ myArray[selectedItemIndex].RouteLV.main }}
-    {{ myArray[selectedItemIndex].RouteLV.LV }} -->
-    <!-- 機關:{{ data.UnitsName }} 入園證:{{ data.isFixedclimb }} 路線名稱{{ data.Name }} -->
     <div class="q-pa-md">
       <q-markup-table>
         <thead>
           <tr>
-            <th class="text-left">機關</th>
-            <th class="text-right">登山主路線</th>
-            <th class="text-right">路線名稱</th>
-            <th class="text-right">入園證</th>
-            <th class="text-right">林務局 自然保護留區</th>
-            <th class="text-right">林務局 住宿</th>
-            <th class="text-right">警政署 入山證</th>
-            <th class="text-right">登山路線 難度等級</th>
+            <th class="text-center">機關</th>
+            <th class="text-center">登山主路線</th>
+            <th class="text-center">路線名稱</th>
+            <th class="text-center">入園證</th>
+            <th class="text-center">林務局 自然保護留區</th>
+            <th class="text-center">林務局 住宿</th>
+            <th class="text-center">警政署 入山證</th>
+            <th class="text-center">登山路線 難度等級</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="text-left">{{ selectedItemIndex.UnitsName }}</td>
-            <td class="text-left">{{ selectedItemIndex.Name }}</td>
-            <td class="text-left">{{ selectedItemIndex.UnitsName }}</td>
-            <td class="text-left">{{ selectedItemIndex.UnitsName }}</td>
-            <td class="text-left">{{ selectedItemIndex.UnitsName }}</td>
-            <td class="text-left">{{ selectedItemIndex.UnitsName }}</td>
-            <td class="text-left">{{ selectedItemIndex.UnitsName }}</td>
-            <td class="text-left">{{ selectedItemIndex.RouteLV.LV }}</td>
+            <td class="text-center">{{ selectedItemIndex.UnitsName }}</td>
+            <td class="text-center">{{ selectedItemIndex.Name }}</td>
+            <td class="text-center">{{ selectedItemIndex.MainName }}</td>
+            <td class="text-center">{{ selectedItemIndex.is_cpami_Fixedclimb == 1 ? "是" : "-"}}</td>
+            <td class="text-center">{{ selectedItemIndex.is_forest_area_list  == 1 ? "是" : "-"}}</td>
+            <td class="text-center">{{ selectedItemIndex.is_forest_camp  == 1 ? "是" : "-"}}</td>
+            <td class="text-center">{{ selectedItemIndex.is_forest_frail  == 1 ? "是" : "-"}}</td>
+            <td class="text-center">
+              <v-chip
+                class="ma-2"
+                color="red"
+                text-color="white"
+              >
+              {{ selectedItemIndex.RouteLV.LV  }}
+              </v-chip>
+            </td>
           </tr>
         </tbody>
       </q-markup-table>
@@ -69,29 +72,36 @@ const organBtn = ref([
   { title: '林務局山屋及營地', active: false },
   { title: '警政署入山', active: false }
 ])
-const model = ref(null)
-const myArray = ref([])
-const getNameInfo = (item, i) => {
-  console.log(item)
-}
+const modelActive = ref(null)
+const routeArray = ref([])
 
 const selectedRouter = ref(null)
 const selectedItemIndex = ref(null)
 const getActive = (item, i) => {
+  console.log(item , i)
+  item.active = true
   if (item.active) {
-    item.active = false
-  } else {
-    item.active = true
+    item.active = !item.active
   }
-
+  
+  // if (item.active) {
+  //   item.active = false
+  // } else {
+  //   item.active = true
+  // }
   getItem(item)
 }
 const showRouteLV = ref(false)
 const $q = useQuasar()
 const forest = useForestData()
 const getInfo = (item) => {
-  console.log(item)
+  $q.loading.show({
+    delay: 1000,
+    message: '請稍等...'
+  })
   selectedItemIndex.value = item
+  $q.loading.hide()
+
 }
 const itemProps = (item) => {
   return {
@@ -110,18 +120,11 @@ const getItem = (item) => {
   forest
     .getQueryMountainRouteWeb(data)
     .then((res) => {
-      myArray.value = []
+      routeArray.value = [] //清空資料
       $q.loading.hide()
       const arr = res.data
       arr.forEach((item) => {
-        console.log(item)
-
-        myArray.value.push({
-          Name: item.Name,
-          UnitsName: item.UnitsName,
-          RouteLV: item.RouteLV,
-          isFixedclimb: item.is_cpami_Fixedclimb
-        })
+        routeArray.value.push(item) 
       })
       $q.loading.hide()
     })
@@ -138,14 +141,6 @@ onMounted(() => {
   })
 
   $q.loading.hide()
-  //   const data = {
-  //     UnitsName: '太魯閣國家公園'
-  //   }
-  //   forest.getQueryMountainRouteWeb(data).then((res) => {
-  //     // if (res)
-  //     console.log(res)
-  //     $q.loading.hide()
-  //   })
 })
 </script>
 

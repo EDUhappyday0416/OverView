@@ -1,4 +1,8 @@
 <template>
+  <h4 class="pa-3">
+    申請表單
+  </h4>
+  <v-divider class="pa-3"></v-divider>
   <div class="mountainForm">
     <v-row no-gutters>
       <v-col class="pa-2" v-for="(item, index) in formData" :key="index" cols="12" sm="4">
