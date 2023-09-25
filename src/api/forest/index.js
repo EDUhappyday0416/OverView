@@ -34,7 +34,7 @@ export async function getMountainRouteWeb(name) {
     //     url:`http://127.0.0.1:8082/api/formUnitsMainSecondaryRoute/`name,
     //     method: "post",
     // })
-    return axios.post('http://127.0.0.1:8001/api/formUnitsMainSecondaryRoute/', name);
+    return axios.post('https://frances.sinami.com/api/formUnitsMainSecondaryRoute/', name);
 }
 
 
