@@ -76,6 +76,12 @@ const router = createRouter({
       name: 'MountainForm',
       component: () => import('../views/MountainForm.vue')
     },
+    //路線查詢與介紹
+    {
+      path: '/RouteWeb',
+      name: 'RouteWeb',
+      component: () => import('../views/RouteWeb.vue')
+    },
     
     // {
     //   path: '/:pathMatch(.*)*',

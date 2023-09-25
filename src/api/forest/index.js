@@ -25,9 +25,16 @@ export async function getForestData(Region,heigh,pagesize,type) {
 
 export async function getMountainData() {
     return axios({
-        // url: `http://127.0.0.1:8001/api/getMountainData/`,
         url:`https://frances.sinami.com/api/getMountainData/`
     })
+}
+
+export async function getMountainRouteWeb(name) {
+    // return axios({
+    //     url:`http://127.0.0.1:8082/api/formUnitsMainSecondaryRoute/`name,
+    //     method: "post",
+    // })
+    return axios.post('http://127.0.0.1:8082/api/formUnitsMainSecondaryRoute/', name);
 }
 
 

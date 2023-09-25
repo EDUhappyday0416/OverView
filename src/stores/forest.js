@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { getForestInfo  ,getForestData , getMountainData} from '../api/forest'
+import { getForestInfo  ,getForestData , getMountainData ,getMountainRouteWeb} from '../api/forest'
 export const useForestData = defineStore("forestData", {
     state: () => ({ 
         forestInfo: [],
@@ -35,6 +35,14 @@ export const useForestData = defineStore("forestData", {
                 this.MountainData = data;
                 return data
                 
+            } catch (error) {
+                return Promise.reject(error.message);
+            }
+        },
+        async getQueryMountainRouteWeb(name) {
+            try {
+                const { data } = await getMountainRouteWeb(name);
+                return data
             } catch (error) {
                 return Promise.reject(error.message);
             }

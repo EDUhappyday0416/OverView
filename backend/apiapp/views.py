@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseBadRequest
 from apiapp.models import ForestInfo
 from rest_framework.decorators import api_view
 from django.views.decorators.csrf import csrf_exempt
@@ -263,3 +263,43 @@ def getMountainData(request):
         return JsonResponse({'status': 'success', 'data': mountain_data, 'message': f"Successfully fetched data for page {i}"})
     except Exception as e:
         return JsonResponse({'status': 'error', 'message': str(e)})
+
+
+@api_view(['GET', 'POST'])
+def formUnitsMainSecondaryRoute(request):
+    try:
+        body_unicode = request.body.decode('utf-8')
+        body_data = json.loads(body_unicode)
+        units_name = body_data.get('UnitsName')
+        # Extracting RouteLV from request body
+        route_lv = body_data.get('RouteLV')
+    except (json.JSONDecodeError, TypeError):
+        return HttpResponseBadRequest("Invalid JSON data")
+
+    if not units_name:
+        return JsonResponse({'status': 'error', 'message': 'UnitsName parameter is required in POST body.'})
+
+    base_url = 'https://hike.taiwan.gov.tw/Api/RouteWeb/FormRouteInfoList'
+    headers = {'Accept': 'application/json'}
+    query = {
+        'ActionKey': '77e6a81bf8ea961b5a6b144416e2fbaa4fc5dc484f4785fbc526203b39cf6e10',
+        'Language': "1",
+    }
+
+    try:
+        response = requests.post(
+            base_url, headers=headers, data=query, timeout=5)
+        data = response.json()
+
+        filtered_data = [item for item in data["Datas"]
+                         if item['UnitsName'] == units_name and item.get('LV') == route_lv]
+        special_units = ['太魯閣國家公園', '玉山國家公園', '雪霸國家公園']
+
+        for item in filtered_data:
+            if item['UnitsName'] in special_units:
+                item['RouteLV'] = json.loads(
+                    item['RouteLV'].replace('\\\\', '\\'))
+
+        return JsonResponse({'status': 'success', 'data': filtered_data})
+    except KeyError as e:
+        return JsonResponse({'status': 'error', 'message': f"Missing key: {e}"})

@@ -15,10 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from apiapp.views import insertForestData,getMountainData
+from apiapp.views import insertForestData, getMountainData, formUnitsMainSecondaryRoute
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/insertForestData/', insertForestData, name='insertForestData'),
     path('api/getMountainData/', getMountainData, name='getMountainData'),
+    path('api/formUnitsMainSecondaryRoute/', formUnitsMainSecondaryRoute,
+         name='formUnitsMainSecondaryRoute'),
+
 ]
