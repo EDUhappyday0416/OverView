@@ -16,6 +16,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@fawmi/vue-google-maps": "0.9.67",
     "@fortawesome/fontawesome-free": "^6.4.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-brands-svg-icons": "^5.15.4",
@@ -36,7 +37,9 @@
     "pinia": "^2.1.4",
     "pinia-plugin-persist": "^1.0.0",
     "pinia-plugin-persistedstate": "^3.2.0",
+    "procedural-gl": "^1.0.19",
     "quasar": "^2.12.7",
+    "swiper": "^10.3.0",
     "vee-validate": "^4.11.6",
     "vue": "^3.3.4",
     "vue-chart-3": "^3.1.8",

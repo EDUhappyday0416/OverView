@@ -16,6 +16,13 @@ const router = createRouter({
       component: HomeView,
     },
     {
+      path: '/news',
+      name: 'news',
+      // component: News,
+      component: () => import('../views/News.vue'),
+
+    },
+    {
       path: '/login',
       name: 'login',
       component: () => import('../views/Login.vue'),
@@ -81,6 +88,11 @@ const router = createRouter({
       path: '/RouteWeb',
       name: 'RouteWeb',
       component: () => import('../views/RouteWeb.vue')
+    },
+    {
+      path: '/Map',
+      name: 'Map',
+      component: () => import('../views/Map.vue')
     },
     
     // {

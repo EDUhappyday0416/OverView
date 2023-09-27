@@ -1,9 +1,10 @@
 import { defineStore } from 'pinia'
-import { getForestInfo  ,getForestData , getMountainData ,getMountainRouteWeb} from '../api/forest'
+import { getForestInfo  ,getForestData , getMountainData ,getMountainRouteWeb ,getMonutainInfo,getMountainLocation} from '../api/forest'
 export const useForestData = defineStore("forestData", {
     state: () => ({ 
         forestInfo: [],
         queryInfo:[],
+        MountainLevel:[],
         MountainData:[]
     }),
     getters: {},
@@ -46,7 +47,27 @@ export const useForestData = defineStore("forestData", {
             } catch (error) {
                 return Promise.reject(error.message);
             }
-        }
+        },
 
+        async getQueryMountainLocation() {
+            try {
+                const { data } = await getMountainLocation();
+                return data
+            } catch (error) {
+                return Promise.reject(error.message);
+            }
+        },
+
+        async getMonutainInfoLevel() {
+            try {
+                const { data } = await getMonutainInfo();
+                this.MountainLevel = data;
+                return data
+            } catch (error) {
+                return Promise.reject(error.message);
+            }
+        },
+
+        
     }
 });

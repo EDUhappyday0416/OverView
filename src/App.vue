@@ -40,30 +40,20 @@ const isLogin = computed(() => {
   <v-layout>
     <v-app-bar color="teal-darken-4" v-if="isLogin !== '/login' && isLogin !== '/register'">
       <template v-slot:prepend>
-        <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
         <Header />
       </template>
-      <!-- <v-app-bar-title>Title</v-app-bar-title> -->
       <v-spacer></v-spacer>
     </v-app-bar>
-
     <v-main>
-      <v-container fluid style="max-width: 1250px">
-        <!-- <v-row dense>
-            <v-col
-              v-for="n in 8"
-              :key="n"
-              cols="12"
-            >
-              <v-card
-                :title="`Content ${n}`"
-                :subtitle="`Subtitle for Content ${n}`"
-                text="Lorem ipsum dolor sit amet consectetur, adipisicing elit.?"
-              ></v-card>
-            </v-col>
-          </v-row> -->
+      <!-- <template v-if="isLogin !== '/' && isLogin !== '/Mountain'"> -->
+      <v-container fluid class="pa-0">
         <RouterView />
       </v-container>
+      <!-- <template v-else>
+        <v-container fluid class="ma-0 pa-0">
+          <RouterView />
+        </v-container>
+      </template> -->
     </v-main>
   </v-layout>
 </template>

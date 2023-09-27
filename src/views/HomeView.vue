@@ -1,247 +1,145 @@
 <script setup>
-import { computed, ref, watch, onMounted } from 'vue'
-// import CustomInput from '../components/CustomInput.vue'
-import BuyTicketInfo from '../components/BuyTicketInfo.vue'
-import { useForestData } from '../stores/forest'
-import { useRouter } from 'vue-router'
-import { useDate } from 'vuetify/labs/date'
-// import Loading from '../components/Loading.vue'
-const init = () => {
-  console.log('init')
-}
+import { ref, onMounted, onUnmounted } from 'vue'
+import SwiperSlide from '../components/SwiperSlide.vue'
 
-const router = useRouter()
+const scale = ref(1.1)
 
-const date = useDate()
-// const eventStore = useEventData()
-const forest = useForestData()
-
-const forestData = computed(() => forest.forestInfo)
-
-const startTimeDate = ref(new Date()) // three month ago
-const endTimeDate = ref(new Date()) //today
-
-watch(
-  () => startTimeDate.value,
-  (newValue) => {
-    console.log(newValue)
-  }
-)
-const getThreeMoth = (date) => {
-  const year = date.getFullYear()
-  const month = date.getMonth()
-  const day = date.getDate()
-  const threeMoth = new Date(year, month - 3, day)
-  return threeMoth
-}
-// const getComputedDate = computed(() => {
-//   return formatDate(startTimeDate.value)
-// })
-
-// const showCalendar = (show) => {
-//   console.log(show)
-//   showDialog.value = show
-// }
-
-const formatDate = (date) => {
-  if (!date) return ''
-  const dateObj = new Date(date)
-  const year = dateObj.getFullYear()
-  const month = String(dateObj.getMonth() + 1).padStart(2, '0')
-  const day = String(dateObj.getDate()).padStart(2, '0')
-  return `${year}-${month}-${day}`
-}
 onMounted(() => {
-  const dateStart = formatDate(getThreeMoth(startTimeDate.value))
-  const dateEnd = formatDate(endTimeDate.value)
-  forest
-    .getForestInfoMethod(dateStart, dateEnd)
-    .then((res) => {
-      console.log(res)
-    })
-    .catch((error) => console.log(error))
+  window.addEventListener('scroll', handleScroll)
 })
 
-// const saveValue = () => {
-//   const dateStart = formatDate(startTimeDate.value)
-//   const dateEnd = formatDate(endTimeDate.value)
-//   forest.getForestInfoMethod(dateStart, dateEnd).then((res) => {
-//     console.log(res)
-//   }).catch((error) => console.log(error))
-// }
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
 
-const img = ref('')
+function handleScroll() {
+  let scrollY = window.scrollY
+  scale.value = 1.1 - scrollY * 0.001
+}
 </script>
 
+<!-- <template>
+  <div class="bg" :style="{ transform: `scale(${scale})` }"></div>
+</template> -->
 <template>
-  <!-- <v-parallax
-    max-height="500"
-    width="100%"
-    cover
-    height="300"
-    src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/%E7%8E%89%E5%B1%B1%E4%B8%BB%E5%B3%B0_02.jpg/2560px-%E7%8E%89%E5%B1%B1%E4%B8%BB%E5%B3%B0_02.jpg"
-  ></v-parallax> -->
-  <div class="banner_img">
-    <div class="content">
-      <div class="main"></div>
-    </div>
-    <div class="img_block">
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/%E7%8E%89%E5%B1%B1%E4%B8%BB%E5%B3%B0_02.jpg/2560px-%E7%8E%89%E5%B1%B1%E4%B8%BB%E5%B3%B0_02.jpg"
-        alt=""
-      />
-    </div>
-  </div>
-  <div class="all">
-    <!--<v-text-field v-model="search" label="關鍵字"></v-text-field>-->
-    <div class="all__bar">
-      <!-- <Loading @showLoading="showLoading" /> -->
-      <!-- <div class="all__content">
-        <div class="all__content__list">
-          <div class="all__content__list__item">
-            <div class="all__content__list__item__title" @click="router.push('/HikingRrail')">
-              <v-btn variant="tonal"> 自然步道 </v-btn>
-            </div>
-          </div>
-          <div class="all__content__list__item">
-            <div class="all__content__list__item__title" @click="router.push('/Mountain')">
-              <v-btn variant="tonal"> 百岳 </v-btn>
-            </div>
-          </div>
-          <div class="all__content__list__item">
-            <div class="all__content__list__item__title" @click="router.push('/MountainForm')">
-              <v-btn variant="tonal"> 揪團 </v-btn>
-            </div>
-          </div>
+  <div class="parallax-container">
+    <v-parallax
+      class="auto-zoom-in"
+      scale="1.1"
+      height="950"
+      src="https://templates.themekit.dev/alpins/media/hd-3.jpg"
+    >
+    </v-parallax>
+    <v-row class="overlay-text">
+      <v-col cols="12" sm="12" md="12" lg="6">
+        <div class="d-flex align-center text-white flex-column">
+          <h1 class="font-weight-black text-white text-h1 font-weight-thin mb-4 typing-text">
+            MountainMingle
+          </h1>
+          <div class="text-h5 floating-text">Preserving Nature, One Summit at a Time</div>
+          <div class="text-h5 floating-text">Mingling with Nature's Majestic Mountains</div>
+          <div class="text-h5 floating-text">Where Nature's Beauty Meets Community</div>
         </div>
-        <v-btn block color="indigo-darken-3" size="x-large" variant="flat"> 全部分類 </v-btn>
-      </div> -->
-      <div class="all__news">
-        <div class="buy__title">最新公告</div>
-        <BuyTicketInfo :data="forestData" />
-      </div>
-      <!--        <v-text-field-->
-      <!--          v-model="getComputedDate"-->
-      <!--          type="text"-->
-      <!--          label="選擇日期"-->
-      <!--          append-inner-icon="mdi-calendar"-->
-      <!--          :clearable="true"-->
-      <!--          density="compact"-->
-      <!--          variant="outlined"-->
-      <!--          @click:append-inner="showCalendar(true)"-->
-      <!--        >-->
-      <!--        </v-text-field>-->
-      <!-- <div class="buy">
-        <BaseDialog
-          @save="saveValue"
-          v-model:isVisible="showDialog"
-          v-model:dateOfBirth="dateOfBirth"
-        ></BaseDialog>
-        <BuyTicketInfo :data="forestData" />
-      </div> -->
-    </div>
+      </v-col>
+
+      <v-col cols="12" sm="12" md="12" lg="6">
+        <div>
+          <SwiperSlide />
+        </div>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.all {
+.parallax-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.overlay-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
-  justify-content: space-around;
-  flex-direction: column;
-  padding: 7px;
-  max-width: 1250px;
-  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+}
+.bg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: url('https://uploads-ssl.webflow.com/60d97739f23901a110ab17de/60d9789af09a5183a5bc66f8_hero-slide-background.jpg')
+    no-repeat center center;
+  background-size: cover;
+  background-color: red;
+  transform: scale(1.1);
+}
+.floating-text {
+  font-size: 2vw;
+  display: inline-block;
+  animation: floatAnimation 3s ease-in-out infinite;
+  /* 你可以自定义其它样式，例如颜色、字体等 */
+}
 
-  &__bar {
-    /*overflow: auto;*/
-    // flex: 1;
-    /*height: calc(100vh - 144px);*/
+@keyframes floatAnimation {
+  0% {
+    transform: translateY(0px);
   }
-  &__content {
-    // display: flex;
-    // justify-content: space-around;
-    background: white;
-    border-radius: 4px;
-    padding: 10px;
-
-    &__btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #f0f0f0;
-      border-radius: 4px;
-      margin: 8px 10px;
-      padding: 6px;
-    }
-
-    &__list {
-      display: flex;
-      justify-content: start;
-      padding: 4px 0;
-      margin: 4px 10px;
-
-      &__item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin: 0 8px;
-        padding: 4px;
-        cursor: pointer;
-        &__title {
-          font-size: 1rem;
-        }
-      }
-    }
+  50% {
+    transform: translateY(10px);
   }
-
-  &__news {
-    /*height: 15vh;*/
+  100% {
+    transform: translateY(0px);
   }
+}
 
-  .buy {
-    background: white;
-    border-radius: 28px;
-    &__title {
-      margin: 10px 0;
-      font-size: 1.5rem;
-    }
-    &__col {
-      background-color: #8ec5fc;
-      background-image: linear-gradient(62deg, #8ec5fc 0%, #e0c3fc 100%);
-      border-radius: 24px;
-      padding-bottom: 15px;
-      position: relative;
-      margin: 32px 0;
-      &__date {
-        position: absolute;
-        left: 85%;
-        background: aliceblue;
-        text-align: center;
-      }
+.typing-text {
+  // font-size: 24px;
+  font-size: 2vw;
+  white-space: nowrap;
+  overflow: hidden;
+  line-height: 1.5;
+  border-right: 3px solid black;
+  width: 12.5ch;
+  animation:
+    typing 4s steps(14, end),
+    blink 0.75s step-end infinite;
+}
 
-      &__title {
-        font-size: 1.5rem;
-      }
-      &__content {
-        display: flex;
-        justify-content: space-between;
-        padding: 2px 12px;
-        align-items: center;
-      }
-      &__description {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 242px;
-      }
-
-      img {
-        border-radius: 24px 24px 0px 0px;
-      }
-
-      &__img {
-      }
-    }
+@keyframes typing {
+  from {
+    width: 0;
   }
+  to {
+    width: 11.4ch;
+  }
+}
+
+@keyframes blink {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: black;
+  }
+}
+
+@keyframes autoZoomIn {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+.auto-zoom-in {
+  animation: autoZoomIn 5s forwards; /* 'forwards' 使動畫結束後保持在最後一帧的狀態 */
 }
 </style>

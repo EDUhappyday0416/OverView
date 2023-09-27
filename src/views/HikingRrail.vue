@@ -189,11 +189,13 @@ const getSearch = () => {
 }
 </script>
 <template>
-  <h4 class="pa-3">
-    自然步道
-  </h4>
-  <v-divider class="pa-3"></v-divider>
-  <div>
+  <v-parallax scale="1.1" height="400" src="https://templates.themekit.dev/alpins/media/hd-3.jpg">
+    <div class="d-flex flex-column fill-height justify-center align-center text-white">
+      <h1 class="text-h4 font-weight-thin mb-4">自然步道</h1>
+      <v-divider :thickness="3" class="ma-4 w-50"></v-divider>
+    </div>
+  </v-parallax>
+  <div style="max-width: 1250px" class="mx-auto">
     <div class="text-right">
       <v-dialog v-model="dialog">
         <template v-slot:activator="{ props }">

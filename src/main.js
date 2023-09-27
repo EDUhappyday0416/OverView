@@ -20,6 +20,7 @@ import { VDatePicker } from 'vuetify/labs/VDatePicker'
 // import { VuetifyDateAdapter } from 'vuetify/labs/date/adapters/vuetify'
 import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
 import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
+import VueGoogleMaps from '@fawmi/vue-google-maps'
 import {
 Quasar,
 Loading
@@ -81,6 +82,11 @@ app.use(createPinia())
 app.use(vuetify)
 app.use(Quasar, {
     plugins: {}, // import Quasar plugins and add here
+})
+app.use(VueGoogleMaps, {
+    load: {
+        key: 'AIzaSyBE1K72jSB6tbdToohLuaF3cv57OwvPgHM',
+    },
 })
 app.use(VueApexCharts); 
 app.mount('#app')
