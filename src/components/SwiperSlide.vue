@@ -15,12 +15,12 @@
     </swiper-slide>
     <swiper-slide>
       <div class="swiper-zoom-container">
-        <img src="	https://templates.themekit.dev/alpins/media/image-3.jpg" />
+        <img src="https://templates.themekit.dev/alpins/media/image-3.jpg" />
       </div>
     </swiper-slide>
     <swiper-slide>
       <div class="swiper-zoom-container">
-        <img src="	https://templates.themekit.dev/alpins/media/image-4.jpg" />
+        <img src="https://templates.themekit.dev/alpins/media/image-4.jpg" />
       </div>
     </swiper-slide>
     <swiper-slide>

@@ -33,12 +33,12 @@ function handleScroll() {
     <v-row class="overlay-text">
       <v-col cols="12" sm="12" md="12" lg="6">
         <div class="d-flex align-center text-white flex-column">
-          <h1 class="font-weight-black text-white text-h1 font-weight-thin mb-4 typing-text">
+          <h1 class="font-weight-black text-white font-weight-thin mb-4 typing-text">
             MountainMingle
           </h1>
-          <div class="text-h5 floating-text">Preserving Nature, One Summit at a Time</div>
-          <div class="text-h5 floating-text">Mingling with Nature's Majestic Mountains</div>
-          <div class="text-h5 floating-text">Where Nature's Beauty Meets Community</div>
+          <div class="floating-text">Preserving Nature, One Summit at a Time</div>
+          <div class="floating-text">Mingling with Nature's Majestic Mountains</div>
+          <div class="floating-text">Where Nature's Beauty Meets Community</div>
         </div>
       </v-col>
 
@@ -80,10 +80,9 @@ function handleScroll() {
   transform: scale(1.1);
 }
 .floating-text {
-  font-size: 2vw;
+  font-size: 1.5vw;
   display: inline-block;
   animation: floatAnimation 3s ease-in-out infinite;
-  /* 你可以自定义其它样式，例如颜色、字体等 */
 }
 
 @keyframes floatAnimation {
@@ -100,12 +99,12 @@ function handleScroll() {
 
 .typing-text {
   // font-size: 24px;
-  font-size: 2vw;
+  font-size: 5vw;
   white-space: nowrap;
   overflow: hidden;
   line-height: 1.5;
   border-right: 3px solid black;
-  width: 12.5ch;
+  width: 13ch;
   animation:
     typing 4s steps(14, end),
     blink 0.75s step-end infinite;
@@ -140,6 +139,6 @@ function handleScroll() {
 }
 
 .auto-zoom-in {
-  animation: autoZoomIn 5s forwards; /* 'forwards' 使動畫結束後保持在最後一帧的狀態 */
+  animation: autoZoomIn 5s forwards;
 }
 </style>

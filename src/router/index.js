@@ -103,29 +103,29 @@ const router = createRouter({
   ]
 })
 
-router.beforeEach((to, from, next) => {
-  NProgress.start();
+// router.beforeEach((to, from, next) => {
+//   NProgress.start();
 
-  const token = Cookies.get('token');
-  const whiteList = ['/login', '/register'];
+//   const token = Cookies.get('token');
+//   const whiteList = ['/login', '/register'];
 
-  if (token) { 
-    if (to.path === "/login") {
-      // next({ path: '/home' });
-      next({ path: '/' });
-      NProgress.done();
-    } else {
-      next();
-    }
-  } else {
-    if (whiteList.includes(to.path)) {
-      next();
-    } else {
-      next({ path: '/login' });
-      NProgress.done();
-    }
-  }
-});
+//   if (token) { 
+//     if (to.path === "/login") {
+//       // next({ path: '/home' });
+//       next({ path: '/' });
+//       NProgress.done();
+//     } else {
+//       next();
+//     }
+//   } else {
+//     if (whiteList.includes(to.path)) {
+//       next();
+//     } else {
+//       next({ path: '/login' });
+//       NProgress.done();
+//     }
+//   }
+// });
 // router.beforeEach((to, from, next) => {
 //   NProgress.start();
 //   const token = Cookies.get('token');
