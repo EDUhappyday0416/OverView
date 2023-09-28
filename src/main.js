@@ -23,7 +23,8 @@ import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loade
 import VueGoogleMaps from '@fawmi/vue-google-maps'
 import {
 Quasar,
-Loading
+Loading,
+Screen
 } from 'quasar'
 /* add icons to the library */
 library.add(faUserSecret)
@@ -73,6 +74,9 @@ const vuetify = createVuetify({
 })
 
 app.use(Quasar, {
+    config: {
+        screen
+    },
     plugins: {
         Loading
     },

@@ -40,11 +40,11 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const menu = ref(false)
 const urlItem = ref([
-  { title: '自然步道', url: '/HikingRrail' },
-  { title: '百岳', url: '/Mountain' },
-  { title: '揪團', url: '/MountainForm' },
+  { title: '探索步道', url: '/HikingRrail' },
+  { title: '台灣百岳', url: '/Mountain' },
+  { title: '山友揪團', url: '/MountainForm' },
   { title: '首頁', url: '/' },
-  { title: '路線查詢與介紹' , url:'/RouteWeb'}
+  { title: '路線指南' , url:'/RouteWeb'}
 
 ])
 
