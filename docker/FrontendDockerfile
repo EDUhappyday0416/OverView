@@ -18,7 +18,7 @@ WORKDIR /app
 # COPY package.json /app/
 COPY package.json ./
 RUN npm install
-
+RUN mkdir node_modules/.vite && chmod -R 777 node_modules/.vite
 # Copy the rest of your application
 COPY . .
 
