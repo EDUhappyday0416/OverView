@@ -20,7 +20,10 @@ export default defineConfig({
   external: ['vue'],
   server: {
     host: '0.0.0.0',
-    allowNetworkAccess: true
+    allowNetworkAccess: true,
+    proxy: {
+      '/api': 'http://localhost:8001',
+    },
   },
   resolve: {
     // alias: {
