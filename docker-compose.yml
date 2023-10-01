@@ -1,21 +1,14 @@
-# version: '3.3'
 version: "3"
 services:
-  vue-app:
+  vue:
     build:
       context: .
-      dockerfile: docker/FrontendDockerfile
-    container_name: django-vue-frontend
+      dockerfile: Dockerfile  # 确保此 Dockerfile 存在于 vue_frontend/ 目录中
+    container_name: vue-frontend
     volumes:
       - .:/app
-      - /app/node_modules
-    # ports:
-    #   - "8082:8080"
     ports:
-        - "8080:8080"
-    depends_on:
-      - django
-    networks:
-      - internal
-    environment:
-      - NODE_ENV=development
+      - "8082:8080"
+networks:
+  internal:
+    driver: bridge
