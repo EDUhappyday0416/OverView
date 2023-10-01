@@ -18,7 +18,7 @@ services:
   vue:
     build:
       context: .
-      dockerfile: docker/Dockerfile
+      dockerfile: docker/FrontendDockerfile
     container_name: vue-frontend
     ports:
       - "8080:8080"
