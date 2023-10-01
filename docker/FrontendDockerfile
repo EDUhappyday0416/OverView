@@ -1,25 +1,25 @@
-# FROM node:16.16.0
-# COPY . /app
-# WORKDIR /app
-# EXPOSE 8000
-
-# RUN npm install --location=global npm@8
-
-# RUN npm install
-
-# Assuming you are using a Node-based image
 FROM node:16.16.0
-
-# Set working directory
+COPY . /app
 WORKDIR /app
+EXPOSE 8000
 
-# Copy package.json and install dependencies
-COPY package.json .
+RUN npm install --location=global npm@8
+
 RUN npm install
 
-# Copy the rest of your application
-COPY . .
+# # Assuming you are using a Node-based image
+# FROM node:16.16.0
 
-# Whatever other commands you need for your application
-CMD ["npm", "run", "serve"]
+# # Set working directory
+# WORKDIR /app
+
+# # Copy package.json and install dependencies
+# COPY package.json .
+# RUN npm install
+
+# # Copy the rest of your application
+# COPY . .
+
+# # Whatever other commands you need for your application
+# CMD ["npm", "run", "serve"]
 
