@@ -15,7 +15,9 @@
 
 version: "3"
 services:
-  vue:
+  # vue:
+  vue-frontend:
+    image: vue3_project_0804-vue
     build:
       context: .
       dockerfile: docker/FrontendDockerfile
