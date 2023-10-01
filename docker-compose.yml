@@ -3,7 +3,7 @@ services:
   vue:
     build:
       context: .
-      dockerfile: Dockerfile  # 确保此 Dockerfile 存在于 vue_frontend/ 目录中
+      dockerfile: docker/FrontendDockerfile  # 确保此 Dockerfile 存在于 vue_frontend/ 目录中
     container_name: vue-frontend
     volumes:
       - .:/app
