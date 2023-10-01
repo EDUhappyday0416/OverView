@@ -5,9 +5,18 @@ export const useForestData = defineStore("forestData", {
         forestInfo: [],
         queryInfo:[],
         MountainLevel:[],
-        MountainData:[]
+        MountainData:[],
+        selectedGrades: []
     }),
-    getters: {},
+    getters: {
+        filteredMountains(state) {
+            if (!state.selectedGrades.length) {
+                return state.MountainLevel.data;
+            } else {
+                return state.MountainLevel.data.filter(mountain => state.selectedGrades.includes(mountain.Grade));
+            }
+        }
+    },
     actions: {
         async getForestInfoMethod(startDate,endDate) {
             try {
@@ -67,7 +76,16 @@ export const useForestData = defineStore("forestData", {
                 return Promise.reject(error.message);
             }
         },
-
+        selectGrade(grade) {
+            if (!this.selectedGrades.includes(grade)) {
+                this.selectedGrades.push(grade);
+            } else {
+                const index = this.selectedGrades.indexOf(grade);
+                if (index > -1) {
+                    this.selectedGrades.splice(index, 1);
+                }
+            }
+        }
         
     }
 });

@@ -1,61 +1,63 @@
 <template>
-  <!-- <button @click="fetchData">取得資料</button> -->
-  <h4 class="pa-3">
-    路線查詢與介紹
-  </h4>
-  <v-divider class="pa-3"></v-divider>
-  <div class="d-flex">
-    <div v-for="(item, i) in organBtn" :key="i" class="ma-2" @click="getActive(item, i)">
-      <v-btn :active="item.active" variant="outlined"> {{ item.title }}</v-btn>
+  <v-parallax scale="1.1" height="400" src="https://templates.themekit.dev/alpins/media/hd-3.jpg">
+    <div class="d-flex flex-column fill-height justify-center align-center text-white">
+      <h1 class="text-h4 font-weight-thin mb-4">路線查詢與介紹</h1>
+      <v-divider :thickness="3" class="ma-4 w-50"></v-divider>
     </div>
-  </div>
-  <!-- <v-btn v-for="(item, i) in routeArray" variant="outlined" :key="i" @click="getInfo(item)">
-    {{ item.Name }}</v-btn
-  > -->
-  <v-select
-    label="路線"
-    :items="routeArray"
-    :item-props="itemProps"
-    v-model="selectedRouter"
-    @update:modelValue="getInfo(selectedRouter)"
-  ></v-select>
-  <div v-if="selectedItemIndex !== null">
-    {{ selectedItemIndex.UnitsName }}
-    <div class="q-pa-md">
-      <q-markup-table>
-        <thead>
-          <tr>
-            <th class="text-center">機關</th>
-            <th class="text-center">登山主路線</th>
-            <th class="text-center">路線名稱</th>
-            <th class="text-center">入園證</th>
-            <th class="text-center">林務局 自然保護留區</th>
-            <th class="text-center">林務局 住宿</th>
-            <th class="text-center">警政署 入山證</th>
-            <th class="text-center">登山路線 難度等級</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="text-center">{{ selectedItemIndex.UnitsName }}</td>
-            <td class="text-center">{{ selectedItemIndex.Name }}</td>
-            <td class="text-center">{{ selectedItemIndex.MainName }}</td>
-            <td class="text-center">{{ selectedItemIndex.is_cpami_Fixedclimb == 1 ? "是" : "-"}}</td>
-            <td class="text-center">{{ selectedItemIndex.is_forest_area_list  == 1 ? "是" : "-"}}</td>
-            <td class="text-center">{{ selectedItemIndex.is_forest_camp  == 1 ? "是" : "-"}}</td>
-            <td class="text-center">{{ selectedItemIndex.is_forest_frail  == 1 ? "是" : "-"}}</td>
-            <td class="text-center">
-              <v-chip
-                class="ma-2"
-                color="red"
-                text-color="white"
-              >
-              {{ selectedItemIndex.RouteLV.LV  }}
-              </v-chip>
-            </td>
-          </tr>
-        </tbody>
-      </q-markup-table>
+  </v-parallax>
+  <div style="max-width: 1250px" class="mx-auto">
+    <v-row no-gutters class="d-flex justify-center pa-7">
+      <v-col cols="12" sm="12" md="12">
+        <div v-for="(item, i) in organBtn" :key="i" class="ma-2" @click="getActive(item, i)">
+          <v-btn :active="item.active" variant="outlined"> {{ item.title }}</v-btn>
+        </div>
+      </v-col>
+    </v-row>
+    <v-select
+      label="路線"
+      :items="routeArray"
+      :item-props="itemProps"
+      v-model="selectedRouter"
+      @update:modelValue="getInfo(selectedRouter)"
+    ></v-select>
+    <div v-if="selectedItemIndex !== null">
+      {{ selectedItemIndex.UnitsName }}
+      <div class="q-pa-md">
+        <q-markup-table>
+          <thead>
+            <tr>
+              <th class="text-center">機關</th>
+              <th class="text-center">登山主路線</th>
+              <th class="text-center">路線名稱</th>
+              <th class="text-center">入園證</th>
+              <th class="text-center">林務局 自然保護留區</th>
+              <th class="text-center">林務局 住宿</th>
+              <th class="text-center">警政署 入山證</th>
+              <th class="text-center">登山路線 難度等級</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-center">{{ selectedItemIndex.UnitsName }}</td>
+              <td class="text-center">{{ selectedItemIndex.Name }}</td>
+              <td class="text-center">{{ selectedItemIndex.MainName }}</td>
+              <td class="text-center">
+                {{ selectedItemIndex.is_cpami_Fixedclimb == 1 ? '是' : '-' }}
+              </td>
+              <td class="text-center">
+                {{ selectedItemIndex.is_forest_area_list == 1 ? '是' : '-' }}
+              </td>
+              <td class="text-center">{{ selectedItemIndex.is_forest_camp == 1 ? '是' : '-' }}</td>
+              <td class="text-center">{{ selectedItemIndex.is_forest_frail == 1 ? '是' : '-' }}</td>
+              <td class="text-center">
+                <v-chip class="ma-2" color="red" text-color="white">
+                  {{ selectedItemIndex.RouteLV.LV }}
+                </v-chip>
+              </td>
+            </tr>
+          </tbody>
+        </q-markup-table>
+      </div>
     </div>
   </div>
 </template>
@@ -78,12 +80,12 @@ const routeArray = ref([])
 const selectedRouter = ref(null)
 const selectedItemIndex = ref(null)
 const getActive = (item, i) => {
-  console.log(item , i)
+  console.log(item, i)
   item.active = true
   if (item.active) {
     item.active = !item.active
   }
-  
+
   // if (item.active) {
   //   item.active = false
   // } else {
@@ -101,7 +103,6 @@ const getInfo = (item) => {
   })
   selectedItemIndex.value = item
   $q.loading.hide()
-
 }
 const itemProps = (item) => {
   return {
@@ -124,7 +125,7 @@ const getItem = (item) => {
       $q.loading.hide()
       const arr = res.data
       arr.forEach((item) => {
-        routeArray.value.push(item) 
+        routeArray.value.push(item)
       })
       $q.loading.hide()
     })

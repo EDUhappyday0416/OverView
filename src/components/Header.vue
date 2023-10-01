@@ -41,11 +41,12 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const menu = ref(false)
 const urlItem = ref([
+  { title: '首頁', url: '/' },
   { title: '探索步道', url: '/HikingRrail' },
   { title: '台灣百岳', url: '/Mountain' },
   { title: '山友揪團', url: '/MountainForm' },
-  { title: '首頁', url: '/' },
-  { title: '路線指南', url: '/RouteWeb' }
+  { title: '路線指南', url: '/RouteWeb' },
+  { title: '地圖', url: '/Map' }
 ])
 
 const goPath = (item) => {

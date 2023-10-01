@@ -42,11 +42,11 @@ topic:
 
 # README
 
-![專案封面圖](https://fakeimg.pl/500/)
+<!-- ![專案封面圖](https://fakeimg.pl/500/) -->
 
 <!-- > 此專案是一份 README 的撰寫範本，主要是方便所有人可以快速撰寫 README，讓大家可以更有方向的去寫出 README。 -->
 
-- [線上觀看連結](https://eduhappyday0416.github.io/vue3_project_0804/#/)
+- [線上觀看連結](https://frances.sinami.com/#/)
 
 ## 功能
 
@@ -73,7 +73,7 @@ topic:
 - [ ] 登山安全教育資料
 - [ ] 登山活動組織與揪團
 - [ ] 山區緊急聯絡方式整理
-...
+      ...
 
 ## 畫面
 
@@ -87,8 +87,6 @@ topic:
 
 > 以下將會引導你如何安裝此專案到你的電腦上。
 
-
-
 Node.js 版本建議為：`16.15.0` 以上...
 
 ### 取得專案
@@ -100,7 +98,7 @@ git clone git@github.com:EDUhappyday0416/vue3_project_0804.git
 ### 移動到專案內
 
 ```bash
-cd README-Example-Template
+cd vue3_project_0804
 ```
 
 ### 安裝套件
@@ -109,11 +107,10 @@ cd README-Example-Template
 npm i
 ```
 
-
 ### 運行專案
 
 ```bash
-npm run serve
+npm run dev
 ```
 
 ### 開啟專案
@@ -123,7 +120,8 @@ npm run serve
 ```bash
 待補
 ```
-<!-- 
+
+<!--
 ## 環境變數說明
 
 ```env
@@ -133,18 +131,19 @@ COUSTOMPATH= # 自訂變數
 ``` -->
 
 ## 資料夾說明(待補)
+
 - src
   - views - 畫面放置處
   <!-- - controllers - 控制器放置處 -->
   - components - 組件
   <!-- - modules - 模組放置處 -->
-  - assets - 靜態資源放置處
-    - scss - scss 檔案放置處
-    - images - 圖片放置處
-...
+  - assets - 靜態資源放置處 - scss - scss 檔案放置處 - images - 圖片放置處
+    ...
 
 ## 專案技術(待補)
+
 //前端
+
 - Node.js v16.15.0
 - Vue v3.2.20
 - Vite v4.4.6
@@ -152,13 +151,14 @@ COUSTOMPATH= # 自訂變數
 - pinia v5.1.3
 
 //後端
-...
 
-<!-- ## 第三方服務
-
-- Algolia
-- Google Analytics
-... -->
+- Django
+- Django Rest Framework
+- PostgreSQL
+- Django CORS Headers
+- Pandas
+- Requests
+- BeautifulSoup
 
 ## CI/CD 說明
 
@@ -169,7 +169,7 @@ COUSTOMPATH= # 自訂變數
 - 編譯程式碼
 - 執行 ESLint 掃描
 - 執行測試
-...
+  ...
 
 當專案 merge 到 main 時會自動執行以下動作：
 
@@ -179,7 +179,7 @@ COUSTOMPATH= # 自訂變數
 - 執行 ESLint 掃描
 - 執行測試
 - 部署到 Github Pages
-...
+  ...
 
 ## 聯絡作者
 
@@ -190,5 +190,4 @@ COUSTOMPATH= # 自訂變數
 - [部落格](https://israynotarray.com/)
 - [Facebook](https://www.facebook.com/israynotarray)
 - [Instagram](https://www.instagram.com/isray_notarray/)
-...
-
+  ...

@@ -94,6 +94,11 @@ const router = createRouter({
       name: 'Map',
       component: () => import('../views/Map.vue')
     },
+    {
+      path: '/MountainList',
+      name: 'MountainList',
+      component: () => import('../views/MountainList.vue')
+    },
     
     // {
     //   path: '/:pathMatch(.*)*',

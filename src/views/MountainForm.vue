@@ -1,11 +1,17 @@
 <template>
-  <h4 class="pa-3">
+  <!-- <h4 class="pa-3">
     申請表單
-  </h4>
+  </h4> -->
+  <v-parallax scale="1.1" height="400" src="https://templates.themekit.dev/alpins/media/hd-3.jpg">
+    <div class="d-flex flex-column fill-height justify-center align-center text-white">
+      <h1 class="text-h4 font-weight-thin mb-4">申請表單</h1>
+      <v-divider :thickness="3" class="ma-4 w-50"></v-divider>
+    </div>
+  </v-parallax>
   <v-divider class="pa-3"></v-divider>
   <div class="mountainForm">
-    <v-row no-gutters>
-      <v-col class="pa-2" v-for="(item, index) in formData" :key="index" cols="12" sm="4">
+    <v-row no-gutters class="d-flex justify-start">
+      <v-col v-for="(item, index) in formData" :key="index" cols="12" sm="12" md="6" class="pa-4">
         <MountainFormText
           :item="item"
           :label="item.label"
@@ -157,33 +163,6 @@ const formData = ref([
     Placeholder: '北大武（單攻）',
     deleteItem: false
   },
-  //   {
-  //     label: 'email',
-  //     type: 'text',
-  //     field: false,
-  //     key: '',
-  //     validate: 'text',
-  //     name: 'email',
-  //     value: ''
-  //   },
-  //   {
-  //     label: '所在縣市',
-  //     type: 'checkbox',
-  //     field: false,
-  //     key: '',
-  //     validate: 'text',
-  //     name: 'incity',
-  //     value: ''
-  //   },
-  //   {
-  //     label: '起登地點',
-  //     type: 'select',
-  //     field: false,
-  //     key: '',
-  //     validate: 'text',
-  //     name: 'start',
-  //     value: ''
-  //   },
   {
     label: '日期',
     type: 'text',
@@ -254,7 +233,7 @@ const formData = ref([
 </script>
 <style lang="scss" scoped>
 .mountainForm {
-  width: 100%;
+  width: 90%;
   margin: 0 auto;
 }
 </style>
