@@ -22,8 +22,10 @@ services:
       context: .
       dockerfile: docker/FrontendDockerfile
     container_name: vue-frontend
+    # ports:
+    #   - "8080:8080"
     ports:
-      - "8080:8080"
+      - "8080:4173"
     volumes:
       - .:/app
       - /app/node_modules

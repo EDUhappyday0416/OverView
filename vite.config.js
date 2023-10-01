@@ -19,7 +19,8 @@ export default defineConfig({
   ],
   external: ['vue'],
   server: {
-    host: '0.0.0.0'
+    host: '0.0.0.0',
+    allowNetworkAccess: true
   },
   resolve: {
     // alias: {
