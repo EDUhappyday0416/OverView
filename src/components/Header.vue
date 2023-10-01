@@ -22,6 +22,7 @@
   <v-menu v-model="menu" :close-on-content-click="false" location="end">
     <template v-slot:activator="{ props }">
       <v-app-bar-nav-icon v-bind="props"></v-app-bar-nav-icon>
+      MountainMingle
     </template>
 
     <v-card min-width="300">
@@ -44,8 +45,7 @@ const urlItem = ref([
   { title: '台灣百岳', url: '/Mountain' },
   { title: '山友揪團', url: '/MountainForm' },
   { title: '首頁', url: '/' },
-  { title: '路線指南' , url:'/RouteWeb'}
-
+  { title: '路線指南', url: '/RouteWeb' }
 ])
 
 const goPath = (item) => {

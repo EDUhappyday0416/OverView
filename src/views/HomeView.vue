@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted , computed} from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useQuasar } from 'quasar'
 import SwiperSlide from '../components/SwiperSlide.vue'
 const $q = useQuasar()
@@ -19,11 +19,8 @@ function handleScroll() {
   scale.value = 1.1 - scrollY * 0.001
 }
 
-
 const buttonColor = computed(() => {
-  return $q.screen.lt.md
-    ? 'primary'
-    : 'secondary'
+  return $q.screen.lt.md ? 'primary' : 'secondary'
 })
 </script>
 
@@ -137,7 +134,7 @@ const buttonColor = computed(() => {
           <q-item-label>Item with caption</q-item-label>
         </q-item-section>
       </q-item>
-      
+
       <q-item clickable v-ripple>
         <q-item-section>
           <q-item-label overline>OVERLINE</q-item-label>
@@ -149,7 +146,6 @@ const buttonColor = computed(() => {
 </template>
 
 <style lang="scss" scoped>
-
 .parallax-container {
   position: relative;
   overflow: hidden;
@@ -202,7 +198,7 @@ const buttonColor = computed(() => {
   overflow: hidden;
   line-height: 1.5;
   border-right: 3px solid black;
-  width: 13ch;
+  // width: 13ch;
   animation:
     typing 4s steps(14, end),
     blink 0.75s step-end infinite;

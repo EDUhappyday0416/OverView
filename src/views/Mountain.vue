@@ -31,11 +31,12 @@
     <v-row no-gutters class="d-flex justify-center">
       <v-col class="ma-2" v-for="(item, i) in MountainLevel" :key="i" cols="12" sm="12" md="3">
         <div>
-          <v-card class="mx-auto" max-width="400">
+          <v-card class="mx-auto" min-height="350">
             <v-img
               :src="item.ImageURL"
               gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
               class="bg-grey-lighten-2 align-end text-white"
+              min-height="100"
             >
               <!-- <div class="d-flex main_table">
                 <div></div>
