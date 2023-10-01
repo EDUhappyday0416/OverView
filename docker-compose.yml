@@ -29,4 +29,5 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
+      - /var/www/vue3_project_0804/dist:/app/dist
 
