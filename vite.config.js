@@ -22,7 +22,7 @@ export default defineConfig({
     host: '0.0.0.0',
     allowNetworkAccess: true,
     proxy: {
-      '/api': 'http://localhost:8001',
+      '/api': 'http://frances.sinami.com/',
     },
   },
   resolve: {
