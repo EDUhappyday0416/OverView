@@ -1,14 +1,27 @@
+# version: "3"
+# services:
+#   vue:
+#     build:
+#       context: .
+#       dockerfile: docker/FrontendDockerfile  # 确保此 Dockerfile 存在于 vue_frontend/ 目录中
+#     container_name: vue-frontend
+#     volumes:
+#       - .:/app
+#     ports:
+#       - "8082:8080"
+# networks:
+#   internal:
+#     driver: bridge
+
 version: "3"
 services:
   vue:
     build:
       context: .
-      dockerfile: docker/FrontendDockerfile  # 确保此 Dockerfile 存在于 vue_frontend/ 目录中
+      dockerfile: docker/Dockerfile
     container_name: vue-frontend
+    ports:
+      - "8080:8080"
     volumes:
       - .:/app
-    ports:
-      - "8082:8080"
-networks:
-  internal:
-    driver: bridge
+
