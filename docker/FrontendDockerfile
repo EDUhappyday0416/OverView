@@ -20,10 +20,12 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
 RUN mkdir node_modules/.vite && chmod -R 777 node_modules/.vite
-COPY dist ./dist
-
-# Copy the rest of your application
+# COPY dist ./dist
 COPY . .
+
+RUN rm -rf ./dist
+COPY dist ./dist
+# Copy the rest of your application
 
 # Whatever other commands you need for your application
 CMD ["npm", "run", "serve"]
