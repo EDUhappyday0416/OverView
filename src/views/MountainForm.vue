@@ -92,7 +92,8 @@ const prompt = ref(false)
 const field1 = ref('')
 const inputPromptText = ref('')
 const sendData = ref(false)
-
+import { useForestData } from '../stores/forest'
+const forest = useForestData()
 const items = ref(['Item 1', 'Item 2', 'Item 3', 'Item 4'])
 // const isValid = computed(() => modelValue.value.length >= 1)
 // const { handleSubmit } = useForm({
@@ -145,7 +146,21 @@ const deleteItem = (index) => {
 const onSubmit = () => {
   console.log(formData.value)
   sendData.value = true
-
+  const data = {
+    UnitsName: '33333'
+  }
+  forest
+    .postMountainTripList(formData.value)
+    .then((res) => {
+      // routeArray.value = []
+      // routeArray.value.push(...res.data)
+      console.log(res)
+      // $q.loading.hide()
+    })
+    .catch((error) => {
+      // $q.loading.hide()
+      console.log(error)
+    })
   //console.log(modelValue.value)
 }
 

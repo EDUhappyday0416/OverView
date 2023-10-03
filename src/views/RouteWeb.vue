@@ -5,13 +5,19 @@
       <v-divider :thickness="3" class="ma-4 w-50"></v-divider>
     </div>
   </v-parallax>
-  <div style="max-width: 1250px" class="mx-auto">
-    <v-row no-gutters class="d-flex justify-center pa-7">
-      <v-col cols="12" sm="12" md="12">
+  <div style="max-width: 1250px" class="mx-auto pa-5">
+    <v-row no-gutters class="d-flex justify-start">
+      <!-- <v-col cols="12" sm="12" md="12">
         <div v-for="(item, i) in organBtn" :key="i" class="ma-2" @click="getActive(item, i)">
           <v-btn :active="item.active" variant="outlined"> {{ item.title }}</v-btn>
         </div>
-      </v-col>
+      </v-col> -->
+
+      <div v-for="(item, i) in organBtn" :key="i" @click="getActive(item, i)">
+        <v-col cols="12" sm="12" md="12">
+          <v-btn :color="item.active ? 'primary' : ''" outlined> {{ item.title }}</v-btn>
+        </v-col>
+      </div>
     </v-row>
     <v-select
       label="路線"
@@ -47,8 +53,12 @@
               <td class="text-center">
                 {{ selectedItemIndex.is_forest_area_list == 1 ? '是' : '-' }}
               </td>
-              <td class="text-center">{{ selectedItemIndex.is_forest_camp == 1 ? '是' : '-' }}</td>
-              <td class="text-center">{{ selectedItemIndex.is_forest_frail == 1 ? '是' : '-' }}</td>
+              <td class="text-center">
+                {{ selectedItemIndex.is_forest_camp == 1 ? '是' : '-' }}
+              </td>
+              <td class="text-center">
+                {{ selectedItemIndex.is_forest_frail == 1 ? '是' : '-' }}
+              </td>
               <td class="text-center">
                 <v-chip class="ma-2" color="red" text-color="white">
                   {{ selectedItemIndex.RouteLV.LV }}
@@ -81,16 +91,8 @@ const selectedRouter = ref(null)
 const selectedItemIndex = ref(null)
 const getActive = (item, i) => {
   console.log(item, i)
+  organBtn.value.forEach((btnItem) => (btnItem.active = false))
   item.active = true
-  if (item.active) {
-    item.active = !item.active
-  }
-
-  // if (item.active) {
-  //   item.active = false
-  // } else {
-  //   item.active = true
-  // }
   getItem(item)
 }
 const showRouteLV = ref(false)
@@ -114,19 +116,16 @@ const getItem = (item) => {
     delay: 400,
     message: '請稍等...'
   })
+
   const data = {
-    // UnitsName: '太魯閣國家公園'
     UnitsName: item.title
   }
+
   forest
     .getQueryMountainRouteWeb(data)
     .then((res) => {
-      routeArray.value = [] //清空資料
-      $q.loading.hide()
-      const arr = res.data
-      arr.forEach((item) => {
-        routeArray.value.push(item)
-      })
+      routeArray.value = []
+      routeArray.value.push(...res.data)
       $q.loading.hide()
     })
     .catch((error) => {

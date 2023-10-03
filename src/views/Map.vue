@@ -5,105 +5,116 @@
     :items="data"
     item-title="name"
     item-value="coordinates"
+    multiple
+    persistent-hint
   ></v-select>
-  經緯度：{{ markers }}
-  <!-- <GMapMap :center="center" :zoom="15" map-type-id="terrain" style="width: 100%; height: 600px">
-    <GMapCluster>
-      <GMapMarker
-        :key="index"
-        v-for="(m, index) in markers"
-        :position="m.position"
-        :clickable="true"
-        :draggable="true"
-        @click="center = m.position"
-      />
-    </GMapCluster>
-  </GMapMap> -->
-
-  <!-- <ProceduralMap /> -->
-  <div style="height:600px; width:800px">
-    <l-map @ready="onLeafletReady" ref="map" v-model:zoom="zoom" v-model:center="center" :useGlobalLeaflet="false">
-      <l-tile-layer url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
-                    :attribution="attribution"></l-tile-layer>
-                    <l-marker :lat-lng="[47.7515953048815, 8.757179159967961]" ></l-marker>
-    </l-map>
-  </div>
+  <div id="map"></div>
 </template>
+
 <script setup>
-// https://docs.stadiamaps.com/tutorials/getting-started-with-vue-leaflet/
-// import ProceduralMap from '../components/ProceduralMap.vue'
-import "leaflet/dist/leaflet.css"
-import { LMap, LTileLayer , LMarker} from "@vue-leaflet/vue-leaflet";
+import L from 'leaflet'
+import 'leaflet/dist/leaflet.css'
 import { ref, onMounted } from 'vue'
 import { useForestData } from '../stores/forest'
-const zoom = ref(13)
-const center = ref([23.470002, 120.957274])
 import { useQuasar } from 'quasar'
-import { indexOf } from 'lodash-es'
 const forest = useForestData()
 const $q = useQuasar()
-const url = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-const attribution = '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
-
-
-const onLeafletReady = async  () => {
-  // await this.$nextTick();
-  leafletObject.value = this.$refs.map.leafletObject;
-  leafletReady.value = true;
-}
-const leafletObject = ref(null)
-const leafletReady = ref(true)
-const markers = ref([
-  {
-    position: {
-      lat: 23.470002,
-      lng: 120.957274
-    }
-  }
-])
-
-const markerLatLng = ref([47.313220, -1.319482])
 const data = ref([])
-// const center = ref({ lat: 23.470002, lng: 120.957274 })
+let map
+let currentMarkers = []
 
 onMounted(() => {
-  $q.loading.show({
-    delay: 400,
-    message: '請稍等...'
-  })
+  forest
+    .getQueryMountainLocation()
+    .then((res) => {
+      if (res.status) {
+        data.value = res.data
+      }
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  map = L.map('map').setView([51.505, -0.09], 16)
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 100,
+    attribution: '© OpenStreetMap'
+  }).addTo(map)
+
+  const markerPosition = [23.465766, 120.448608]
+  const marker = L.marker(markerPosition, {
+    draggable: true
+  }).addTo(map)
+
+  map.setView(markerPosition, 13)
+
+  map.invalidateSize()
+
   $q.loading.hide()
 })
 
-forest.getQueryMountainLocation().then((res) => {
-  console.log(res)
-  if (res.status) {
-    //markers.value = res.data
-    data.value = res.data
-    console.log(res.data)
-  }
-})
+const DJANGO_PROXY_URL = 'https://127.0.0.1:8000/getRoute/' // 假設你的Django伺服器在這個URL上運行
+const ORS_URL = 'https://api.openrouteservice.org/v2/directions/foot-hiking'
+// 其他代碼...
 
-function onValueChange(v) {
-  const str = v
-  const arr = str.split(',')
-  console.log(arr)
-  //   markers.value = arr
+async function onValueChange(coordinatesArray) {
+  // 清除先前添加的标记
+  currentMarkers.forEach((marker) => marker.remove())
+  currentMarkers = []
 
-  markers.value = [
-    {
-      position: {
-        lat: parseFloat(arr[0]),
-        lng: parseFloat(arr[1])
-      }
+  let linePoints = []
+
+  coordinatesArray.forEach((v) => {
+    const arr = v.split(',')
+    if (arr.length === 2) {
+      const lat = parseFloat(arr[0].trim())
+      const lng = parseFloat(arr[1].trim())
+      linePoints.push([lat, lng]) // 注意这里的顺序，首先是纬度，然后是经度
     }
-  ]
+  })
 
-  markerLatLng.value[0] = parseFloat(arr[0])
-  markerLatLng.value[1] = parseFloat(arr[1])
-  center.value = {
-    lat: parseFloat(arr[0]),
-    lng: parseFloat(arr[1])
+  if (linePoints.length > 1) {
+    try {
+      const route = await getRoute(linePoints)
+      const wholeDecodedPath = decodePolyline(route.geometry) // 解码整体路径
+      route.routes[0].segments.forEach((segment) => {
+        segment.steps.forEach((step) => {
+          const stepPath = wholeDecodedPath.slice(step.way_points[0], step.way_points[1] + 1)
+          L.polyline(stepPath).addTo(map)
+        })
+      })
+    } catch (error) {
+      console.error('Error fetching the route:', error)
+    }
   }
-  console.log(markers.value)
+}
+
+// 其他代碼...
+
+async function getRoute(linePoints) {
+  const response = await fetch(ORS_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer 5b3ce3597851110001cf62488afe79f82c944427add4f46903b9087e' // 用你的API密鑰替換'YOUR_API_KEY'
+    },
+    body: JSON.stringify({
+      coordinates: linePoints
+    })
+  })
+
+  if (!response.ok) {
+    throw new Error('Network response was not ok')
+  }
+
+  const data = await response.json()
+  return data
 }
 </script>
+
+<style scoped>
+#map {
+  width: 80%;
+  margin: 0 auto;
+  height: 80vh;
+}
+</style>

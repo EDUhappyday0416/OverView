@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { getForestInfo  ,getForestData , getMountainData ,getMountainRouteWeb ,getMonutainInfo,getMountainLocation} from '../api/forest'
+import { getForestInfo  ,getForestData , getMountainData ,getMountainRouteWeb ,getMonutainInfo,getMountainLocation ,mountainTripList} from '../api/forest'
 export const useForestData = defineStore("forestData", {
     state: () => ({ 
         forestInfo: [],
@@ -85,7 +85,17 @@ export const useForestData = defineStore("forestData", {
                     this.selectedGrades.splice(index, 1);
                 }
             }
-        }
+        },
+
+        async postMountainTripList(data) {
+            try {
+                const { data } = await mountainTripList(data);
+                return data
+            } catch (error) {
+                return Promise.reject(error.message);
+            }
+        },
+
         
     }
 });
