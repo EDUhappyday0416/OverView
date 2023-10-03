@@ -33,7 +33,7 @@ const buttonColor = computed(() => {
     <v-parallax
       class="auto-zoom-in align-center fill-height"
       scale="1"
-      height="950"
+      height="100%"
       src="https://templates.themekit.dev/alpins/media/hd-3.jpg"
     >
     </v-parallax>
@@ -171,4 +171,5 @@ const buttonColor = computed(() => {
 .auto-zoom-in {
   animation: autoZoomIn 5s forwards;
 }
+
 </style>

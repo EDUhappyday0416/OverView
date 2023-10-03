@@ -99,6 +99,11 @@ const router = createRouter({
       name: 'MountainList',
       component: () => import('../views/MountainList.vue')
     },
+    {
+      path: '/Profile',
+      name: 'Profile',
+      component: () => import('../views/Profile.vue')
+    },
     
     // {
     //   path: '/:pathMatch(.*)*',
