@@ -46,7 +46,8 @@ const urlItem = ref([
   { title: '台灣百岳', url: '/Mountain' },
   { title: '山友揪團', url: '/MountainForm' },
   { title: '路線指南', url: '/RouteWeb' },
-  { title: '地圖', url: '/Map' }
+  { title: '地圖', url: '/Map' },
+  { title: '個人檔案', url: '/Profile' },
 ])
 
 const goPath = (item) => {
