@@ -24,7 +24,8 @@ import VueGoogleMaps from '@fawmi/vue-google-maps'
 import {
 Quasar,
 Loading,
-Screen
+Screen,
+Notify
 } from 'quasar'
 /* add icons to the library */
 library.add(faUserSecret)
@@ -75,10 +76,12 @@ const vuetify = createVuetify({
 
 app.use(Quasar, {
     config: {
-        screen
+        screen,
+        Notify
     },
     plugins: {
-        Loading
+        Loading,
+        'Notify': Notify
     },
 })
 app.use(router)

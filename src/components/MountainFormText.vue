@@ -20,9 +20,10 @@
       :placeholder="Placeholder"
       :error="error"
       bottom-slots
+      :errmsg="errmsg"
       after
     >
-      <template v-slot:error> Please use maximum 3 characters. </template>
+      <template v-slot:error> {{ errmsg }}</template>
 
       <template v-slot:after>
         <q-btn round dense flat icon="delete" @click="$emit('deleteItem', index)" v-if="isDelete">
@@ -50,6 +51,18 @@
   </template>
   <template v-if="type == 'select'">
     <v-select :label="label" :items="data"></v-select>
+  </template>
+  <template v-if="type == 'date'">
+    <q-input
+      filled
+      :error="error"
+      :type="type"
+      :model-value="modelValue"
+      :errmsg="errmsg"
+      @update:model-value="(newValue) => $emit('update:modelValue', newValue)"
+    >
+      <template v-slot:error> {{ errmsg }}</template>
+    </q-input>
   </template>
 </template>
 
@@ -88,6 +101,10 @@ const props = defineProps({
   error: {
     type: Boolean,
     default: false
+  },
+  errmsg: {
+    type: String,
+    default: '請輸入正確格式或內容'
   }
 })
 </script>

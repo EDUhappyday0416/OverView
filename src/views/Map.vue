@@ -60,52 +60,62 @@ onMounted(() => {
   $q.loading.hide()
 })
 
-const ORS_URL = 'https://api.openrouteservice.org/v2/directions/foot-hiking';
-const API_KEY = '5b3ce3597851110001cf62488afe79f82c944427add4f46903b9087e'; // 更改為你的API金鑰
-
 let currentMarkers = []
-let routingControl;
+let routingControl
 async function onValueChange(coordinatesString) {
-  console.log(coordinatesString);
+  const API_KEY = '5b3ce3597851110001cf62488afe79f82c944427add4f46903b9087e'
+  const baseURL = 'https://api.openrouteservice.org/v2/directions/foot-hiking'
+  console.log(coordinatesString.length >= 3)
 
-  currentMarkers.forEach((marker) => marker.remove());
-  currentMarkers = [];
-
-  // 如果存在舊的路由控制，從地圖中移除它
-  if (routingControl) {
-    map.removeControl(routingControl);
+  if (coordinatesString.length !== 2) {
+    if (coordinatesString.length > 2) {
+      // 當選擇超過2個座標時
+      $q.notify({
+        color: 'red',
+        message: '請勿選擇超過兩個地點', // 我更改了這裡的消息內容，因為您希望限制只能選擇2個座標
+        icon: 'check'
+      })
+      return
+    }
+    return false
   }
 
-  // 將字符串坐標轉換為L.latLng對象的數組
-  const waypoints = coordinatesString.map(coordStr => {
-    const [lat, lng] = coordStr.split(',').map(Number);
-    return L.latLng(lat, lng);
-  });
+  // 如果選擇的座標是2，執行下面的操作
+  const swapCoordinates = (coordStr) => {
+    const [lat, lng] = coordStr.split(',')
+    return `${lng},${lat}` // 交換經緯度的位置
+  }
+  const start = swapCoordinates(coordinatesString[0])
+  const end = swapCoordinates(coordinatesString[1])
+  const url = `${baseURL}?api_key=${API_KEY}&start=${start}&end=${end}`
 
-  // 使用轉換後的坐標建立新的路由控制
+  currentMarkers.forEach((marker) => marker.remove())
+  currentMarkers = []
+
+  if (routingControl) {
+    map.removeControl(routingControl)
+  }
+
+  const routeData = await getRoute(url)
+
+  const waypoints = coordinatesString.map((coordStr) => {
+    const [lat, lng] = coordStr.split(',').map(Number)
+    return L.latLng(lat, lng)
+  })
+
   routingControl = L.Routing.control({
-    waypoints: waypoints,
-    // routeWhileDragging: true
-  }).addTo(map);
+    waypoints: waypoints
+  }).addTo(map)
 }
 
-async function getRoute(linePoints) {
-  const response = await fetch(ORS_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${API_KEY}`
-    },
-    body: JSON.stringify({
-      coordinates: linePoints
-    })
-  });
+async function getRoute(url) {
+  const response = await fetch(url)
 
   if (!response.ok) {
-    throw new Error('Network response was not ok');
+    throw new Error('Network response was not ok')
   }
 
-  return await response.json();
+  return await response.json()
 }
 </script>
 
@@ -115,10 +125,4 @@ async function getRoute(linePoints) {
   margin: 0 auto;
   height: 80vh;
 }
-
-.leaflet-touch.leaflet-bar {
-  width: 10%;   /* 或使用具體的像素值，例如 width: 300px; */
-  height: 80%;  /* 或使用具體的像素值 */
-}
-
 </style>

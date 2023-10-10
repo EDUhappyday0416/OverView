@@ -104,7 +104,11 @@ const router = createRouter({
       name: 'Profile',
       component: () => import('../views/Profile.vue')
     },
-    
+    {
+      path: '/Hikes/:id',
+      name: 'Hikes',
+      component: () => import('../views/Hikes.vue')
+    },
     // {
     //   path: '/:pathMatch(.*)*',
     //   name: 'not-found',

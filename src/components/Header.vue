@@ -22,9 +22,7 @@
   <v-menu v-model="menu" :close-on-content-click="false" location="end">
     <template v-slot:activator="{ props }">
       <v-app-bar-nav-icon v-bind="props"></v-app-bar-nav-icon>
-      MountainMingle
     </template>
-
     <v-card min-width="300">
       <v-list v-for="(item, i) in urlItem" :key="i">
         <v-list-item @click="goPath(item.url)">{{ item.title }}</v-list-item>
@@ -42,12 +40,13 @@ const router = useRouter()
 const menu = ref(false)
 const urlItem = ref([
   { title: '首頁', url: '/' },
+  { title: '個人檔案', url: '/Profile' },
   { title: '探索步道', url: '/HikingRrail' },
   { title: '台灣百岳', url: '/Mountain' },
   { title: '山友揪團', url: '/MountainForm' },
   { title: '路線指南', url: '/RouteWeb' },
   { title: '地圖', url: '/Map' },
-  { title: '個人檔案', url: '/Profile' },
+  { title: '清單', url: '/MountainList' }
 ])
 
 const goPath = (item) => {

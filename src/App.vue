@@ -45,15 +45,9 @@ const isLogin = computed(() => {
       <v-spacer></v-spacer>
     </v-app-bar>
     <v-main>
-      <!-- <template v-if="isLogin !== '/' && isLogin !== '/Mountain'"> -->
       <v-container fluid class="pa-0">
         <RouterView />
       </v-container>
-      <!-- <template v-else>
-        <v-container fluid class="ma-0 pa-0">
-          <RouterView />
-        </v-container>
-      </template> -->
     </v-main>
   </v-layout>
 </template>

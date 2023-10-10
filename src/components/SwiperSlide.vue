@@ -8,46 +8,32 @@
     :modules="modules"
     class="mySwiper"
   >
-    <swiper-slide>
+    <swiper-slide v-for="(arr, i) in img" :key="i">
       <div class="swiper-zoom-container">
-        <img src="https://templates.themekit.dev/alpins/media/image-2.jpg" />
-      </div>
-    </swiper-slide>
-    <swiper-slide>
-      <div class="swiper-zoom-container">
-        <img src="https://templates.themekit.dev/alpins/media/image-3.jpg" />
-      </div>
-    </swiper-slide>
-    <swiper-slide>
-      <div class="swiper-zoom-container">
-        <img src="https://templates.themekit.dev/alpins/media/image-4.jpg" />
+        <img :src="arr" />
       </div>
     </swiper-slide>
   </swiper>
 </template>
-<script>
+<script setup>
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue'
+import { ref } from 'vue'
 
 // Import Swiper styles
 import 'swiper/css'
-
 import 'swiper/css/pagination'
-
 // import required modules
 import { Pagination } from 'swiper/modules'
-
-export default {
-  components: {
-    Swiper,
-    SwiperSlide
-  },
-  setup() {
-    return {
-      modules: [Pagination]
-    }
-  }
-}
+const props = defineProps({
+  img: Array
+})
+const modules = ref([Pagination])
+const images = ref([
+  'https://templates.themekit.dev/alpins/media/image-2.jpg',
+  'https://templates.themekit.dev/alpins/media/image-3.jpg',
+  'https://templates.themekit.dev/alpins/media/image-4.jpg'
+])
 </script>
 
 <style>

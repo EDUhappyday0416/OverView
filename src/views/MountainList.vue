@@ -1,47 +1,46 @@
 <script setup>
-import { ref } from 'vue'
-const items = ref([
-  { type: 'subheader', title: 'Today' },
+import { ref, computed } from 'vue'
+import { useForestData } from '../stores/forest'
+import DataTable from '../components/DataTable.vue'
+const forest = useForestData()
+const tripData = ref([])
+
+forest.getMountainTripList().then((res) => {
+  tripData.value = res.data
+})
+
+const columns = ref([
   {
-    prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-    title: '北大武三天兩夜',
-    subtitle: `<span>爬山地點:</span><br><span>日期:2023/04/13</span><br><span>聯絡資訊:</span><br><span>山岳等級:</span><br><span>集合地點:</span><br><span>活動人數:</span><br><span>交通方式:</span> `
+    name: '名稱',
+    key: 'location'
   },
-  { type: 'divider', inset: true },
   {
-    prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-    title: 'Summer BBQ',
-    subtitle: `<span>爬山地點:</span><br><span>日期:2023/04/13</span><br><span>聯絡資訊:</span><br><span>山岳等級:</span><br><span>集合地點:</span><br><span>活動人數:</span><br><span>交通方式:</span> `
+    name: '狀態',
+    key: 'status'
   },
-  { type: 'divider', inset: true },
   {
-    prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-    title: 'Oui oui',
-    subtitle: `<span>爬山地點:</span><br><span>日期:2023/04/13</span><br><span>聯絡資訊:</span><br><span>山岳等級:</span><br><span>集合地點:</span><br><span>活動人數:</span><br><span>交通方式:</span> `
+    name: '日期',
+    key: 'date'
   },
-  { type: 'divider', inset: true },
   {
-    prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
-    title: 'Birthday gift',
-    subtitle: `<span>爬山地點:</span><br><span>日期:2023/04/13</span><br><span>聯絡資訊:</span><br><span>山岳等級:</span><br><span>集合地點:</span><br><span>活動人數:</span><br><span>交通方式:</span> `
+    name: '聯絡方式',
+    key: 'contact_info'
   },
-  { type: 'divider', inset: true },
   {
-    prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
-    title: 'Recipe to try',
-    subtitle: `<span>爬山地點:</span><br><span>日期:2023/04/13</span><br><span>聯絡資訊:</span><br><span>山岳等級:</span><br><span>集合地點:</span><br><span>活動人數:</span><br><span>交通方式:</span> `
+    name: '山岳等級',
+    key: 'mountain_grade'
   },
-  { type: 'subheader', title: 'Yesterday' },
   {
-    prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
-    title: 'Birthday gift',
-    subtitle: `<span>爬山地點:</span><br><span>日期:2023/04/13</span><br><span>聯絡資訊:</span><br><span>山岳等級:</span><br><span>集合地點:</span><br><span>活動人數:</span><br><span>交通方式:</span> `
+    name: '集合地點',
+    key: 'meetup_location'
   },
-  { type: 'divider', inset: true },
   {
-    prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
-    title: 'Recipe to try',
-    subtitle: `<span>爬山地點:</span><br><span>日期:2023/04/13</span><br><span>聯絡資訊:</span><br><span>山岳等級:</span><br><span>集合地點:</span><br><span>活動人數:</span><br><span>交通方式:</span> `
+    name: '活動人數',
+    key: 'number_of_people'
+  },
+  {
+    name: '交通方式',
+    key: 'transportation'
   }
 ])
 </script>
@@ -52,12 +51,32 @@ const items = ref([
       <v-divider :thickness="3" class="ma-4 w-50"></v-divider>
     </div>
   </v-parallax>
-  <v-card class="mx-auto pa-3">
-    <v-list :items="items" item-props lines="three">
-      <template v-slot:subtitle="{ subtitle }">
-        <div v-html="subtitle"></div>
-      </template>
-    </v-list>
+  <v-card class="ma-4 pa-3">
+    <DataTable :columns="columns" :paginatedData="tripData" />
+    <!-- <v-table>
+      <thead>
+        <tr>
+          <th class="text-left">名稱</th>
+          <th class="text-left">日期</th>
+          <th class="text-left">聯絡方式</th>
+          <th class="text-left">山岳等級</th>
+          <th class="text-left">集合地點</th>
+          <th class="text-left">活動人數</th>
+          <th class="text-left">交通方式</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item in tripData" :key="item.name">
+          <td>{{ item.location }}</td>
+          <td>{{ item.date }}</td>
+          <td>{{ item.contact_info }}</td>
+          <td>{{ item.mountain_grade }}</td>
+          <td>{{ item.meetup_location }}</td>
+          <td>{{ item.number_of_people }}</td>
+          <td>{{ item.transportation }}</td>
+        </tr>
+      </tbody>
+    </v-table> -->
   </v-card>
 </template>
 <style></style>

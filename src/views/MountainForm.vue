@@ -25,12 +25,13 @@
           @update:model-value="(newValue) => (item.value = newValue)"
           :isDelete="item.isDelete"
           :index="index"
+          :errmsg="item.errmsg"
           @deleteItem="deleteItem"
         />
       </v-col>
     </v-row>
     <div class="text-center">
-      <v-btn class="text-none ma-4" color="grey-lighten-2" @click="prompt = true"> 新增欄位 </v-btn>
+      <!-- <v-btn class="text-none ma-4" color="grey-lighten-2" @click="prompt = true"> 新增欄位 </v-btn> -->
       <v-btn class="text-none ma-4" color="teal-darken-4" @click="onSubmit()"> 確認 </v-btn>
     </div>
   </div>
@@ -72,54 +73,60 @@
       </div>
       <q-card-actions align="right" class="text-primary">
         <q-btn flat label="關閉" v-close-popup />
-        <q-btn flat label="送出" v-close-popup />
+        <q-btn flat label="送出" v-close-popup @click="sendFormData" />
       </q-card-actions>
     </q-card>
   </q-dialog>
 </template>
 <script setup>
 import { computed, ref } from 'vue'
-import { useForm } from 'vee-validate'
-import * as yup from 'yup'
+import { useRouter } from 'vue-router'
 import MountainFormText from '../components/MountainFormText.vue'
 const openTextArea = ref('No')
-// const name = useField('name')
-// const phone = useField('phone')
-// const email = useField('email')
-// const select = useField('select')
-// const checkbox = useField('checkbox')
+const router = useRouter()
+
 const prompt = ref(false)
 const field1 = ref('')
 const inputPromptText = ref('')
 const sendData = ref(false)
 import { useForestData } from '../stores/forest'
+import { useQuasar } from 'quasar'
 const forest = useForestData()
-const items = ref(['Item 1', 'Item 2', 'Item 3', 'Item 4'])
-// const isValid = computed(() => modelValue.value.length >= 1)
-// const { handleSubmit } = useForm({
-//   validationSchema: yup.object({
-//     firstName: yup.string().required()
-//   })
-// })
+const $q = useQuasar()
+
 const error = computed(() => {
-  if (isError.value) return
+  let hasError = false
+
+  if (isError.value) return false
+
   for (let item of formData.value) {
     if (item.field) {
-      //針對某一個欄位做判斷
-      if (item.name === 'firstName') {
-        if (item.value.length <= 3) {
-          return true
+      if (item.name === 'number_of_people') {
+        if (item.value === '') {
+          item.errmsg = '請輸入正確的活動人數'
+          hasError = true
+        } else {
+          item.errmsg = '' // 清除之前的錯誤消息
+        }
+      } else if (item.name === 'date') {
+        if (item.value === '') {
+          item.errmsg = '請輸入正確的日期'
+          hasError = true
+        } else {
+          item.errmsg = '' // 清除之前的錯誤消息
+        }
+      } else if (item.name === 'location') {
+        if (item.value === '') {
+          item.errmsg = '請輸入爬山地點'
+          hasError = true
+        } else {
+          item.errmsg = '' // 清除之前的錯誤消息
         }
       }
     }
   }
-  return false // 沒有任何錯誤
+  return hasError
 })
-
-// const onSubmit = handleSubmit((values) => {
-//   console.log(values)
-//   alert(JSON.stringify(values, null, 2))
-// })
 
 const addForm = () => {
   const newItem = {
@@ -144,27 +151,47 @@ const deleteItem = (index) => {
   formData.value.splice(index, 1)
 }
 const onSubmit = () => {
-  console.log(formData.value)
-  sendData.value = true
-  const data = {
-    UnitsName: '33333'
+  isError.value = false //按確認判斷錯誤
+  if (!error.value) {
+    sendData.value = true
   }
-  forest
-    .postMountainTripList(formData.value)
-    .then((res) => {
-      // routeArray.value = []
-      // routeArray.value.push(...res.data)
-      console.log(res)
-      // $q.loading.hide()
-    })
-    .catch((error) => {
-      // $q.loading.hide()
-      console.log(error)
-    })
-  //console.log(modelValue.value)
 }
 
-const isError = ref(true) //載入頁面預設是否要先判斷錯誤
+const sendFormData = () => {
+  const getSendData = formData.value.reduce((accumulator, item) => {
+    accumulator[item.name] = item.value
+    return accumulator
+  }, {})
+
+  forest
+    .postMountainTripList(getSendData)
+    .then((res) => {
+      if (res.status === 'success') {
+        $q.notify({
+          color: 'positive',
+          message: '新增成功',
+          icon: 'check'
+        })
+
+        formData.value.forEach((item) => {
+          item.value = ''
+        })
+
+        router.push({ path: '/MountainList' })
+      } else {
+        $q.notify({
+          color: 'negative',
+          message: '新增失敗',
+          icon: 'close'
+        })
+      }
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+}
+
+const isError = ref(true) //true載入部判斷錯誤
 
 const formData = ref([
   {
@@ -173,15 +200,15 @@ const formData = ref([
     field: true,
     key: '',
     validate: 'text',
-    name: 'firstName',
+    name: 'location',
     value: '',
     Placeholder: '北大武（單攻）',
     deleteItem: false
   },
   {
     label: '日期',
-    type: 'text',
-    field: false,
+    type: 'date',
+    field: true,
     key: '',
     validate: 'text',
     name: 'date',
@@ -195,9 +222,9 @@ const formData = ref([
     field: false,
     key: '',
     validate: 'text',
-    name: 'content',
+    name: 'contact_info',
     value: '',
-    Placeholder: 'ex: 9/30',
+    Placeholder: 'ex: LINE:ID ',
     deleteItem: false
   },
   {
@@ -206,7 +233,7 @@ const formData = ref([
     field: false,
     key: '',
     validate: 'text',
-    name: 'content',
+    name: 'mountain_grade',
     value: '',
     Placeholder: 'A/B/C 或 百岳雲海級山岳',
     deleteItem: false
@@ -217,7 +244,7 @@ const formData = ref([
     field: false,
     key: '',
     validate: 'text',
-    name: '',
+    name: 'meetup_location',
     value: '',
     Placeholder: '台北火車站',
     deleteItem: false
@@ -225,10 +252,10 @@ const formData = ref([
   {
     label: '活動人數',
     type: 'text',
-    field: false,
+    field: true,
     key: '',
     validate: 'text',
-    name: '',
+    name: 'number_of_people',
     value: '',
     Placeholder: '滿7人開團',
     deleteItem: false
@@ -239,7 +266,7 @@ const formData = ref([
     field: false,
     key: '',
     validate: 'text',
-    name: 'train',
+    name: 'transportation',
     value: '',
     Placeholder: '包車/再議',
     deleteItem: false

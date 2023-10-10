@@ -2,6 +2,7 @@
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useQuasar } from 'quasar'
 import SwiperSlide from '../components/SwiperSlide.vue'
+import Footer from '../components/Footer.vue'
 const $q = useQuasar()
 
 const scale = ref(1.1)
@@ -22,66 +23,77 @@ function handleScroll() {
 const buttonColor = computed(() => {
   return $q.screen.lt.md ? 'primary' : 'secondary'
 })
+
+const image = ref([
+  'https://templates.themekit.dev/alpins/media/hd-3.jpg',
+  'https://templates.themekit.dev/alpins/media/hd-2.jpg',
+  'https://templates.themekit.dev/alpins/media/hd-1.jpg'
+])
+
+const mainImg = ref([
+  'https://templates.themekit.dev/alpins/media/hd-3.jpg',
+  'https://templates.themekit.dev/alpins/media/hd-2.jpg',
+  'https://templates.themekit.dev/alpins/media/hd-1.jpg',
+  'https://templates.themekit.dev/alpins/media/hd-1.jpg',
+  'https://templates.themekit.dev/alpins/media/hd-1.jpg',
+  'https://templates.themekit.dev/alpins/media/hd-1.jpg',
+  'https://templates.themekit.dev/alpins/media/hd-1.jpg'
+])
 </script>
-
-<!-- <template>
-  <div class="bg" :style="{ transform: `scale(${scale})` }"></div>
-</template> -->
 <template>
-  <!-- <q-btn square :color="buttonColor" icon="shopping_cart" /> -->
-  <div class="parallax-container q-pa-0">
-    <v-parallax
-      class="auto-zoom-in align-center fill-height"
-      scale="1"
-      height="100%"
-      src="https://templates.themekit.dev/alpins/media/hd-3.jpg"
-    >
-    </v-parallax>
-    <!-- <q-parallax
-      height="950"
-      src="https://templates.themekit.dev/alpins/media/hd-3.jpg"
-    >
-    </q-parallax> -->
-    <!-- <q-parallax >
-      <template v-slot:media>
-        <img src="https://templates.themekit.dev/alpins/media/hd-3.jpg">
-      </template>
-
-      <template v-slot:content="scope">
-        <div
-          class="absolute column items-center"
-          :style="{
-            opacity: 0.45 + (1 - scope.percentScrolled) * 0.55,
-            top: (scope.percentScrolled * 60) + '%',
-            left: 0,
-            right: 0,
-            height: '100%'
-          }"
-        >
+  <div class="full-page">
+    <div class="parallax-container q-pa-0">
+      <v-parallax
+        class="auto-zoom-in align-center fill-height"
+        scale="1"
+        src="https://templates.themekit.dev/alpins/media/hd-3.jpg"
+      >
+      </v-parallax>
+      <v-row class="overlay-text">
+        <v-col cols="12" sm="12" md="12" lg="6">
+          <div class="d-flex align-center text-white flex-column">
+            <h1 class="font-weight-black text-white font-weight-thin mb-4 typing-text">
+              MountainMingle
+            </h1>
+            <div class="floating-text">Preserving Nature, One Summit at a Time</div>
+            <div class="floating-text">Mingling with Nature's Majestic Mountains</div>
+            <div class="floating-text">Where Nature's Beauty Meets Community</div>
+          </div>
+        </v-col>
+        <v-col cols="12" sm="12" md="12" lg="6" v-if="!$q.screen.lt.md">
+          <div>
+            <SwiperSlide :img="image" />
+          </div>
+        </v-col>
+      </v-row>
+    </div>
+    <v-row>
+      <v-col cols="12" sm="12" md="12" lg="12">
+        <div class="pa-4 font-weight-black text-white main__text">
+          Explore place around the world
         </div>
-      </template>
-    </q-parallax> -->
-    <v-row class="overlay-text">
-      <v-col cols="12" sm="12" md="12" lg="6">
-        <div class="d-flex align-center text-white flex-column">
-          <h1 class="font-weight-black text-white font-weight-thin mb-4 typing-text">
-            MountainMingle
-          </h1>
-          <div class="floating-text">Preserving Nature, One Summit at a Time</div>
-          <div class="floating-text">Mingling with Nature's Majestic Mountains</div>
-          <div class="floating-text">Where Nature's Beauty Meets Community</div>
+        <div class="pa-4">
+          <SwiperSlide :img="mainImg" />
+          <!-- <img src="https://templates.themekit.dev/alpins/media/hd-3.jpg" alt="" /> -->
+          <!-- <img src="../assets/img/pexels-tobias-bjørkli-2387966.jpg" alt="" loading="lazy" /> -->
         </div>
       </v-col>
-      <v-col cols="12" sm="12" md="12" lg="6" v-if="!$q.screen.lt.md">
-        <div>
-          <SwiperSlide />
+      <v-col cols="12" sm="12" md="12" lg="12">
+        <div class="pa-4 font-weight-black text-white main__text">About Me</div>
+        <div class="pa-4">
+          <SwiperSlide :img="mainImg" />
         </div>
       </v-col>
     </v-row>
+    <Footer />
   </div>
 </template>
 
 <style lang="scss" scoped>
+.full-page {
+  background: black;
+  // height: 100vh;
+}
 .parallax-container {
   position: relative;
   overflow: hidden;
@@ -172,4 +184,7 @@ const buttonColor = computed(() => {
   animation: autoZoomIn 5s forwards;
 }
 
+.main__text {
+  font-size: 3vw;
+}
 </style>

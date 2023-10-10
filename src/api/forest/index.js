@@ -52,10 +52,10 @@ export async function getMonutainInfo() {
 
 
 export async function mountainTripList(data) {
-    // return axios({
-    //     url:``
-    // })
+    return axios.post('https://frances.sinami.com/api/sendMountainTripViewSet/' ,data);
+}
 
-    return axios.post('https://127.0.0.1:8000/api/sendMountainTripViewSet/' ,data);
+export async function getMountainTripList() {
+    return axios.get('https://frances.sinami.com/api/sendMountainTripViewSet/');
 }
 
